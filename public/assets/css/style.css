@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+p {
+    margin: 0 ;
+}
 
 .btn-my-primary {
     background-color: #08090a;
