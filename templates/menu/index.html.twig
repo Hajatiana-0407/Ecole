@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MenuController!{% endblock %}
+{% block title %}Menu
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Ecole/src/Controller/MenuController.php'|file_link(0) }}">src/Controller/MenuController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Ecole/templates/menu/index.html.twig'|file_link(0) }}">templates/menu/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<div class="connexion">
+		<div class="blender"></div>
+		<div class='container'>
+			<div class="connexion-container container-menu">
+				<a href='{{ path("parmetre_index")}}' class="btn btn w-100 mb-2 btn-my-primary">
+					<span class='me-1'>
+						<i class="fa-solid fa-user-gear"></i>
+					</span>
+					Parametrage
+				</a>
+				<a href='{{ path("personnel_index")}}' class="btn btn w-100 mb-2 btn-my-primary">
+					<span class='me-1'>
+						<i class="fa-solid fa-users-gear"></i>
+					</span>
+					Gestion du personnel
+				</a>
+				<a href='{{ path("eleve_index") }}' class="btn btn w-100 mb-2 btn-my-primary">
+					<span class='me-1'>
+						<i class="fas fa-user-graduate"></i>
+					</span>
+					Gestion des éleves
+				</a>
+				<a href='{{ path("principale_menu_index") }}' class="btn btn w-100  btn-my-primary">
+					<span class='me-1'>
+						<i class="fa-solid fa-bars"></i>
+					</span>
+					Menu principale
+				</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}
