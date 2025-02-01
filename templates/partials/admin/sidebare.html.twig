@@ -13,16 +13,26 @@
 			<span class='user-icone'>
 				<i class="fa-solid fa-angle-down"></i>
 			</span>
+
+
 		</div>
 	</div>
+</div>
+<div class='user-info-liste info-liste'>
+	<ul>
+		<li class='mb-1 user-info-liste-li d-none'><a href="#"><span class='user-icone'><span class='user-icone me-2'><i class="fa-solid fa-shield"></i></span></span>Sécurité</a></li>
+		<li class=' user-info-liste-li d-none'><a href="{{ path('app_logout') }}"><span class='user-icone'><span class='user-icone me-2'><i class="fa-solid fa-sign-out-alt"></i></span></span>Deconnexion</a></li>
+	</ul>
 </div>
 <div class="sidebare">
 	<div class="side-title mb-2">
 		<h3>
-			<span class='menu-principale-icone'>
+			<span class='menu-principale-icone' id='hide-show-menu'>
 				<i class="fa-solid fa-bars"></i>
 			</span>
-			{{ titleMenu }}
+			<span class='attribute-menu'>
+				{{ titleMenu }}
+			</span>
 		</h3>
 	</div>
 	<div class="side-navigation">
@@ -35,7 +45,9 @@
 								<span class='menu-icone'>
 									{{ menu.icone|raw}}
 								</span>
-								{{ titre  }}
+								<span class='attribute-menu'>
+									{{ titre  }}
+								</span>
 							</a>
 						</li>
 					{% endif %}
