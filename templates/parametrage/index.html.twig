@@ -5,6 +5,10 @@
 
 {% block body %}
 	{% include "partials/admin/sidebare.html.twig" with { 
-            titleMenu : "Parametrage"
+            titleMenu : titleMenu ,
+            menuListes : menuListes 
     } %}
+    <div class='corps'>
+        <h1>TESTE</h1>
+    </div>
 {% endblock %}

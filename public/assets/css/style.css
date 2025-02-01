@@ -78,3 +78,10 @@ p {
     text-align: left ;
 }
 /* Menu  */
+/*  */
+.corps {
+    width: 100% ;
+    padding-top: 55px ;
+    padding-left: 260px ;
+    padding-right: 10px ;
+}
