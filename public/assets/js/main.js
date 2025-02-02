@@ -1,35 +1,55 @@
-$(document).ready(function () {
+function hidde_sidebar() {
+    const elem_hidde = $('.attribut-to-hidde');
+    $(elem_hidde).removeClass('attribut-to-hidde');
+    $(elem_hidde).addClass('attribut-to-show');
+    $('.attribute-menu').css({
+        display: 'none'
+    });
+    $('.sidebare').animate({
+        width: '46px'
+    }, 250)
+    $('.corps').animate({
+        paddingLeft: '53px'
+    }, 250)
+}
+function show_sidebar() {
+    const elem_hidde = $('.attribut-to-show');
+    $(elem_hidde).removeClass('attribut-to-show');
+    $(elem_hidde).addClass('attribut-to-hidde');
 
+    $('.sidebare').animate({
+        width: '250px'
+    }, 250)
+    $('.corps').animate({
+        paddingLeft: '260px'
+    }, 250, function () {
+        $('.attribute-menu').css({
+            display: 'inline-block'
+        });
+    })
+}
+
+$(window).resize(function () {
+    if ($(window).width() < 996) {
+        const elem_hidde = $('.attribut-to-hidde');
+        $(elem_hidde).removeClass('attribut-to-hidde');
+        $(elem_hidde).addClass('attribut-to-show');
+    } else {
+        const elem_hidde = $('.attribut-to-show');
+        $(elem_hidde).removeClass('attribut-to-show');
+        $(elem_hidde).addClass('attribut-to-hidde');
+    }
+});
+
+$(document).ready(function () {
     /** side bare animation */
     $(document).on('click', '#hide-show-menu', function () {
         const element = $('.sidebare');
 
         if ($(element).width() > 230) {
-            const elem_hidde = $('.attribut-to-hidde');
-            $(elem_hidde).removeClass('attribut-to-hidde');
-            $(elem_hidde).addClass('attribut-to-show');
-
-            $('.attribute-menu').addClass('d-none');
-            $('.sidebare').animate({
-                width: '46px'
-            }, 250)
-            $('.corps').animate({
-                paddingLeft: '53px'
-            }, 250)
+            hidde_sidebar();
         } else {
-
-            const elem_hidde = $('.attribut-to-show');
-            $(elem_hidde).removeClass('attribut-to-show');
-            $(elem_hidde).addClass('attribut-to-hidde');
-
-            $('.sidebare').animate({
-                width: '250px'
-            }, 250)
-            $('.corps').animate({
-                paddingLeft: '260px'
-            }, 250, function () {
-                $('.attribute-menu').removeClass('d-none');
-            })
+            show_sidebar();
         }
     })
 

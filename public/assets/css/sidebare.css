@@ -129,5 +129,19 @@
     color: #a7a2a9;
     text-decoration: none;
     padding: 5px;
-    text-decoration: underline;
 }
+
+
+/*  responsive  */
+@media screen and ( max-width : 996px) {
+    .sidebare {
+        width: 46px ;
+    }
+    .attribute-menu{
+        display: none ;
+    } 
+    .corps {
+        padding-left: 53px ;
+    }
+}
+/*  responsive  */
