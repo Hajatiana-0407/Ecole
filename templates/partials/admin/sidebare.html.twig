@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="{{ asset('assets/css/sidebare.css') }}">
 <div class='head'>
+	<div class="head-left">
+		<h3>{{ titleMenu }}</h3>
+	</div>
 	<div class="head-right">
 		<div class='user-info-container'>
 			<span class='user-icone text-success'>
@@ -13,15 +16,23 @@
 			<span class='user-icone'>
 				<i class="fa-solid fa-angle-down"></i>
 			</span>
-
-
 		</div>
 	</div>
 </div>
 <div class='user-info-liste info-liste'>
 	<ul>
-		<li class='mb-1 user-info-liste-li d-none'><a href="#"><span class='user-icone'><span class='user-icone me-2'><i class="fa-solid fa-shield"></i></span></span>Sécurité</a></li>
-		<li class=' user-info-liste-li d-none'><a href="{{ path('app_logout') }}"><span class='user-icone'><span class='user-icone me-2'><i class="fa-solid fa-sign-out-alt"></i></span></span>Deconnexion</a></li>
+		<li class='mb-1 user-info-liste-li d-none'>
+			<a href="#">
+				<span class='user-icone me-2'>
+					<i class="fa-solid fa-shield"></i>
+				</span>Sécurité</a>
+		</li>
+		<li class=' user-info-liste-li d-none'>
+			<a href="{{ path('app_logout') }}">
+				<span class='user-icone me-2'>
+					<i class="fa-solid fa-sign-out-alt"></i>
+				</span>Deconnexion</a>
+		</li>
 	</ul>
 </div>
 <div class="sidebare">
@@ -40,7 +51,7 @@
 			{% if ( menuListes ) %}
 				{% for titre , menu in menuListes %}
 					{% if (  is_granted( menu.role )  or menu.role == "" ) %}
-						<li class='menu-liste '>
+						<li class='menu-liste'>
 							<a href="{{ menu.href is defined and menu.href != '' ? path(menu.href) : '#' }}">
 								<span class='menu-icone'>
 									{{ menu.icone|raw}}
@@ -49,6 +60,9 @@
 									{{ titre  }}
 								</span>
 							</a>
+							<div class="attribut-to-hidde">
+								<p>{{ titre  }}</p>
+							</div>
 						</li>
 					{% endif %}
 				{% endfor %}
@@ -57,7 +71,6 @@
 					Menu non trouvé...
 				</div>
 			{% endif %}
-
 		</ul>
 	</div>
 </div>

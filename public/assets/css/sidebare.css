@@ -1,97 +1,133 @@
 .menu-principale-icone {
-    cursor: pointer ;
+    cursor: pointer;
 }
+
 .side-title {
-    border-bottom: 2px solid #f4f7f5 ;
+    border-bottom: 2px solid #f4f7f5;
 }
-.sidebare{
-    width: 250px ;
-    background-color: #08090a ;
+
+.sidebare {
+    width: 250px;
+    background-color: #08090a;
     color: #f4f7f5;
-    position: fixed ;
-    top: 0 ;
-    bottom: 0 ;
-    left: 0 ;
-    padding: 10px 0 0 10px ;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0 0 10px;
     z-index: 1000;
 }
+
 .side-navigation ul {
-    list-style-type: none ;
-    padding: 0 ;
+    list-style-type: none;
+    padding: 0;
 }
 
-.side-navigation .menu-liste:hover  {
+.side-navigation .menu-liste:hover {
     background-color: #131416;
 }
-.side-navigation .menu-liste a {
-    margin-bottom: 5px ;
-    padding: 7px 0 ;
-    border-radius: 3px ;
 
-    display: block ;
-    width: inherit ;
-    height: inherit ;
-    color: #a7a2a9 ;
-    text-decoration: none ;
-    font-size: 15px ;
+.side-navigation .menu-liste a {
+    margin-bottom: 5px;
+    padding: 7px 0;
+    border-radius: 3px;
+
+    display: block;
+    width: inherit;
+    height: inherit;
+    color: #a7a2a9;
+    text-decoration: none;
+    font-size: 15px;
 }
-.side-navigation .menu-liste .menu-icone  {
+
+.side-navigation .menu-liste {
+    position: relative;
+}
+
+.attribut-hidde , .attribut-to-show  {
+    position: absolute;
+    left: 38px;
+    top: 0;
+    text-align: left;
+    background-color: #08090a;
+    width: max-content;
+    border-radius: 5px 5px 5px 0;
+    padding: 3px;
+    color: #f4f7f5 ;
+}
+
+.attribut-to-hidde,
+.attribut-to-show {
+    display: none;
+}
+.side-navigation .menu-liste:hover .attribut-to-show {
+    display: block;
+}
+
+.side-navigation .menu-liste .menu-icone {
     display: inline-block;
-    text-align: center ;
-    width: 25px ;
+    text-align: center;
+    width: 25px;
 }
 
 /*  Head  */
 .head {
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.322) ;
-    background-color: white ;
-    width: 100% ;
-    height: 51px ;
-    position: fixed ;
-    top: 0 ;
-    left: 0 ;
-    right: 0 ;
-    padding: 0 10px ;
-    display: flex ;
-    align-items: center ;
-    justify-content: right ;
-    color: #a7a2a9 ;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.322);
+    background-color: white;
+    width: 100%;
+    height: 51px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #a7a2a9;
     z-index: 999;
+    padding-left: 50px;
+}
+
+.head-left {
+    padding-top: 10px;
+    color: #08090a;
 }
 
 .user-info-container {
-    border: 1px solid #a7a2a9 ;
-    padding: 5px ;
-    border-radius: 3px ;
-    display: flex ;
-    gap: 10px ;
-    cursor: pointer ;
-    width: 190px ;
+    border: 1px solid #a7a2a9;
+    padding: 5px;
+    border-radius: 3px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    width: 190px;
 }
 
 /* right  */
 .info-liste {
-    position: absolute ;
-    right: 10px  ;
+    position: absolute;
+    right: 10px;
     /* top: 50px ; */
-    top: -200px ;
-    min-width: 190px ;
-    min-height: 10px ;
-    background-color: #08090a ;
+    top: -200px;
+    min-width: 190px;
+    min-height: 10px;
+    background-color: #08090a;
     z-index: 888;
-    padding: 5px   5px ;
+    padding: 5px 5px;
 }
 
 .info-liste ul {
-    list-style-type: none ;
-    margin: 0 ;
-    padding: 0 ;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
+
 .info-liste ul li a {
-    display: block ;
-    width: inherit ;
-    color: #a7a2a9 ;
-    text-decoration: none ;
-    padding: 5px ;
+    display: block;
+    width: inherit;
+    color: #a7a2a9;
+    text-decoration: none;
+    padding: 5px;
     text-decoration: underline;
 }

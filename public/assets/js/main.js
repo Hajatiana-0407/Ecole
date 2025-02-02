@@ -3,9 +3,12 @@ $(document).ready(function () {
     /** side bare animation */
     $(document).on('click', '#hide-show-menu', function () {
         const element = $('.sidebare');
-        console.log($(element).width());
 
         if ($(element).width() > 230) {
+            const elem_hidde = $('.attribut-to-hidde');
+            $(elem_hidde).removeClass('attribut-to-hidde');
+            $(elem_hidde).addClass('attribut-to-show');
+
             $('.attribute-menu').addClass('d-none');
             $('.sidebare').animate({
                 width: '46px'
@@ -14,6 +17,11 @@ $(document).ready(function () {
                 paddingLeft: '53px'
             }, 250)
         } else {
+
+            const elem_hidde = $('.attribut-to-show');
+            $(elem_hidde).removeClass('attribut-to-show');
+            $(elem_hidde).addClass('attribut-to-hidde');
+
             $('.sidebare').animate({
                 width: '250px'
             }, 250)
@@ -45,7 +53,7 @@ $(document).ready(function () {
     })
 
     $(document).click(function (event) {
-        if (!$(event.target).closest('.user-info-container').length && !$(event.target).closest('.user-info-liste-li"r').length) {
+        if (!$(event.target).closest('.user-info-container').length && !$(event.target).closest('.user-info-liste-li').length) {
             $('.user-info-liste-li').addClass('d-none');
             const element = $('.user-info-liste');
             $(element).animate({
