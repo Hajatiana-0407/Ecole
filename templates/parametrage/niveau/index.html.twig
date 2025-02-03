@@ -1,0 +1,15 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Frais -
+	{{ titleMenu  }}
+{% endblock %}
+
+{% block body %}
+	{% include "partials/admin/sidebare.html.twig" with { 
+            titleMenu : titleMenu ,
+            menuListes : menuListes 
+    	} %}
+	<div class='corps'>
+		<h1>TESTE</h1>
+	</div>
+{% endblock %}

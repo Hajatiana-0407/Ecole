@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/parametre', name: 'parmetre_')]
+#[Route('/parametre', name: 'parametre_')]
 class ParametrageController extends AbstractController
 {
-    private $titleMenu;
-    private $menuListes;
+    protected $titleMenu;
+    protected $menuListes;
     public function __construct()
     {
         // TItre du menu 
@@ -21,7 +21,7 @@ class ParametrageController extends AbstractController
         // Liste des menu et icone 
         $this->menuListes = [
             'Niveau' =>  [
-                'href' => '',
+                'href' => 'parametre_niveau',
                 'role' => '',
                 'icone' => '<i class="fas fa-layer-group"></i>'
             ],
@@ -31,7 +31,7 @@ class ParametrageController extends AbstractController
                 'icone' => '<i class="fa-solid fa-dollar-sign"></i>'
             ],
             'Matiére' =>  [
-                'href' => '',
+                'href' => 'parametre_matier',
                 'role' => '',
                 'icone' => '<i class="fas fa-book"></i>'
             ],
@@ -49,13 +49,13 @@ class ParametrageController extends AbstractController
     }
 
 
-    #[Route('/niveau', name: 'niveau')]
-    public function niveau(): Response
-    {
-        return $this->render('parametrage/index.html.twig', [
-            'controller_name' => 'ParametrageController',
-            'titleMenu' => $this->titleMenu,
-            'menuListes' => $this->menuListes
-        ]);
-    }
+    // #[Route('/niveau', name: 'niveau')]
+    // public function niveau(): Response
+    // {
+    //     return $this->render('parametrage/index.html.twig', [
+    //         'controller_name' => 'ParametrageController',
+    //         'titleMenu' => $this->titleMenu,
+    //         'menuListes' => $this->menuListes
+    //     ]);
+    // }
 }
