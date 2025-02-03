@@ -15,21 +15,29 @@
 		{# lien de style css #}
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css.map') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/connexion.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/alert.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
-
-
+		<link rel="stylesheet" href="{{ asset('assets/css/admin/sidebare.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
 	<body>
 
-
 		{% block body %}{% endblock %}
 
+		{# Section des alert  #}
+		{% include "partials/alert.html.twig" %}
+		{# Section des alert  #}
 
+		<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+		<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+		<script src="{{ asset('assets/js/bootstrap.bundle.js.map') }}"></script>
 		<script src="{{ asset('assets/js/all.min.js') }}"></script>
+
+
+		<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
 		<script src="{{ asset('assets/js/main.js') }}"></script>
 	</body>
 </html>

@@ -21,27 +21,27 @@ class ParametrageController extends AbstractController
         // Liste des menu et icone 
         $this->menuListes = [
             'Niveau' =>  [
-                'href' => '' , 
+                'href' => '',
                 'role' => '',
-                'icone' =>'<i class="fas fa-layer-group"></i>'
+                'icone' => '<i class="fas fa-layer-group"></i>'
             ],
             "Frais de scolarité" => [
-                'href' => '' , 
+                'href' => '',
                 'role' => '',
                 'icone' => '<i class="fa-solid fa-dollar-sign"></i>'
             ],
             'Matiére' =>  [
-                'href' => '' , 
+                'href' => '',
                 'role' => '',
                 'icone' => '<i class="fas fa-book"></i>'
             ],
             'Utilisateur' =>  [
-                'href' => '' , 
+                'href' => '',
                 'role' => '',
                 'icone' => '<i class="fas fa-user"></i>'
-            ] , 
+            ],
             'Salaire personnel' =>  [
-                'href' => '' , 
+                'href' => '',
                 'role' => '',
                 'icone' => '<i class="fas fa-hand-holding"></i>'
             ],
