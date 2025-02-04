@@ -21,7 +21,7 @@ function show_sidebar() {
         width: '250px'
     }, 250)
     $('.corps').animate({
-        paddingLeft: '260px'
+        paddingLeft: '270px'
     }, 250, function () {
         $('.attribute-menu').css({
             display: 'inline-block'

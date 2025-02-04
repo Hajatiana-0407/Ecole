@@ -1,0 +1,17 @@
+<div class="onglet">
+
+	<nav>
+		<ul>
+			{% for onglet , item in onglets %}
+				<li class='{{ item.active }}'>
+					<a href="{{ (item.href != '') ? path( item.href ) : '#' }}">
+						<span class='me-1'>
+							{{ item.icone|raw }}
+						</span>
+						{{ onglet  }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</nav>
+</div>

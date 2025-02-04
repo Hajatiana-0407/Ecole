@@ -13,13 +13,49 @@ class ParametrageController extends AbstractController
 {
     protected $titleMenu;
     protected $menuListes;
+    protected $active_class;
     public function __construct()
     {
         // TItre du menu 
         $this->titleMenu = "Parametrage";
+    }
 
-        // Liste des menu et icone 
-        $this->menuListes = [
+
+    #[Route('/', name: 'index')]
+    public function niveau(): Response
+    {
+        return $this->redirectToRoute('parametre_niveau');
+    }
+
+
+    protected function getNiveauClass_onglets($active_class): array
+    {
+        $datas =  [
+            'Niveau' => [
+                'icone' => '<i class="fa-solid fa-stairs"></i>',
+                'href' => 'parametre_niveau',
+            ],
+            'Classe' => [
+                'icone' => '<i class="fa-solid fa-graduation-cap"></i>',
+                'href' => ''
+            ],
+        ];
+        foreach ($datas as $key => $data) {
+
+            if (strtoupper($key) == strtoupper($active_class)) {
+                $datas[$key]['active'] = 'active';
+            } else {
+                $datas[$key]['active'] = '';
+            }
+        }
+        return $datas;
+    }
+
+
+    public function get_menu_liste($active_menu) :array 
+    {
+
+        $datas  = [
             'Niveau' =>  [
                 'href' => 'parametre_niveau',
                 'role' => '',
@@ -46,16 +82,15 @@ class ParametrageController extends AbstractController
                 'icone' => '<i class="fas fa-hand-holding"></i>'
             ],
         ];
+
+        foreach ($datas as $key => $data) {
+
+            if (strtoupper($key) == strtoupper($active_menu)) {
+                $datas[$key]['active'] = 'active';
+            } else {
+                $datas[$key]['active'] = '';
+            }
+        }
+        return $datas;
     }
-
-
-    // #[Route('/niveau', name: 'niveau')]
-    // public function niveau(): Response
-    // {
-    //     return $this->render('parametrage/index.html.twig', [
-    //         'controller_name' => 'ParametrageController',
-    //         'titleMenu' => $this->titleMenu,
-    //         'menuListes' => $this->menuListes
-    //     ]);
-    // }
 }

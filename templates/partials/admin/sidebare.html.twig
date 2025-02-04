@@ -50,7 +50,7 @@
 			{% if ( menuListes ) %}
 				{% for titre , menu in menuListes %}
 					{% if (  is_granted( menu.role )  or menu.role == "" ) %}
-						<li class='menu-liste'>
+						<li class='menu-liste {{ menu.active }}'>
 							<a href="{{ menu.href is defined and menu.href != '' ? path(menu.href) : '#' }}">
 								<span class='menu-icone'>
 									{{ menu.icone|raw}}
@@ -66,8 +66,8 @@
 					{% endif %}
 				{% endfor %}
 			{% else %}
-				<div class="alert alert-warning">
-					Menu non trouvé...
+				<div class="text-danger">
+					Menu non trouvé...!
 				</div>
 			{% endif %}
 			<li class="menu-liste mt-5">

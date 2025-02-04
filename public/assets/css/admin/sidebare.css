@@ -30,7 +30,7 @@
 .side-navigation .menu-liste a {
     margin-bottom: 1px;
     padding: 7px 0;
-    border-radius: 3px;
+    /* border-radius: 3px; */
 
     display: block;
     width: inherit;
@@ -38,6 +38,10 @@
     color: #a7a2a9;
     text-decoration: none;
     font-size: 15px;
+}
+
+.side-navigation .menu-liste.active a{
+    color: white ;
 }
 
 .side-navigation .menu-liste {
@@ -83,7 +87,7 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 0 10px;
+    padding: 0 20px 0 10px ;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block body %}
-	{% include "partials/admin/sidebare.html.twig" with { 
-            titleMenu : titleMenu ,
-            menuListes : menuListes 
-    	} %}
 	<div class='corps'>
-		<h1>TESTE</h1>
+		{% include "partials/admin/onglet.html.twig"  %}
+		{{ form_start( form_niveau )}}
+		{{ form_row( form_niveau.nom ) }}
+		<div class="boutton__">
+			<button class='btn btn-info ' type='submit'>
+				<i class="fa-solid fa-check"></i>
+				Valider
+			</button>
+		</div>
+		{{ form_end( form_niveau )}}
 	</div>
 {% endblock %}
