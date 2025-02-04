@@ -2,14 +2,14 @@
 
 namespace App\Controller\Parametrage;
 
+use App\Controller\BaseController;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 #[Route('/parametre', name: 'parametre_')]
-class ParametrageController extends AbstractController
+class ParametrageController extends BaseController
 {
     protected $titleMenu;
     protected $menuListes;
@@ -18,13 +18,6 @@ class ParametrageController extends AbstractController
     {
         // TItre du menu 
         $this->titleMenu = "Parametrage";
-    }
-
-
-    #[Route('/', name: 'index')]
-    public function niveau(): Response
-    {
-        return $this->redirectToRoute('parametre_niveau');
     }
 
     public function get_menu_liste($active_menu) :array 

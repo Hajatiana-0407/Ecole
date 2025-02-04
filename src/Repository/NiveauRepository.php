@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Niveau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @extends ServiceEntityRepository<Niveau>
@@ -20,6 +23,14 @@ class NiveauRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Niveau::class);
     }
+
+
+    public function __get_all( ): Query 
+    {
+        return $this->createQueryBuilder('n')
+                    ->getQuery() ; 
+    }
+
 
 //    /**
 //     * @return Niveau[] Returns an array of Niveau objects
