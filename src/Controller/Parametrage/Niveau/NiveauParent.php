@@ -21,4 +21,27 @@ class NiveauParent extends ParametrageController
             'onglets' => $this->getNiveauClass_onglets( $this->active_onglet  ) ,
         ] ; 
     }
+
+    protected function getNiveauClass_onglets($active_class): array
+    {
+        $datas =  [
+            'Niveau' => [
+                'icone' => '<i class="fa-solid fa-layer-group"></i>',
+                'href' => 'parametre_niveau',
+            ],
+            'Classe' => [
+                'icone' => '<i class="fa-solid fa-graduation-cap"></i>',
+                'href' => 'parametre_classe'
+            ],
+        ];
+        foreach ($datas as $key => $data) {
+
+            if (strtoupper($key) == strtoupper($active_class)) {
+                $datas[$key]['active'] = 'active';
+            } else {
+                $datas[$key]['active'] = '';
+            }
+        }
+        return $datas;
+    }
 }

@@ -27,31 +27,6 @@ class ParametrageController extends AbstractController
         return $this->redirectToRoute('parametre_niveau');
     }
 
-
-    protected function getNiveauClass_onglets($active_class): array
-    {
-        $datas =  [
-            'Niveau' => [
-                'icone' => '<i class="fa-solid fa-stairs"></i>',
-                'href' => 'parametre_niveau',
-            ],
-            'Classe' => [
-                'icone' => '<i class="fa-solid fa-graduation-cap"></i>',
-                'href' => ''
-            ],
-        ];
-        foreach ($datas as $key => $data) {
-
-            if (strtoupper($key) == strtoupper($active_class)) {
-                $datas[$key]['active'] = 'active';
-            } else {
-                $datas[$key]['active'] = '';
-            }
-        }
-        return $datas;
-    }
-
-
     public function get_menu_liste($active_menu) :array 
     {
 
