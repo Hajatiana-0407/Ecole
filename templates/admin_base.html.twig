@@ -28,19 +28,21 @@
 		{% include "partials/admin/sidebare.html.twig" %}
 		{# Side bar  #}
 
-		{% block body %}{% endblock %}
+		<div class='corps'> 
+			{% block body %}{% endblock %}
+		</div>
 
-		{# Section des alert  #}
-		{% include "partials/alert.html.twig" %}
-		{# Section des alert  #}
+			{# Section des alert  #}
+			{% include "partials/alert.html.twig" %}
+			{# Section des alert  #}
 
-		<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-		<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
-		<script src="{{ asset('assets/js/bootstrap.bundle.js.map') }}"></script>
-		<script src="{{ asset('assets/js/all.min.js') }}"></script>
+			<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+			<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+			<script src="{{ asset('assets/js/bootstrap.bundle.js.map') }}"></script>
+			<script src="{{ asset('assets/js/all.min.js') }}"></script>
 
 
-		<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
-		<script src="{{ asset('assets/js/main.js') }}"></script>
-	</body>
-</html>
+			<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
+			<script src="{{ asset('assets/js/main.js') }}"></script>
+		</body>
+	</html>

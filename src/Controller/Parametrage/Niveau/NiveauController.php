@@ -21,16 +21,27 @@ class NiveauController extends NiveauParent
         $this->active_onglet = 'Niveau';
     }
 
-    #[Route('/niveau', name: 'niveau')]
+    #[Route('/niveau', name: 'niveau' , methods: ['POST'  , 'GET'])]
     public function index(Request $request , PaginatorInterface $paginator): Response
     {
         $niveau  = new Niveau();
         $form_niveau = $this->createForm(NiveauType::class, $niveau);
+
+        $form_niveau->handleRequest( $request ) ; 
+
+        if ( $form_niveau->isSubmitted() && $form_niveau->isValid() ){
+            dd( $form_niveau->getData()) ; 
+        }  
+        else {
+
+        }
+
         $datas = $this->pagination( $paginator , $request , $this->repository->__get_all()) ; 
-        dd( $datas ) ; 
+ 
         return $this->render('parametrage/niveau/index.html.twig', [
             ...$this->get_params(),
-            'form_niveau' => $form_niveau->createView()
+            'form_niveau' => $form_niveau->createView() , 
+            'datas' => $datas
         ]);
     }
 }

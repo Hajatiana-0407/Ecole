@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BaseController extends AbstractController
 {
     public function pagination( PaginatorInterface $paginator , Request $request , Query $query ){
-        $limite = 12 ; 
+        $limite = 10 ; 
         return $paginator->paginate( $query  , $request->query->getInt('page' , 1 ) ,  $limite  ) ; 
     }
 }
