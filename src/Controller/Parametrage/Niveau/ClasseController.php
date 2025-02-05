@@ -2,9 +2,7 @@
 
 namespace App\Controller\Parametrage\Niveau;
 
-use App\Entity\Classe;
 use App\Entity\Niveau;
-use App\Form\ClasseType;
 use App\Form\NiveauType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,14 +21,12 @@ class ClasseController extends NiveauParent
     #[Route('/niveau/classe', name: 'classe')]
     public function index(): Response
     {
-        $classe = new Classe() ; 
-        $classe_form = $this->createForm( ClasseType::class , $classe ) ;
-        
-        
+        $niveau  = new Niveau();
+        $form_niveau = $this->createForm(NiveauType::class, $niveau);
 
         return $this->render('parametrage/niveau/classe.html.twig', [
             ...$this->get_params(),
-            'form_niveau' => $classe_form->createView()
+            'form_niveau' => $form_niveau->createView()
         ]);
     }
 }

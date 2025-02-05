@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Classe;
-use App\Entity\Niveau;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,15 +12,8 @@ class ClasseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Niveau', EntityType::class, [
-                'class' =>  Niveau::class,
-                'choice_label' => 'nom',
-                'label' => 'Niveau' , 
-                'attr' => [
-                    'class' => 'ui search dropdown'
-                ]
-            ])
             ->add('denomination')
+            ->add('Niveau')
         ;
     }
 
