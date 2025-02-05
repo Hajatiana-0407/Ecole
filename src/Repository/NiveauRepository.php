@@ -28,6 +28,7 @@ class NiveauRepository extends ServiceEntityRepository
     public function __get_all( ): Query 
     {
         return $this->createQueryBuilder('n')
+                    ->orderBy('n.id', 'desc')
                     ->getQuery() ; 
     }
 

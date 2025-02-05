@@ -7,20 +7,32 @@
 {% block body %}
 
 	{% include "partials/admin/onglet.html.twig"  %}
-	{{ form_start( form_niveau )}}
-	{{ form_row( form_niveau.nom ) }}
-	<div class="boutton__">
-		<button class='btn btn-info ' type='submit'>
-			<i class="fa-solid fa-check"></i>
-			Valider
-		</button>
+	<div class='row'>
+		<div class="col-lg-6">
+			{{ form_start( form_niveau )}}
+			{{ form_row( form_niveau.nom ) }}
+			<div class="boutton__">
+				<button class='btn btn-info ' type='submit'>
+					{% if id is defined %}
+						<i class="fa-solid fa-pen-to-square"></i>
+						Modifier
+					{% else %}
+						<i class="fa-solid fa-check"></i>
+						Valider
+					{% endif %}
+				</button>
+			</div>
+			{{ form_end( form_niveau )}}
+		</div>
 	</div>
-	{{ form_end( form_niveau )}}
+
 	<div class="table-container mt-3">
 		<table class="table table-md">
 			<thead class='table-dark'>
+
 				<tr>
 					<th>Nom</th>
+					<th>Date</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -29,12 +41,18 @@
 					<tr>
 						<td>{{ data.nom|capitalize  }}</td>
 						<td>
-							<button type="button" class="btn btn-sm btn-outline-danger">
-								<i class="fa-solid fa-trash"></i>
-							</button>
-							<button type="button" class="btn btn-sm btn-outline-dark">
+							{{ data.createdAt|date('d-m-Y') }}
+						</td>
+						<td>
+							<a href="{{ path('parametre_niveau_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary">
 								<i class="fa-solid fa-pen-to-square"></i>
-							</button>
+							</a>
+							<form action="{{ path('parametre_niveau_delete' , { id:data.id } ) }}" class="__delete_form">
+								<input type="hidden" name='id' value='{{ data.id }}'>
+								<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+									<i class="fa-solid fa-trash"></i>
+								</button>
+							</form>
 						</td>
 					</tr>
 				{% endfor %}

@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\NiveauRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: NiveauRepository::class)]
+#[UniqueEntity('nom')]
 class Niveau
 {
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,10 +25,15 @@ class Niveau
     #[ORM\OneToMany(targetEntity: Classe::class, mappedBy: 'Niveau', orphanRemoval: true)]
     private Collection $classes;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+
 
     public function __construct()
     {
         $this->classes = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable() ; 
     }
 
     public function getId(): ?int
@@ -73,4 +82,17 @@ class Niveau
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
 }

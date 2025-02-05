@@ -10,13 +10,19 @@
 			<p>Voullez vous vraiment supprimer ?</p>
 		</div>
 		<div class="my-btn-alert">
-			<button class='btn btn-sm btn-danger'>Supprimer</button>
-			<button class='btn btn-sm btn-info' onclick="close_alert( this )">Annuler</button>
+			<button id='confirmDelete' class='btn btn-sm btn-danger'>
+				<i class="fa-solid fa-trash"></i>
+				Supprimer
+			</button>
+			<button class='btn btn-sm btn-info' onclick="close_alert( this )">
+				<i class="fa fa-times"></i>
+				Annuler
+			</button>
 		</div>
 	</div>
 </div>
 
 {# utilisation de add falsh #}
 {% for type , message  in  app.flashes %}
-{{ alert( message[0]  , type )|raw}}
+	{{ alert( message[0]  , type )|raw}}
 {% endfor %}

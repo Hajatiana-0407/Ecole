@@ -36,7 +36,7 @@ class MyAlert extends AbstractExtension
                             <p>{$message} 😎 </p>
                         </div>
                         <div class=\"my-btn-alert\">
-                            <button class='btn  btn-info' onclick=\"close_alert( this )\"><i class=\"fa-solid fa-check\"></i> D'accord</button>
+                            <button class='btn  btn-{$type}' onclick=\"close_alert( this )\"><i class=\"fa-solid fa-check\"></i> D'accord</button>
                         </div>
                     </div>
                 </div>";
