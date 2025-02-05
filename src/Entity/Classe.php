@@ -49,6 +49,4 @@ class Classe
         return $this;
     }
 
-
-
 }

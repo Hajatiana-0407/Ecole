@@ -5,16 +5,14 @@
 {% endblock %}
 
 {% block body %}
-	<div class='corps'>
-		{% include "partials/admin/onglet.html.twig"  %}
-		{{ form_start( form_niveau )}}
-		{{ form_row( form_niveau.nom ) }}
-		<div class="boutton__">
-			<button class='btn btn-info ' type='submit'>
-				<i class="fa-solid fa-check"></i>
-				Valider
-			</button>
-		</div>
-		{{ form_end( form_niveau )}}
+	{% include "partials/admin/onglet.html.twig"  %}
+	{{ form( form_niveau )}}
+	{# {{ form_row( form_niveau.nom ) }}
+	<div class="boutton__">
+		<button class='btn btn-info ' type='submit'>
+			<i class="fa-solid fa-check"></i>
+			Valider
+		</button>
 	</div>
+	{{ form_end( form_niveau )}} #}
 {% endblock %}
