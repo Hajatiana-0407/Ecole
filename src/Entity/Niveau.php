@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('nom')]
 class Niveau
 {
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -33,7 +33,7 @@ class Niveau
     public function __construct()
     {
         $this->classes = new ArrayCollection();
-        $this->createdAt = new DateTimeImmutable() ; 
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -49,7 +49,7 @@ class Niveau
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-        
+
         return $this;
     }
 
@@ -95,4 +95,8 @@ class Niveau
         return $this;
     }
 
+    public function ___toString(): string
+    {
+        return $this->getNom();
+    }
 }
