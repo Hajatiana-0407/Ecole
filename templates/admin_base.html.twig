@@ -14,9 +14,19 @@
 		{% endblock %}
 		{# lien de style css #}
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css.map') }}">
+		<link rel="stylesheet"  href="{{ asset('assets/css/bootstrap.css.map') }}">
+		<link
+		rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+
+		<!-- Auto-complet -->
+		<link rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/dropdown.min.css') }} ">
+		<link rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/form.min.css') }} ">
+		<link
+		rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/transition.min.css') }} ">
+		<!-- Auto-complet -->
+
+
 		<link rel="stylesheet" href="{{ asset('assets/css/alert.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/admin/sidebare.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 		{% block javascripts %}
@@ -28,9 +38,9 @@
 		{% include "partials/admin/sidebare.html.twig" %}
 		{# Side bar  #}
 
-		<div class='corps'> 
-			{% block body %}{% endblock %}
-		</div>
+		<div class='corps'> {% block body %}{% endblock %}
+			</div>
+
 
 			{# Section des alert  #}
 			{% include "partials/alert.html.twig" %}
@@ -41,6 +51,12 @@
 			<script src="{{ asset('assets/js/bootstrap.bundle.js.map') }}"></script>
 			<script src="{{ asset('assets/js/all.min.js') }}"></script>
 
+			<!-- Auto-complet -->
+			<script src="{{ asset('assets/auto_complete/js/autocomplete/bootstrap.5.2.3.no.dropdown.js') }} "></script>
+			<script src="{{ asset('assets/auto_complete/js/autocomplete/dropdown.min.js') }} "></script>
+			<script src="{{  asset('assets/auto_complete/js/autocomplete/form.min.js') }}"></script>
+			<script src="{{ asset('assets/auto_complete/js/autocomplete/transition.min.js') }} "></script>
+			<!-- Auto-complet -->
 
 			<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
 			<script src="{{ asset('assets/js/admin/admin_general.js') }}"></script>
