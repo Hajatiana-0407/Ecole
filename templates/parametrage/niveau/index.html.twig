@@ -7,25 +7,51 @@
 {% block body %}
 
 	{% include "partials/admin/onglet.html.twig"  %}
-	<div class='row'>
-		<div class="col-lg-6">
-			{{ form_start( form_niveau )}}
-			{{ form_row( form_niveau.nom ) }}
-			{{ form_row( form_niveau.frais ) }}
-			<div class="boutton__">
-				<button class='btn btn-info ' type='submit'>
-					{% if id is defined %}
-						<i class="fa-solid fa-pen-to-square"></i>
-						Modifier
-					{% else %}
-						<i class="fa-solid fa-check"></i>
-						Valider
-					{% endif %}
-				</button>
-			</div>
-			{{ form_end( form_niveau )}}
+	{# <div class='row'>
+											<div class="col-lg-6"> #}
+	{{ form_start( form_niveau )}}
+	{{ form_row( form_niveau.nom ) }}
+	{{ form_row( form_niveau.frais ) }}
+
+
+	<div id="__classe_add_container" class='{{ ( form_niveau.nbr_classe.vars.value == '')? 'd-none' : '' }}'>
+		{{ form_row( form_niveau.nbr_classe ) }}
+		<div class="text-primary">
+			<label for="" class='form-label'>Nominalisation des classes en alphabet( Classe A , B , ... ) ou en chiffre ( Classe 1 , 2 , ... )
+			</label>
+		</div>
+		<div class='d-flex gap-5'>
+			{% for child in form_niveau.type %}
+				<div class="">
+					{{ form_widget(child) }}
+					{{ form_label(child) }}
+				</div>
+			{% endfor %}
 		</div>
 	</div>
+
+	<div class="boutton__">
+
+		{% if form_niveau.nbr_classe.vars.value == '' %}
+			<button type='button' class='btn btn-secondary' id='__add_classe'>
+				<i class='fa-solid fa-plus'></i>
+				Ajout Classe
+			</button>
+		{% endif %}
+
+		<button class='btn btn-info ' type='submit'>
+			{% if id is defined %}
+				<i class="fa-solid fa-pen-to-square"></i>
+				Modifier
+			{% else %}
+				<i class="fa-solid fa-check"></i>
+				Valider
+			{% endif %}
+		</button>
+	</div>
+	{{ form_end( form_niveau )}}
+	{# </div>
+									</div> #}
 
 	<div class="table-container mt-3">
 		<table class="table table-md">

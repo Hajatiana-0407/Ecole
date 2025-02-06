@@ -16,6 +16,12 @@
     background-color: #97a1a4;
 }
 
+.form-control , .form-select , .form-select.ui.dropdown , .form-check-input  {
+    border-color : #9c9e9f  ;
+}
+.form-check-input {
+    cursor: pointer;
+}
 * {
     scrollbar-width: thin;
     scrollbar-color: #97a1a4 transparent;
@@ -38,6 +44,7 @@ p {
 .boutton__ {
     display: flex;
     justify-content: right;
+    gap: 10px ;
 }
 
 .btn-my-primary {

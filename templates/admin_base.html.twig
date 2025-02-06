@@ -62,5 +62,11 @@
 			<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
 			<script src="{{ asset('assets/js/admin/admin_general.js') }}"></script>
 			<script src="{{ asset('assets/js/main.js') }}"></script>
+
+			{% if js is defined  %}
+			{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}
+				<script src="{{ scriptpath }}"></script>
+			{% endif %}
+
 		</body>
 	</html>

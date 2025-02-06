@@ -28,12 +28,19 @@ class Niveau
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * @var Collection<int, Frais>
+     */
+    #[ORM\OneToMany(targetEntity: Frais::class, mappedBy: 'Niveau', orphanRemoval: true)]
+    private Collection $frais;
+
 
 
     public function __construct()
     {
         $this->classes = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+        $this->frais = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,5 +105,35 @@ class Niveau
     public function ___toString(): string
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection<int, Frais>
+     */
+    public function getFrais(): Collection
+    {
+        return $this->frais;
+    }
+
+    public function addFrai(Frais $frai): static
+    {
+        if (!$this->frais->contains($frai)) {
+            $this->frais->add($frai);
+            $frai->setNiveau($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFrai(Frais $frai): static
+    {
+        if ($this->frais->removeElement($frai)) {
+            // set the owning side to null (unless already changed)
+            if ($frai->getNiveau() === $this) {
+                $frai->setNiveau(null);
+            }
+        }
+
+        return $this;
     }
 }

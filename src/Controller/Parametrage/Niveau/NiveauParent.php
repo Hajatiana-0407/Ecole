@@ -19,6 +19,7 @@ class NiveauParent extends ParametrageController
             'titleMenu' => $this->titleMenu,
             'menuListes' => $this->get_menu_liste( $this->active_class ) , 
             'onglets' => $this->getNiveauClass_onglets( $this->active_onglet  ) ,
+            'js' => 'niveau'
         ] ; 
     }
 

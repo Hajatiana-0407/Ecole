@@ -40,7 +40,13 @@ class NiveauController extends NiveauParent
 
         $form_niveau->handleRequest($request);
 
+
         if ($form_niveau->isSubmitted() && $form_niveau->isValid()) {
+
+            // ******************************************** //
+            // dd($form_niveau->getData());
+            // ******************************************** //
+
             $_niveau = $form_niveau->getData();
             $manager->persist($_niveau);
             $manager->flush();
