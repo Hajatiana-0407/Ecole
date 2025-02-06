@@ -21,6 +21,15 @@ class ClasseRepository extends ServiceEntityRepository
         parent::__construct($registry, Classe::class);
     }
 
+    public function __get_all( ){
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.Niveau' , 'n')
+            ->addSelect('n')
+            ->orderBy('c.id' , 'desc')
+            ->orderBy('n.nom' , 'desc')
+            ->getQuery() ; 
+    }
+
 //    /**
 //     * @return Classe[] Returns an array of Classe objects
 //     */

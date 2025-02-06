@@ -42,6 +42,10 @@ $(window).resize(function () {
 });
 
 $(document).ready(function () {
+    if (document.querySelector(".ui.dropdown")) {
+        $('.ui.dropdown').dropdown();
+    }
+    
     /** side bare animation */
     $(document).on('click', '#hide-show-menu', function () {
         const element = $('.sidebare');
@@ -52,6 +56,9 @@ $(document).ready(function () {
             show_sidebar();
         }
     })
+
+
+
 
     /** user info animation  */
     $(document).on('click', '.user-info-container', function (e) {

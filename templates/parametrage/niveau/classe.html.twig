@@ -6,13 +6,59 @@
 
 {% block body %}
 	{% include "partials/admin/onglet.html.twig"  %}
-	{{ form( form_niveau )}}
-	{# {{ form_row( form_niveau.nom ) }}
-	<div class="boutton__">
-		<button class='btn btn-info ' type='submit'>
-			<i class="fa-solid fa-check"></i>
-			Valider
-		</button>
+
+	<div class='row'>
+		<div class="col-lg-6">
+			{{ form_start( classe_form )}}
+			{{ form_row( classe_form.niveau ) }}
+			{{ form_row( classe_form.denomination ) }}
+			<div class="boutton__">
+				<button class='btn btn-info ' type='submit'>
+					{% if id is defined %}
+						<i class="fa-solid fa-pen-to-square"></i>
+						Modifier
+					{% else %}
+						<i class="fa-solid fa-check"></i>
+						Valider
+					{% endif %}
+				</button>
+			</div>
+			{{ form_end( classe_form )}}
+		</div>
 	</div>
-	{{ form_end( form_niveau )}} #}
+
+	<div class="table-container mt-3">
+		<table class="table table-md">
+			<thead class='table-dark'>
+
+				<tr>
+					<th>Denomination</th>
+					<th>Niveau</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for data in datas %}
+					<tr>
+						<td>{{ data.denomination  }}</td>
+						<td>{{ data.niveau.nom }}</td>
+						<td>
+							<a href="{{ path('parametre_classe_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary">
+								<i class="fa-solid fa-pen-to-square"></i>
+							</a>
+							<form action="{{ path('parametre_classe_delete' , { id:data.id } ) }}" class="__delete_form">
+								<input type="hidden" name='id' value='{{ data.id }}'>
+								<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+									<i class="fa-solid fa-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation ">
+			{{ knp_pagination_render(datas) }}
+		</div>
+	</div>
 {% endblock %}
