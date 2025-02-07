@@ -2,6 +2,8 @@
 
 namespace App\Controller\Parametrage\Niveau;
 
+use App\Entity\Classe;
+use App\Entity\Frais;
 use App\Entity\Niveau;
 use App\Form\NiveauType;
 use App\Repository\NiveauRepository;
@@ -43,12 +45,40 @@ class NiveauController extends NiveauParent
 
         if ($form_niveau->isSubmitted() && $form_niveau->isValid()) {
 
-            // ******************************************** //
-            // dd($form_niveau->getData());
-            // ******************************************** //
-
             $_niveau = $form_niveau->getData();
             $manager->persist($_niveau);
+
+            // ******************** Frais de scolarité  ************************ //
+
+            if (isset($_POST['niveau']['frais']) && isset($_POST['niveau']['frais']) > 0) {
+                $frais = new Frais();
+                $frais->setNiveau($_niveau)
+                    ->setMontant($_POST['niveau']['frais']);
+                $manager->persist($frais);
+            }
+
+            // ********************* Classes *********************** //
+
+            if (isset($_POST['niveau']['nbr_classe']) && isset($_POST['niveau']['nbr_classe']) > 0) {
+                $alphabets = range('A', 'Z');
+                if ($_POST['niveau']['type'] == 'A') {
+                    for ($i = $_POST['niveau']['nbr_classe'] - 1; $i >= 0; $i--) {
+                        $classe = new Classe();
+                        $classe->setDenomination($_POST['niveau']['nom'] . ' ' . $alphabets[$i])
+                            ->setNiveau($_niveau);
+                        $manager->persist($classe);
+                    }
+                } else {
+                    for ($i = $_POST['niveau']['nbr_classe'] - 1; $i >= 0; $i--) {
+                        $classe = new Classe();
+                        $classe->setDenomination($_POST['niveau']['nom'] . ' ' . $i + 1)
+                            ->setNiveau($_niveau);
+                        $manager->persist($classe);
+                    }
+                }
+            }
+            // ********************************************************************** //
+
             $manager->flush();
 
             $this->addFlash('success', 'Ajout effectué');

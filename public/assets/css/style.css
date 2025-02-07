@@ -16,12 +16,17 @@
     background-color: #97a1a4;
 }
 
-.form-control , .form-select , .form-select.ui.dropdown , .form-check-input  {
-    border-color : #9c9e9f  ;
+.form-control,
+.form-select,
+.form-select.ui.dropdown,
+.form-check-input {
+    border-color: #9c9e9f;
 }
+
 .form-check-input {
     cursor: pointer;
 }
+
 * {
     scrollbar-width: thin;
     scrollbar-color: #97a1a4 transparent;
@@ -29,8 +34,9 @@
 
 
 .__delete_form {
-    display: inline-block ;
+    display: inline-block;
 }
+
 body {
     width: 100%;
     min-height: 100vh;
@@ -44,7 +50,7 @@ p {
 .boutton__ {
     display: flex;
     justify-content: right;
-    gap: 10px ;
+    gap: 10px;
 }
 
 .btn-my-primary {
@@ -57,6 +63,37 @@ p {
     color: rgb(204, 204, 204);
     transition: all .5s ease;
 }
+
+/* **************************** */
+table {
+    border-collapse: collapse;
+}
+
+thead,
+tfoot {
+    background: #343a40;
+    color: white;
+}
+
+tbody {
+    display: block;
+    max-height: 400px;
+    /* Hauteur max du tbody */
+    overflow-y: auto;
+    /* Activation du scroll */
+    width: 100%;
+}
+
+thead,
+tfoot,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    /* Empêche le décalage des colonnes */
+}
+
+/* **************************** */
 
 /*  */
 .onglet {
@@ -107,8 +144,9 @@ p {
     width: 100%;
     overflow: auto;
 }
+
 .navigation {
-    width: 100% ;
-    display: flex ;
+    width: 100%;
+    display: flex;
     justify-content: right;
 }

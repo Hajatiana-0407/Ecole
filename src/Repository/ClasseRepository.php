@@ -26,7 +26,7 @@ class ClasseRepository extends ServiceEntityRepository
             ->innerJoin('c.Niveau' , 'n')
             ->addSelect('n')
             ->orderBy('c.id' , 'desc')
-            ->orderBy('n.nom' , 'desc')
+            // ->orderBy('n.nom' , 'desc')
             ->getQuery() ; 
     }
 
