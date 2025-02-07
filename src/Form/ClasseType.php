@@ -8,6 +8,7 @@ use App\Repository\NiveauRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,12 +24,14 @@ class ClasseType extends AbstractType
                     return $repository->createQueryBuilder('n')
                             ->orderBy('n.id' , 'desc') ; 
                 } , 
-                'label' => 'Niveau' , 
+                'label' => 'Niveau : ' , 
                 'attr' => [
                     'class' => 'ui search dropdown'
                 ]
             ])
-            ->add('denomination')
+            ->add('denomination' , TextType::class , [
+                'label' => 'Dénomination : '
+            ])
         ;
     }
 

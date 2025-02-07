@@ -42,7 +42,6 @@ body {
     min-height: 100vh;
     background-color: #ecf0f1;
 }
-
 p {
     margin: 0;
 }
@@ -91,62 +90,4 @@ tbody tr {
     width: 100%;
     table-layout: fixed;
     /* Empêche le décalage des colonnes */
-}
-
-/* **************************** */
-
-/*  */
-.onglet {
-    width: 100%;
-    margin-bottom: 9px;
-}
-
-.onglet nav ul {
-    display: flex;
-    gap: 5px;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border-bottom: 2px solid #08090a;
-
-}
-
-.onglet nav ul li {
-    background-color: #08090ada;
-    border-radius: 5px 5px 0 0;
-}
-
-.onglet nav ul a {
-    text-decoration: none;
-    color: #a7a2a9;
-    display: inline-block;
-    padding: 3px 10px;
-}
-
-.onglet nav ul li.active {
-    background-color: #08090a;
-}
-
-.onglet nav ul li.active a {
-    color: white;
-}
-
-.corps {
-    width: 100%;
-    padding-top: 60px;
-    padding-left: 270px;
-    padding-right: 20px;
-}
-
-
-.table-container {
-    width: 100%;
-    overflow: auto;
-}
-
-.navigation {
-    width: 100%;
-    display: flex;
-    justify-content: right;
 }

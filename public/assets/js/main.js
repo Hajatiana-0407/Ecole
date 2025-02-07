@@ -8,7 +8,7 @@ function hidde_sidebar() {
     $('.sidebare').animate({
         width: '46px'
     }, 250)
-    $('.corps').animate({
+    $('.corps , .head').animate({
         paddingLeft: '53px'
     }, 250)
 }
@@ -20,7 +20,7 @@ function show_sidebar() {
     $('.sidebare').animate({
         width: '250px'
     }, 250)
-    $('.corps').animate({
+    $('.corps , .head ').animate({
         paddingLeft: '270px'
     }, 250, function () {
         $('.attribute-menu').css({
