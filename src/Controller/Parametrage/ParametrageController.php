@@ -30,7 +30,7 @@ class ParametrageController extends BaseController
                 'icone' => '<i class="fas fa-layer-group"></i>'
             ],
             "Frais de scolarité" => [
-                'href' => '',
+                'href' => 'parametre_frais',
                 'role' => '',
                 'icone' => '<i class="fa-solid fa-dollar-sign"></i>'
             ],

@@ -1,0 +1,41 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Frais -
+	{{ titleMenu  }}
+{% endblock %}
+{% block body %}
+	{{ form_start( form )}}
+	{{ form_row( form.Niveau) }}
+	{{ form_row( form.montant) }}
+	<div class="boutton__">
+		<button class="btn btn-info" type='submit'>
+			<i class="fa-solid fa-check"></i>
+			Valider
+		</button>
+	</div>
+	{{ form_end( form )}}
+
+	<div class="table-container mt-3">
+		<table class="table table-md">
+			<thead class='table-dark'>
+				<tr>
+					<th>Niveau </th>
+					<th>Frais</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for data in datas %}
+					<tr>
+						<td>{{ data.niveau.nom }} </td>
+						<td>{{ data.montant|number_format(0 , '.' , ' ') }} Ar <i class="fas fa-coins"></i></td>
+						<td>{{ data.createdAT|date('d/m/Y') }} <i class="fas fa-calendar-check"></i></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation ">
+			{{ knp_pagination_render(datas) }}
+		</div>
+	</div>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Frais;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,6 +15,15 @@ class FraisRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Frais::class);
+    }
+
+    public function __get_all( ) :Query
+    {
+        return $this->createQueryBuilder('f')
+            ->innerJoin('f.Niveau' , 'n')
+            ->addSelect('n')
+            ->orderBy('f.id')
+            ->getQuery() ; 
     }
 
     //    /**
