@@ -70,12 +70,12 @@ $(document).ready(function () {
             $('.user-info-liste-li').removeClass('d-none');
             $(element).animate({
                 top: '50px'
-            }, 250)
+            }, 250) ; 
         } else {
             $('.user-info-liste-li').addClass('d-none');
             $(element).animate({
                 top: '-200px'
-            }, 300)
+            }, 300) ; 
         }
     })
 
@@ -85,7 +85,17 @@ $(document).ready(function () {
             const element = $('.user-info-liste');
             $(element).animate({
                 top: '-200px'
-            }, 300)
+            }, 300) ; 
         }
+    });
+
+    $(document).on("click", "a, button[type='submit'], input[type='submit'] , #confirmDelete", function () {
+        let href = $(this).attr("href");
+
+        // Vérifier si l'élément est un lien et que son href n'est pas vide ou "#"
+        if ($(this).is("a") && (!href || href === "#")) {
+            return; // Ne fait rien si href est vide ou "#"
+        }
+        $('.loader-spinner').removeClass('d-none') ; 
     });
 })

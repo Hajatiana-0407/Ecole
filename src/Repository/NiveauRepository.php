@@ -24,37 +24,41 @@ class NiveauRepository extends ServiceEntityRepository
         parent::__construct($registry, Niveau::class);
     }
 
-
-    public function __get_all( ): Query 
+    public function __get_all(): Query
     {
         return $this->createQueryBuilder('n')
-                    ->orderBy('n.id', 'desc')
-                    ->getQuery() ; 
+            ->orderBy('n.id', 'desc')
+            ->leftJoin('n.frais', 'f', 'WITH', 'f.id = (
+                        SELECT MAX(f2.id) FROM App\Entity\Frais f2 
+                        WHERE f2.Niveau = n.id
+                    )')
+            ->addSelect('f')
+            ->getQuery();
     }
 
 
-//    /**
-//     * @return Niveau[] Returns an array of Niveau objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Niveau[] Returns an array of Niveau objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('n.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Niveau
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Niveau
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -28,6 +28,10 @@
 
 		{% block body %}{% endblock %}
 
+		<div class="my-back-dorp d-none loader-spinner">
+			{% include "partials/spinners.html.twig" %}
+		</div>
+
 
 		<script src="{{ asset('assets/js/all.min.js') }}"></script>
 		<script src="{{ asset('assets/js/main.js') }}"></script>

@@ -13,7 +13,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('nom')]
 class Niveau
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

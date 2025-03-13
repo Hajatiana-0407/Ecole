@@ -65,7 +65,6 @@ class ClasseController extends NiveauParent
             $data = $classe_form->getData();
             $manager->persist($data);
             $manager->flush();
-
             $this->addFlash('success', 'Modification éffectué');
             return $this->redirectToRoute('parametre_classe');
         }

@@ -28,8 +28,8 @@
 				{% for data in datas %}
 					<tr>
 						<td>{{ data.niveau.nom }} </td>
-						<td>{{ data.montant|number_format(0 , '.' , ' ') }} Ar <i class="fas fa-coins"></i></td>
-						<td>{{ data.createdAT|date('d/m/Y') }} <i class="fas fa-calendar-check"></i></td>
+						<td>{{ data.montant|number_format(0 , '.' , ' ') }} Ar <i class="fas fa-coins text-primary"></i></td>
+						<td>{{ data.createdAT|date('d/m/Y') }} <i class="fas fa-calendar-check text-success"></i></td>
 					</tr>
 				{% endfor %}
 			</tbody>

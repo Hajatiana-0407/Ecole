@@ -40,6 +40,10 @@
 		{% include "partials/admin/sidebare.html.twig" %}
 		{# Side bar  #}
 
+		<div class="my-back-dorp d-none loader-spinner">
+			{% include "partials/spinners.html.twig" %}
+		</div>
+
 		<div class='corps'> {% block body %}{% endblock %}
 			</div>
 
@@ -64,7 +68,7 @@
 			<script src="{{ asset('assets/js/main.js') }}"></script>
 
 			{% if js is defined  %}
-			{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}
+				{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}
 				<script src="{{ scriptpath }}"></script>
 			{% endif %}
 

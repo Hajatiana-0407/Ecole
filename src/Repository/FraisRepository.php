@@ -22,7 +22,7 @@ class FraisRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
             ->innerJoin('f.Niveau' , 'n')
             ->addSelect('n')
-            ->orderBy('f.id')
+            ->orderBy('f.id' , 'desc')
             ->getQuery() ; 
     }
 
