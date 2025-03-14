@@ -18,10 +18,10 @@ function show_sidebar() {
     $(elem_hidde).addClass('attribut-to-hidde');
 
     $('.sidebare').animate({
-        width: '250px'
+        width: '220px'
     }, 250)
     $('.corps , .head ').animate({
-        paddingLeft: '270px'
+        paddingLeft: '240px'
     }, 250, function () {
         $('.attribute-menu').css({
             display: 'inline-block'
@@ -50,7 +50,7 @@ $(document).ready(function () {
     $(document).on('click', '#hide-show-menu', function () {
         const element = $('.sidebare');
 
-        if ($(element).width() > 230) {
+        if ($(element).width() > 200) {
             hidde_sidebar();
         } else {
             show_sidebar();

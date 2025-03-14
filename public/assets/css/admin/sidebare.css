@@ -9,7 +9,7 @@
 }
 
 .sidebare {
-    width: 250px;
+    width: 220px;
     background-color: #08090a;
     color: #f4f7f5;
     position: fixed;
@@ -32,7 +32,7 @@
 
 .side-navigation .menu-liste a {
     margin-bottom: 1px;
-    padding: 7px 0;
+    padding: 5px 0;
     /* border-radius: 3px; */
 
     display: block;
@@ -40,7 +40,7 @@
     height: inherit;
     color: #a7a2a9;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .side-navigation .menu-liste.active a {
@@ -80,7 +80,6 @@
 }
 
 
-
 /*  Head  */
 .head {
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.322);
@@ -92,7 +91,7 @@
     left: 0;
     right: 0;
     padding: 0 20px 0 10px;
-    padding-left: 270px;
+    padding-left: 240px;
     /* border-bottom: 2px solid #08090a; */
     display: flex;
     align-items: center;
@@ -184,7 +183,7 @@
 .corps {
     width: 100%;
     padding-top: 67px;
-    padding-left: 270px;
+    padding-left: 240px;
     padding-right: 20px;
 }
 
