@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.401);
 }
 .myalert {
     position: fixed;

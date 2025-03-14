@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Controller\Parametrage;
+namespace App\Controller\Parametrage\Matier;
 
+use App\Controller\Parametrage\ParametrageController;
+use App\Entity\Matier;
+use App\Form\MatierType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +26,14 @@ class MatierController extends ParametrageController
     }
 
     #[Route('/matier', name: 'matier')]
-    public function index(): Response
+    public function index( ): Response
     {
-        return $this->render('parametrage/matier/index.html.twig', [
-            ...$this->get_params()  , 
+        $matier = new Matier() ; 
+        $form = $this->createForm( MatierType::class , $matier ) ; 
+
+        return $this->render('parametrage/matier/matier.html.twig', [
+            ...$this->get_params()  ,
+            'form_matier' => $form->createView(),  
         ]);
     }
 }

@@ -33,6 +33,18 @@ class Niveau
     #[ORM\OneToMany(targetEntity: Frais::class, mappedBy: 'Niveau', orphanRemoval: true)]
     private Collection $frais;
 
+    /**
+     * @var Collection<int, Droit>
+     */
+    #[ORM\OneToMany(targetEntity: Droit::class, mappedBy: 'Niveau')]
+    private Collection $droits;
+
+    /**
+     * @var Collection<int, Matier>
+     */
+    #[ORM\ManyToMany(targetEntity: Matier::class, mappedBy: 'niveau')]
+    private Collection $matiers;
+
 
 
     public function __construct()
@@ -40,6 +52,8 @@ class Niveau
         $this->classes = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
         $this->frais = new ArrayCollection();
+        $this->droits = new ArrayCollection();
+        $this->matiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +145,63 @@ class Niveau
             if ($frai->getNiveau() === $this) {
                 $frai->setNiveau(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Droit>
+     */
+    public function getDroits(): Collection
+    {
+        return $this->droits;
+    }
+
+    public function addDroit(Droit $droit): static
+    {
+        if (!$this->droits->contains($droit)) {
+            $this->droits->add($droit);
+            $droit->setNiveau($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDroit(Droit $droit): static
+    {
+        if ($this->droits->removeElement($droit)) {
+            // set the owning side to null (unless already changed)
+            if ($droit->getNiveau() === $this) {
+                $droit->setNiveau(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Matier>
+     */
+    public function getMatiers(): Collection
+    {
+        return $this->matiers;
+    }
+
+    public function addMatier(Matier $matier): static
+    {
+        if (!$this->matiers->contains($matier)) {
+            $this->matiers->add($matier);
+            $matier->addNiveau($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatier(Matier $matier): static
+    {
+        if ($this->matiers->removeElement($matier)) {
+            $matier->removeNiveau($this);
         }
 
         return $this;

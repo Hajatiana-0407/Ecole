@@ -1,6 +1,5 @@
 {% extends 'admin_base.html.twig' %}
-
-{% block title %}Frais -
+{% block title %}Droit d'inscription -
 	{{ titleMenu  }}
 {% endblock %}
 {% block body %}
@@ -20,8 +19,7 @@
 			<thead class='table-dark'>
 				<tr>
 					<th>Niveau </th>
-					<th>Frais de scolarité <i class="fas fa-coins text-primary"></i></th>
-					<th>Date <i class="fas fa-calendar-check text-primary"></i></th>
+					<th>Droit <i class="fas fa-coins text-primary"></i></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +27,6 @@
 					<tr>
 						<td>{{ data.niveau.nom }} </td>
 						<td>{{ data.montant|number_format(0 , '.' , ' ') }} Ar <i class="fas fa-coins text-secondary"></i></td>
-						<td>{{ data.createdAT|date('d/m/Y') }} <i class="fas fa-calendar-check text-secondary"></i></td>
 					</tr>
 				{% endfor %}
 			</tbody>

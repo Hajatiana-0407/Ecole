@@ -1,28 +1,23 @@
 <?php
 
-namespace App\Controller\Parametrage;
+namespace App\Controller\Parametrage\Frais;
 
-use App\Controller\Parametrage\ParametrageController;
-use App\Entity\Classe;
 use App\Entity\Frais;
-use App\Form\ClasseType;
 use App\Form\FraisType;
-use App\Repository\ClasseRepository;
 use App\Repository\FraisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 #[Route('/parametre', name: 'parametre_')]
-class FraisController extends ParametrageController
+class FraisController extends FraisParent
 {
     public function __construct()
     {
         parent::__construct();
-        $this->active_class = 'Frais de scolarité';
+        $this->active_onglet = 'Ecolage';
     }
 
     #[Route('/frais', name: 'frais')]
@@ -53,13 +48,4 @@ class FraisController extends ParametrageController
         ]);
     }
 
-
-    public function get_params(): array
-    {
-        return [
-            'titleMenu' => $this->titleMenu,
-            'menuListes' => $this->get_menu_liste($this->active_class),
-            'js' => 'frais'
-        ];
-    }
 }

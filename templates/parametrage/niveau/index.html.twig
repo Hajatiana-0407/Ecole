@@ -22,8 +22,7 @@
 
 				<!-- Modal body -->
 				<form
-					class='form-edit'
-					action="/parametre/niveau/edition/" method='post' >
+					class='form-edit' action="/parametre/niveau/edition/" method='post'>
 					{# spinner  #}
 					<div class="editspinner d-none">
 						{% include "partials/spinners.html.twig" %}
@@ -98,15 +97,17 @@
 	<div class="table-container mt-3">
 		<table class="table table-md">
 			<thead class='table-dark'>
-
 				<tr>
-					<th>Nom
+					<th>
+						Nom
 						<i class="fas fa-edit text-primary"></i>
 					</th>
-					<th>Frais de scolarité
+					<th>
+						Frais de scolarité
 						<i class="fas fa-coins text-primary"></i>
 					</th>
-					<th>Date
+					<th>
+						Date
 						<i class="fas fa-calendar-check text-primary"></i>
 					</th>
 					<th>Action</th>
@@ -129,7 +130,7 @@
 						</td>
 						<td>
 							{{ data.createdAt|date('d-m-Y') }}
-							<i class="fas fa-calendar-check text-success"></i>
+							<i class="fas fa-calendar-check text-secondary"></i>
 						</td>
 						<td>
 							{# <a href="{{ path('parametre_niveau_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary"> #}
