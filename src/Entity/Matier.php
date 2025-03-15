@@ -19,14 +19,17 @@ class Matier
     private ?string $denomination = null;
 
     /**
-     * @var Collection<int, Niveau>
+     * @var Collection<int, MatierNiveau>
      */
-    #[ORM\ManyToMany(targetEntity: Niveau::class, inversedBy: 'matiers')]
-    private Collection $niveau;
+    #[ORM\OneToMany(targetEntity: MatierNiveau::class, mappedBy: 'matier')]
+    private Collection $matierNiveaux;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $abreviation = null;
 
     public function __construct()
     {
-        $this->niveau = new ArrayCollection();
+        $this->matierNiveaux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,26 +50,45 @@ class Matier
     }
 
     /**
-     * @return Collection<int, Niveau>
+     * @return Collection<int, MatierNiveau>
      */
-    public function getNiveau(): Collection
+    public function getMatierNiveaux(): Collection
     {
-        return $this->niveau;
+        return $this->matierNiveaux;
     }
 
-    public function addNiveau(Niveau $niveau): static
+    public function addMatierNiveau(MatierNiveau $matierNiveau): static
     {
-        if (!$this->niveau->contains($niveau)) {
-            $this->niveau->add($niveau);
+        if (!$this->matierNiveaux->contains($matierNiveau)) {
+            $this->matierNiveaux->add($matierNiveau);
+            $matierNiveau->setMatier($this);
         }
 
         return $this;
     }
 
-    public function removeNiveau(Niveau $niveau): static
+    public function removeMatierNiveau(MatierNiveau $matierNiveau): static
     {
-        $this->niveau->removeElement($niveau);
+        if ($this->matierNiveaux->removeElement($matierNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($matierNiveau->getMatier() === $this) {
+                $matierNiveau->setMatier(null);
+            }
+        }
 
         return $this;
     }
+
+    public function getAbreviation(): ?string
+    {
+        return $this->abreviation;
+    }
+
+    public function setAbreviation(?string $abreviation): static
+    {
+        $this->abreviation = $abreviation;
+
+        return $this;
+    }
+
 }

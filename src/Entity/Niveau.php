@@ -40,11 +40,10 @@ class Niveau
     private Collection $droits;
 
     /**
-     * @var Collection<int, Matier>
+     * @var Collection<int, MatierNiveau>
      */
-    #[ORM\ManyToMany(targetEntity: Matier::class, mappedBy: 'niveau')]
-    private Collection $matiers;
-
+    #[ORM\OneToMany(targetEntity: MatierNiveau::class, mappedBy: 'niveau')]
+    private Collection $matierNiveaux;
 
 
     public function __construct()
@@ -53,7 +52,7 @@ class Niveau
         $this->createdAt = new DateTimeImmutable();
         $this->frais = new ArrayCollection();
         $this->droits = new ArrayCollection();
-        $this->matiers = new ArrayCollection();
+        $this->matierNiveaux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,29 +180,34 @@ class Niveau
     }
 
     /**
-     * @return Collection<int, Matier>
+     * @return Collection<int, MatierNiveau>
      */
-    public function getMatiers(): Collection
+    public function getMatierNiveaux(): Collection
     {
-        return $this->matiers;
+        return $this->matierNiveaux;
     }
 
-    public function addMatier(Matier $matier): static
+    public function addMatierNiveau(MatierNiveau $matierNiveau): static
     {
-        if (!$this->matiers->contains($matier)) {
-            $this->matiers->add($matier);
-            $matier->addNiveau($this);
+        if (!$this->matierNiveaux->contains($matierNiveau)) {
+            $this->matierNiveaux->add($matierNiveau);
+            $matierNiveau->setNiveau($this);
         }
 
         return $this;
     }
 
-    public function removeMatier(Matier $matier): static
+    public function removeMatierNiveau(MatierNiveau $matierNiveau): static
     {
-        if ($this->matiers->removeElement($matier)) {
-            $matier->removeNiveau($this);
+        if ($this->matierNiveaux->removeElement($matierNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($matierNiveau->getNiveau() === $this) {
+                $matierNiveau->setNiveau(null);
+            }
         }
 
         return $this;
     }
+
+    
 }

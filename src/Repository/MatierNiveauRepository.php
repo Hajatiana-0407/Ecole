@@ -2,29 +2,31 @@
 
 namespace App\Repository;
 
-use App\Entity\Matier;
+use App\Entity\MatierNiveau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Matier>
+ * @extends ServiceEntityRepository<MatierNiveau>
  */
-class MatierRepository extends ServiceEntityRepository
+class MatierNiveauRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Matier::class);
+        parent::__construct($registry, MatierNiveau::class);
     }
 
-    public function __get_all ( ) : Query {
-        return $this->createQueryBuilder('m')
-                ->orderBy('m.id' , 'desc')
-                ->getQuery() ; 
+    public function __get_AllMat_by_niveau( $id_niveau ){
+        return $this->createQueryBuilder('mn')
+                ->leftJoin('mn.matier' , 'm')
+                ->addSelect('m')
+                ->where('mn.niveau = ' . $id_niveau ) 
+                ->getQuery()
+                ->getResult() ; 
     }
 
     //    /**
-    //     * @return Matier[] Returns an array of Matier objects
+    //     * @return MatierNiveau[] Returns an array of MatierNiveau objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -38,7 +40,7 @@ class MatierRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Matier
+    //    public function findOneBySomeField($value): ?MatierNiveau
     //    {
     //        return $this->createQueryBuilder('m')
     //            ->andWhere('m.exampleField = :val')

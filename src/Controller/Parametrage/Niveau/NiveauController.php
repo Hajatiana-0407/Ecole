@@ -3,6 +3,7 @@
 namespace App\Controller\Parametrage\Niveau;
 
 use App\Entity\Classe;
+use App\Entity\Droit;
 use App\Entity\Frais;
 use App\Entity\Niveau;
 use App\Form\NiveauType;
@@ -61,10 +62,19 @@ class NiveauController extends NiveauParent
                     ->setMontant($_POST['niveau']['frais']);
                 $manager->persist($frais);
             }
-
+            if (isset($_POST['niveau']['droit']) && isset($_POST['niveau']['droit']) > 0) {
+                $droit = new Droit();
+                $droit->setNiveau($_niveau)
+                    ->setMontant($_POST['niveau']['droit']);
+                $manager->persist($droit);
+            }
+ 
             // ********************* Classes *********************** //
 
             if (isset($_POST['niveau']['nbr_classe']) && isset($_POST['niveau']['nbr_classe']) > 0) {
+                if ( $_POST['niveau']['nbr_classe'] == ''){
+                    $_POST['niveau']['nbr_classe'] = 0 ; 
+                }
                 $alphabets = range('A', 'Z');
                 if ($_POST['niveau']['type'] == 'A') {
                     for ($i = $_POST['niveau']['nbr_classe'] - 1; $i >= 0; $i--) {
@@ -84,7 +94,7 @@ class NiveauController extends NiveauParent
             }
             // ********************************************************************** //
 
-            $manager->flush();
+            $manager->flush();   
 
             $this->addFlash('success', 'Ajout effectué');
             return $this->redirectToRoute('parametre_niveau');

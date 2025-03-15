@@ -1,6 +1,6 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Frais -
+{% block title %}Niveau -
 	{{ titleMenu  }}
 {% endblock %}
 
@@ -54,6 +54,7 @@
 
 	{{ form_start( form_niveau )}}
 	{{ form_row( form_niveau.nom ) }}
+	{{ form_row( form_niveau.droit ) }}
 	{{ form_row( form_niveau.frais ) }}
 
 	<div id="__classe_add_container" class='{{ ( form_niveau.nbr_classe.vars.value == '')? 'd-none' : '' }}'>
@@ -93,7 +94,7 @@
 	</div>
 	{{ form_end( form_niveau )}}
 
-
+	<h4>Liste des niveaux : </h4>
 	<div class="table-container mt-3">
 		<table class="table table-md">
 			<thead class='table-dark'>
@@ -103,11 +104,19 @@
 						<i class="fas fa-edit text-primary"></i>
 					</th>
 					<th>
+						Droit d'inscription 
+						<i class="fas fa-dollar text-primary"></i>
+					</th>
+					<th>
 						Frais de scolarité
 						<i class="fas fa-coins text-primary"></i>
 					</th>
 					<th>
-						Date
+						Nbr Classe
+						<i class="fas fa-2 text-primary"></i>
+					</th>
+					<th>
+						Date d'ajout
 						<i class="fas fa-calendar-check text-primary"></i>
 					</th>
 					<th>Action</th>
@@ -118,6 +127,17 @@
 					<tr>
 						<td>{{ data.nom|capitalize  }}</td>
 						<td>
+							{% if data.droits|length > 0 %}
+								{{ data.droits[0].montant|number_format(0 , '.' , ' ') }}
+								Ar
+								<i class="fas fa-dollar text-secondary"></i>
+							{% else %}
+								<p class="text-secondary text-small">
+									En attente ...
+								</p>
+							{% endif %}
+						</td>
+						<td>
 							{% if data.frais|length > 0 %}
 								{{ data.frais[0].montant|number_format(0 , '.' , ' ') }}
 								Ar
@@ -127,6 +147,9 @@
 									En attente ...
 								</p>
 							{% endif %}
+						</td>
+						<td>
+							{{ data.classes|length }}
 						</td>
 						<td>
 							{{ data.createdAt|date('d-m-Y') }}

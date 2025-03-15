@@ -32,8 +32,21 @@ class NiveauRepository extends ServiceEntityRepository
                         SELECT MAX(f2.id) FROM App\Entity\Frais f2 
                         WHERE f2.Niveau = n.id
                     )')
+            ->leftJoin('n.droits', 'd', 'WITH', 'd.id = (
+                        SELECT MAX(d2.id) FROM App\Entity\Droit d2 
+                        WHERE d2.Niveau = n.id
+                    )')
+            ->leftJoin('n.classes' , 'c') 
             ->addSelect('f')
             ->getQuery();
+    }
+
+    public function getAllNiveau(){
+        return $this->createQueryBuilder('n')
+        ->orderBy('n.id' , 'desc')
+        ->getQuery()
+        ->getResult() ; 
+        ; 
     }
 
 

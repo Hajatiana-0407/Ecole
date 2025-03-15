@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Niveau;
+use phpDocumentor\Reflection\PseudoTypes\Numeric_;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -19,9 +20,17 @@ class NiveauType extends AbstractType
                 'label' => 'Nom : '
             ])
             ->add('frais', NumberType::class, [
-                'mapped' => false, // le champs n\' est pas ne Niveau
+                'mapped' => false, // le champs n\' est pas de Niveau
                 'label' => 'Frais de scolarité :',
                 'required' => true,
+            ])
+            ->add('droit', NumberType::class, [
+                'mapped' => false, // le champs n\' est pas de Niveau
+                'label' => 'Droit d\'inscription :',
+                'required' => true,
+                'attr' => [
+                    'min' => '0',
+                ],
             ])
             ->add('nbr_classe', NumberType::class, [
                 'mapped' => false, // le champs n\' est pas ne Niveau
@@ -30,7 +39,7 @@ class NiveauType extends AbstractType
                     'min' => '0',
                     'max' => '30',
                 ],
-                'label' => 'Nombre de classe :' , 
+                'label' => 'Nombre de classe :',
                 'required' => false,
             ])
             ->add('type', ChoiceType::class, [
