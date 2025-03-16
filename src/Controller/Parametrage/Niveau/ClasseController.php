@@ -55,8 +55,6 @@ class ClasseController extends NiveauParent
     public function edition(
         Request $request,
         EntityManagerInterface $manager,
-        ClasseRepository $repository,
-        PaginatorInterface $paginator,
         Classe $classe
     ): Response {
         $classe_form = $this->createForm(ClasseType::class, $classe);
@@ -69,14 +67,10 @@ class ClasseController extends NiveauParent
             return $this->redirectToRoute('parametre_classe');
         }
 
-        $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
-
-        return $this->render('parametrage/niveau/classe.html.twig', [
+        return $this->render('parametrage/niveau/classeModif.html.twig', [
             ...$this->get_params(),
             'classe_form' => $classe_form->createView(),
-            'datas' => $datas,
-            'id' => $classe->getId()
         ]);
     }
 

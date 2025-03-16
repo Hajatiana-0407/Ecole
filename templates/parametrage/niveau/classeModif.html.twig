@@ -1,0 +1,17 @@
+<turbo-frame id='update_frame'>
+	{{ form_start( classe_form )}}
+	{{ form_row( classe_form.niveau ) }}
+	{{ form_row( classe_form.denomination ) }}
+	<div class="boutton__">
+		<button class='btn btn-info ' type='submit'>
+			{% if id is defined %}
+				<i class="fa-solid fa-pen-to-square"></i>
+				Modifier
+			{% else %}
+				<i class="fa-solid fa-check"></i>
+				Valider
+			{% endif %}
+		</button>
+	</div>
+	{{ form_end( classe_form )}}
+</turbo-frame>

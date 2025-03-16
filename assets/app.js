@@ -1,5 +1,5 @@
-import './bootstrap.js';
-import { Turbo } from "@hotwired/turbo";
+// import './bootstrap.js';
+import '@hotwired/turbo';
 /*
  * Welcome to your app's main JavaScript file!
  *
