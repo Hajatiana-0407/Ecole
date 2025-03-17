@@ -3,6 +3,14 @@
 	{{ titleMenu  }}
 {% endblock %}
 {% block body %}
+
+<div class="form-add ">
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-circle-plus"></i>
+				Droit d'inscription
+			</h5>
+		</div>
 	{{ form_start( form )}}
 	{{ form_row( form.Niveau) }}
 	{{ form_row( form.montant) }}
@@ -13,20 +21,37 @@
 		</button>
 	</div>
 	{{ form_end( form )}}
+	</div>
 
 	<div class="table-container mt-3">
-		<table class="table table-md">
-			<thead class='table-dark'>
+	<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Droit d'inscription
+			</h5>
+		</div>
+		<table class="table table-md  table-hover">
+			<thead class=''>
 				<tr>
-					<th>Niveau </th>
-					<th>Droit <i class="fas fa-coins text-primary"></i></th>
+					<th>
+						Niveau
+						<i class="fas fa-layer-group text-primary"></i>
+					</th>
+					<th>
+						Droit d'inscription
+						<i class="fas fa-file-signature text-primary"></i>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for data in datas %}
 					<tr>
-						<td>{{ data.niveau.nom }} </td>
-						<td>{{ data.montant|number_format(0 , '.' , ' ') }} Ar <i class="fas fa-coins text-secondary"></i></td>
+						<td>{{ data.niveau.nom }}
+						</td>
+						<td>{{ data.montant|number_format(0 , '.' , ' ') }}
+							Ar
+							<i class="fas fa-coins text-secondary"></i>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>

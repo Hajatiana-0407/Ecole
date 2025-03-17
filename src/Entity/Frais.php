@@ -14,8 +14,6 @@ class Frais
     {
         $this->createdAt = new DateTimeImmutable() ; 
     }
-
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

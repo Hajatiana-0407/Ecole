@@ -13,7 +13,7 @@ class FraisParent extends ParametrageController
     public function __construct()
     {
         parent::__construct();
-        $this->active_class = 'Frais de scolarité';
+        $this->active_class = 'Frais';
     }
 
     public function get_params(): array
@@ -30,11 +30,11 @@ class FraisParent extends ParametrageController
     {
         $datas =  [
             'Ecolage' => [
-                'icone' => '<i class="fa-solid fa-layer-group"></i>',
+                'icone' => '<i class="fas fa-money-bill-wave"></i>',
                 'href' => 'parametre_frais',
             ],
             'Droit d\'inscription' => [
-                'icone' => '<i class="fa-solid fa-graduation-cap"></i>',
+                'icone' => '<i class="fas fa-file-signature"></i>',
                 'href' => 'parametre_droit'
             ],
         ];

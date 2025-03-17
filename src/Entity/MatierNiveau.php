@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MatierNiveauRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MatierNiveauRepository::class)]
 class MatierNiveau
@@ -17,9 +18,13 @@ class MatierNiveau
     private ?float $coeficient = null;
 
     #[ORM\ManyToOne(inversedBy: 'matierNiveaux')]
-    private ?Niveau $niveau = null;
+    #[ORM\JoinColumn(nullable: false)] // ⚠️ Rend la colonne obligatoire en base de données
+    #[Assert\NotNull(message: "Vous devez sélectionner une niveau.")]
+    private ?Niveau $niveau ;
 
     #[ORM\ManyToOne(inversedBy: 'matierNiveaux')]
+    #[ORM\JoinColumn(nullable: false)] // ⚠️ Rend la colonne obligatoire en base de données
+    #[Assert\NotNull(message: "Vous devez sélectionner une matière.")]
     private ?Matier $matier = null;
 
     public function getId(): ?int

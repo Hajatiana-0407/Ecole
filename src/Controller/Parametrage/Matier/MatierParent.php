@@ -32,7 +32,7 @@ class MatierParent extends ParametrageController
                 'href' => 'parametre_matier',
             ],
             'Niveau et Coeficient' => [
-                'icone' => '<i class="fa-solid fa-graduation-cap"></i>',
+                'icone' => '<i class="fas fa-percent"></i>',
                 'href' => 'parametre_matiere_coeficient'
             ],
         ];

@@ -2,31 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Frais;
+use App\Entity\MatierNiveau;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FraisType extends AbstractType
+class MatNiveauType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Niveau', NiveauAutocompleteField::class )
-            ->add('montant' , NumberType::class , [
+            ->add('Niveau', NiveauAutocompleteField::class , [
                 'attr' => [
-                    'min' => 100 
-                ] , 
-                'label' => 'Frais de scolarité :'
-            ]) 
+                    'placeholder' => 'Rechercher'
+                ]
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Frais::class,
+            'data_class' => MatierNiveau::class,
         ]);
     }
 }

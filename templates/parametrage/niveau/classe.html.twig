@@ -37,7 +37,13 @@
 	</div>
 	{# Modele #}
 
-
+<div class="form-add ">
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-circle-plus"></i>
+				Ajout Classe 
+			</h5>
+		</div>
 	{{ form_start( classe_form )}}
 	{{ form_row( classe_form.niveau ) }}
 	{{ form_row( classe_form.denomination ) }}
@@ -53,16 +59,21 @@
 		</button>
 	</div>
 	{{ form_end( classe_form )}}
+	</div>
 
-
-	<h4>Liste des classes :
-	</h4>
 	<div class="table-container mt-3">
-		<table class="table table-md">
-			<thead class='table-dark'>
-
+	<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des classes 
+			</h5>
+		</div>
+		<table class="table table-md  table-hover">
+			<thead class=''>
 				<tr>
-					<th>Denomination</th>
+					<th>
+					<i class="fas fa-tag text-primary"></i>
+					Denomination</th>
 					<th>Niveau</th>
 					<th>Action</th>
 				</tr>

@@ -20,18 +20,7 @@ class DroitType extends AbstractType
             ->add('montant' , NumberType::class , [
                 'label' => 'Montant : '
             ])
-            ->add('Niveau', EntityType::class, [
-                'class' => Niveau::class,
-                'choice_label' => 'nom',
-                'query_builder' => function (NiveauRepository $repository): QueryBuilder {
-                    return $repository->createQueryBuilder('d')
-                        ->orderBy('d.id', 'desc');
-                },
-                'label' => 'Niveau : ',
-                'attr' => [
-                    'class' => 'ui search dropdown'
-                ]
-            ])
+            ->add('Niveau', NiveauAutocompleteField::class)
         ;
     }
 

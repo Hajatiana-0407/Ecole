@@ -56,33 +56,47 @@
 		</div>
 	</div>
 	{# Modele #}
-
-	{{ form_start( form_matier )}}
-	{{ form_row( form_matier.denomination )}}
-	{{ form_row( form_matier.abreviation )}}
-	<div class="boutton__">
-		<button class='btn btn-info ' type='submit'>
-			<i class="fa-solid fa-check"></i>
-			Valider
-		</button>
+	<div class="form-add ">
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-circle-plus"></i>
+				Ajout Matière
+			</h5>
+		</div>
+		{{ form_start( form_matier )}}
+		{{ form_row( form_matier.denomination )}}
+		{{ form_row( form_matier.abreviation )}}
+		<div class="boutton__">
+			<button class='btn btn-info ' type='submit'>
+				<i class="fa-solid fa-check"></i>
+				Valider
+			</button>
+		</div>
+		{{ form_end( form_matier )}}
 	</div>
-	{{ form_end( form_matier )}}
 
 
-<h4>Liste des matières :</h4>
 	<div class="table-container mt-3">
-		<table class="table table-md">
-			<thead class='table-dark'>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des matières
+			</h5>
+		</div>
+		<table class="table table-md  table-hover">
+			<thead class=''>
 				<tr>
 					<th>
 						Dénomination
-						<i class="fas fa-edit text-primary"></i>
+						<i class="fas fa-tag text-primary"></i>
 					</th>
 					<th>
 						Abréviation
-						<i class="fas fa-dollar text-primary"></i>
+						<i class="fas fa-font text-primary"></i>
 					</th>
-					<th>Action</th>
+					<th>Action
+						<i class="fas fa-cogs text-primary"></i>
+					</th>
 				</tr>
 			</thead>
 			<tbody>

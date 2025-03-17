@@ -24,12 +24,12 @@ class ParametrageController extends BaseController
     {
 
         $datas  = [
-            'Niveau' =>  [
+            'Niveau et classe' =>  [
                 'href' => 'parametre_niveau',
                 'role' => '',
                 'icone' => '<i class="fas fa-layer-group"></i>'
             ],
-            "Frais de scolarité" => [
+            "Frais" => [
                 'href' => 'parametre_frais',
                 'role' => '',
                 'icone' => '<i class="fa-solid fa-dollar-sign"></i>'

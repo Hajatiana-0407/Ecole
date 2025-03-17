@@ -21,6 +21,7 @@ class MatierNiveauRepository extends ServiceEntityRepository
                 ->leftJoin('mn.matier' , 'm')
                 ->addSelect('m')
                 ->where('mn.niveau = ' . $id_niveau ) 
+                ->orderBy('mn.id' , 'desc')
                 ->getQuery()
                 ->getResult() ; 
     }

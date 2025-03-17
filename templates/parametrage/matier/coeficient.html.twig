@@ -6,9 +6,9 @@
 
 {% block body %}
 
+<div id="flash_message"></div>
 	{# Modele #}
 	<!-- Button to Open the Modal -->
-
 	<!-- The Modal -->
 		<div class="modal fade modal" id="myModal"> <div class="modal-dialog">
 			<div
@@ -56,66 +56,59 @@
 		</div>
 	</div>
 	{# Modele #}
+	{# <div class="form-add ">
+			<div class="title-left">
+				<h5>
+					<i class="fa-solid fa-magnifying-glass"></i>
+					Rechercher un niveau
+				</h5>
+			</div>
+			
+		</div> #}
+	<div id='add-matiere_coef'>
+		<h6 class='text-secondary'>
+			Veuillez rechercher un Niveau !!!
+		</h6>
+	</div>
 
-	<form action="{{ path('parametre_srch_niveau') }}" method='post'>
-		<div class="mb-3">
-			<label for="" class="form-label">Choisire un Niveau :
-			</label>
-			<input type="text" class="d-none " name='_token' value='{{ csrf_token("srch_niveau") }}'>
-			<select name="niveau" id="" class='form-select ui search dropdown'>
-				{% for niveau in niveaux %}
-					<option value="{{ niveau.id }}">{{ niveau.nom }}</option>
-				{% endfor %}
-			</select>
+	<div class="table-container mt-5">
+		<div class='tab-search-bar'>
+			{{ form_start( form ) }}
+			<div class="input-group">
+				{{ form_widget( form.Niveau ) }}
+				<button class="btn btn-info" type="submit">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			</div>
+			{{ form_end( form ) }}
 		</div>
-		<div class="boutton__">
-			<button class='btn btn-info'>Rechercher</button>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des matières <span id='niveau-name'></span>
+			</h5>
 		</div>
-	</form>
-
-	<h4>Liste des matières :</h4>
-	<div class="table-container mt-3">
-		<table class="table table-md">
-			<thead class='table-dark'>
+		<table class="table table-md  table-hover">
+			<thead class=''>
 				<tr>
 					<th>
-						Matièere
-						<i class="fas fa-edit text-primary"></i>
+						Dénomination
+						<i class="fas fa-tag text-primary"></i>
 					</th>
 					<th>
 						Abréviation
-						<i class="fas fa-dollar text-primary"></i>
+						<i class="fas fa-font text-primary"></i>
 					</th>
-					<th>Coéficient</th>
-					<th>Action</th>
+					<th>
+						Coéfient
+						<i class="fas fa-divide text-primary"></i>
+					</th>
+					<th>Action
+						<i class="fas fa-cogs text-primary"></i>
+					</th>
 				</tr>
 			</thead>
-			<tbody>
-				{% if datas is defined  %}
-					{% for data in datas %}
-						<tr>
-							<td>{{ data.matier.denomination|capitalize  }}</td>
-							<td>{{ data.matier.abreviation|capitalize  }}</td>
-							<td>
-								{# <a href="{{ path('parametre_niveau_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary"> #}
-								<a href="#" class="btn btn-sm btn-outline-primary edit" data-id='{{ data.id }}' data-bs-toggle="modal" data-bs-target="#myModal">
-									<i class="fa-solid fa-pen-to-square"></i>
-								</a>
-								<form action="{{ path('parametre_matiere_delete' , { id:data.id } ) }}" class="__delete_form">
-									<input type="hidden" name='id' value='{{ data.id }}'>
-									<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
-										<i class="fa-solid fa-trash"></i>
-									</button>
-								</form>
-							</td>
-						</tr>
-					{% endfor %}
-				{% endif %}
-
-
-			</tbody>
+			<tbody id='tab_body_stream'></tbody>
 		</table>
 	</div>
-
-
 {% endblock %}

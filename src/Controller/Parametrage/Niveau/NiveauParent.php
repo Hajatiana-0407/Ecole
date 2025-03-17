@@ -10,7 +10,7 @@ class NiveauParent extends ParametrageController
     public function __construct( )
     {
         parent::__construct( );
-        $this->active_class = 'Niveau' ; 
+        $this->active_class = 'Niveau et classe' ; 
     }
 
     public function get_params():array

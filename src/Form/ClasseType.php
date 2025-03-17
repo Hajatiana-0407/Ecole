@@ -17,22 +17,11 @@ class ClasseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('niveau', EntityType::class, [
-                'class' =>  Niveau::class,
-                'choice_label' => 'nom',
-                'query_builder' => function ( NiveauRepository $repository ) : QueryBuilder {
-                    return $repository->createQueryBuilder('n')
-                            ->orderBy('n.id' , 'desc') ; 
-                } , 
-                'label' => 'Niveau : ' , 
-                'attr' => [
-                    'class' => 'ui search dropdown'
-                ]
-            ])
-            ->add('denomination' , TextType::class , [
+            ->add('niveau', NiveauAutocompleteField::class)
+            ->add('denomination' , TextType::class , [ 
                 'label' => 'Dénomination : '
             ])
-        ;
+        ; 
     }
 
     public function configureOptions(OptionsResolver $resolver): void

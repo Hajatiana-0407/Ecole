@@ -1,4 +1,4 @@
-// import './bootstrap.js';
+import './bootstrap.js';
 import '@hotwired/turbo';
 /*
  * Welcome to your app's main JavaScript file!

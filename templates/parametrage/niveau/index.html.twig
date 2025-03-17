@@ -52,74 +52,90 @@
 	</div>
 	{# Modele #}
 
-	{{ form_start( form_niveau )}}
-	{{ form_row( form_niveau.nom ) }}
-	{{ form_row( form_niveau.droit ) }}
-	{{ form_row( form_niveau.frais ) }}
-
-	<div id="__classe_add_container" class='{{ ( form_niveau.nbr_classe.vars.value == '')? 'd-none' : '' }}'>
-		{{ form_row( form_niveau.nbr_classe ) }}
-		<div class="text-primary">
-			<label for="" class='form-label'>Nominalisation des classes en alphabet( Classe A , B , ... ) ou en chiffre ( Classe 1 , 2 , ... )
-			</label>
+	<div class="form-add ">
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-circle-plus"></i>
+				Ajout Niveau 
+			</h5>
 		</div>
-		<div class='d-flex gap-5'>
-			{% for child in form_niveau.type %}
-				<div class="">
-					{{ form_widget(child) }}
-					{{ form_label(child) }}
-				</div>
-			{% endfor %}
+		{{ form_start( form_niveau )}}
+		{{ form_row( form_niveau.nom ) }}
+		{{ form_row( form_niveau.droit ) }}
+		{{ form_row( form_niveau.frais ) }}
+
+		<div id="__classe_add_container" class='{{ ( form_niveau.nbr_classe.vars.value == '')? 'd-none' : '' }}'>
+			{{ form_row( form_niveau.nbr_classe ) }}
+			<div class="text-primary">
+				<label for="" class='form-label'>Nominalisation des classes en alphabet( Classe A , B , ... ) ou en chiffre ( Classe 1 , 2 , ... )
+				</label>
+			</div>
+			<div class='d-flex gap-5'>
+				{% for child in form_niveau.type %}
+					<div class="">
+						{{ form_widget(child) }}
+						{{ form_label(child) }}
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-	</div>
 
-	<div class="boutton__">
+		<div class="boutton__">
 
-		{% if form_niveau.nbr_classe.vars.value == '' %}
-			<button type='button' class='btn btn-secondary' id='__add_classe'>
-				<i class='fa-solid fa-plus'></i>
-				Ajout Classe
-			</button>
-		{% endif %}
-
-		<button class='btn btn-info ' type='submit'>
-			{% if id is defined %}
-				<i class="fa-solid fa-pen-to-square"></i>
-				Modifier
-			{% else %}
-				<i class="fa-solid fa-check"></i>
-				Valider
+			{% if form_niveau.nbr_classe.vars.value == '' %}
+				<button type='button' class='btn btn-secondary' id='__add_classe'>
+					<i class='fa-solid fa-plus'></i>
+					Ajout Classe
+				</button>
 			{% endif %}
-		</button>
-	</div>
-	{{ form_end( form_niveau )}}
 
-	<h4>Liste des niveaux : </h4>
+			<button class='btn btn-info ' type='submit'>
+				{% if id is defined %}
+					<i class="fa-solid fa-pen-to-square"></i>
+					Modifier
+				{% else %}
+					<i class="fa-solid fa-check"></i>
+					Valider
+				{% endif %}
+			</button>
+		</div>
+		{{ form_end( form_niveau )}}
+	</div>
+
+
 	<div class="table-container mt-3">
-		<table class="table table-md">
-			<thead class='table-dark'>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des niveaux
+			</h5>
+		</div>
+		<table class="table table-md  table-hover  table-hover">
+			<thead>
 				<tr>
 					<th>
 						Nom
-						<i class="fas fa-edit text-primary"></i>
+						<i class="fas fa-tag text-primary"></i>
 					</th>
 					<th>
-						Droit d'inscription 
-						<i class="fas fa-dollar text-primary"></i>
+						Droit d'inscription
+						<i class="fas fa-file-signature text-primary"></i>
 					</th>
 					<th>
 						Frais de scolarité
-						<i class="fas fa-coins text-primary"></i>
+						<i class="fas fa-money-bill-wave text-primary"></i>
 					</th>
 					<th>
 						Nbr Classe
-						<i class="fas fa-2 text-primary"></i>
+						<i class="fas fa-chalkboard-teacher text-primary"></i>
 					</th>
 					<th>
 						Date d'ajout
-						<i class="fas fa-calendar-check text-primary"></i>
+						<i class="fas fa-calendar-plus text-primary"></i>
 					</th>
-					<th>Action</th>
+					<th>Action
+						<i class="fas fa-cogs text-primary"></i>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -157,9 +173,9 @@
 						</td>
 						<td>
 							{# <a href="{{ path('parametre_niveau_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary"> #}
-							<a href="#" class="btn btn-sm btn-outline-primary edit" data-id='{{ data.id }}' data-bs-toggle="modal" data-bs-target="#myModal">
+							<button type='button' href="#" class="btn btn-sm btn-outline-primary edit" data-id='{{ data.id }}' data-bs-toggle="modal" data-bs-target="#myModal">
 								<i class="fa-solid fa-pen-to-square"></i>
-							</a>
+							</button>
 							<form action="{{ path('parametre_niveau_delete' , { id:data.id } ) }}" class="__delete_form">
 								<input type="hidden" name='id' value='{{ data.id }}'>
 								<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
