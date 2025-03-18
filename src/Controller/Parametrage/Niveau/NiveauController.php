@@ -106,7 +106,7 @@ class NiveauController extends NiveauParent
         $datas = $this->pagination($paginator, $request, $this->repository->__get_all());
 
         // detection des erreur dans la formulaire et retourne dan le vue
-        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+        if ($form_niveau->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('parametrage/niveau/niveau_form_error.html.twig', [
                 'form_niveau' => $form_niveau ,

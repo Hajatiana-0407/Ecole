@@ -17,7 +17,9 @@ class ClasseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('niveau', NiveauAutocompleteField::class)
+            ->add('niveau', NiveauAutocompleteField::class ,  [
+                'label' => 'Niveau :'
+            ])
             ->add('denomination' , TextType::class , [ 
                 'label' => 'Dénomination : '
             ])
