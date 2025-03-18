@@ -35,7 +35,6 @@
 			{% block importmap %}
 				{{ importmap('app') }}
 			{% endblock %}
-			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
 	<body>
@@ -43,12 +42,8 @@
 		{% include "partials/admin/sidebare.html.twig" %}
 		{# Side bar  #}
 
-		<div class="my-back-dorp d-none loader-spinner">
-			{% include "partials/spinners.html.twig" %}
-		</div>
-
 		<div class='corps'> {% block body %}{% endblock %}
-			</div>
+		</div>
 
 
 			{# Section des alert  #}
@@ -58,6 +53,7 @@
 			<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 			<script src="{{ asset('assets/js/bootstrap.bundle.min.js.map') }}"></script>
 			<script src="{{ asset('assets/js/all.min.js') }}"></script>
+			<script src="{{ asset('assets/js/function.js') }}"></script>
 
 			{# <!-- Auto-complet -->
 			// <script src="{{ asset('assets/auto_complete/js/autocomplete/bootstrap.5.2.3.no.dropdown.js') }} "></script>
@@ -65,10 +61,6 @@
 			// <script src="{{ asset('assets/auto_complete/js/autocomplete/form.min.js') }}"></script>
 			// <script src="{{ asset('assets/auto_complete/js/autocomplete/transition.min.js') }} "></script> #}
 			<!-- Auto-complet -->
-
-			<script src="{{ asset('assets/js/admin/alert.js') }}"></script>
-			<script src="{{ asset('assets/js/admin/admin_general.js') }}"></script>
-			<script src="{{ asset('assets/js/main.js') }}"></script>
 
 			{% if js is defined  %}
 				{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}

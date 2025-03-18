@@ -5,58 +5,12 @@
 {% endblock %}
 
 {% block body %}
-	{# Modele #}
-	<!-- Button to Open the Modal -->
 
-	<!-- The Modal -->
-		<div class="modal fade modal" id="myModal"> <div class="modal-dialog">
-			<div
-				class="modal-content" class='modal-edit'>
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Modification
-						<i class="fa-solid fa-pen"></i>
-					</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<form
-					class='form-edit' action="/parametre/niveau/edition/" method='post'>
-					{# spinner  #}
-					<div class="editspinner d-none">
-						{% include "partials/spinners.html.twig" %}
-					</div>
-					{# spinner  #}
-					<div class="modal-body">
-						<div class="mb3">
-							<label for="nom-edit" class='form-label'>Nom :
-							</label>
-							<input type="text" class='d-none' name='_token' value='{{ csrf_token("form_niveau_edit") }}'>
-							<input type="hidden" class="form-control " id='id-edit' name='niveau[id]'>
-							<input type="text" class="form-control" id='nom-edit' name='nom'>
-						</div>
-					</div>
-
-					<!-- Modal footer -->
-					<div class="modal-footer boutton__">
-						<button class='btn btn-info' type='submit'>
-							<i class="fa-solid fa-pen-to-square"></i>
-							Modifier
-						</button>
-					</div>
-				</form>
-
-			</div>
-		</div>
-	</div>
-	{# Modele #}
-
-	<div class="form-add ">
+	<div class="form-add" id='__form__'>
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-circle-plus"></i>
-				Ajout Niveau 
+				Ajout Niveau
 			</h5>
 		</div>
 		{{ form_start( form_niveau )}}
@@ -141,7 +95,7 @@
 			<tbody>
 				{% for data in datas %}
 					<tr>
-						<td>{{ data.nom|capitalize  }}</td>
+						<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
 						<td>
 							{% if data.droits|length > 0 %}
 								{{ data.droits[0].montant|number_format(0 , '.' , ' ') }}
@@ -172,10 +126,9 @@
 							<i class="fas fa-calendar-check text-secondary"></i>
 						</td>
 						<td>
-							{# <a href="{{ path('parametre_niveau_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary"> #}
-							<button type='button' href="#" class="btn btn-sm btn-outline-primary edit" data-id='{{ data.id }}' data-bs-toggle="modal" data-bs-target="#myModal">
+							<a href='{{ path('parametre_niveau_edit' , {id:data.id}) }}' type='submit' class="btn btn-sm btn-outline-primary">
 								<i class="fa-solid fa-pen-to-square"></i>
-							</button>
+							</a>
 							<form action="{{ path('parametre_niveau_delete' , { id:data.id } ) }}" class="__delete_form">
 								<input type="hidden" name='id' value='{{ data.id }}'>
 								<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">

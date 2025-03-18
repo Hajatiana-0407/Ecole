@@ -7,64 +7,7 @@
 {% block body %}
 
 <div id="flash_message"></div>
-	{# Modele #}
-	<!-- Button to Open the Modal -->
-	<!-- The Modal -->
-		<div class="modal fade modal" id="myModal"> <div class="modal-dialog">
-			<div
-				class="modal-content" class='modal-edit'>
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Modification
-						<i class="fa-solid fa-pen"></i>
-					</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<form
-					class='form-edit' action="/parametre/niveau/edition/" method='post'>
-					{# spinner  #}
-					<div class="editspinner d-none">
-						{% include "partials/spinners.html.twig" %}
-					</div>
-					{# spinner  #}
-					<div class="modal-body">
-						<div class="mb3">
-							<label for="nom-edit" class='form-label'>Dénomination :
-							</label>
-							<input type="text" class='d-none' name='_token' value='{{ csrf_token("form_niveau_edit") }}'>
-							<input type="hidden" class="form-control " id='id-edit' name='niveau[id]'>
-							<input type="text" class="form-control" id='denomination-edit' name='denomination'>
-						</div>
-						<div class="mb3">
-							<label for="nom-edit" class='form-label'>Abréviation :
-							</label>
-							<input type="text" class="form-control" id='abreviation-edit' name='abreviation'>
-						</div>
-					</div>
-
-					<!-- Modal footer -->
-					<div class="modal-footer boutton__">
-						<button class='btn btn-info' type='submit'>
-							<i class="fa-solid fa-pen-to-square"></i>
-							Modifier
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	{# Modele #}
-	{# <div class="form-add ">
-			<div class="title-left">
-				<h5>
-					<i class="fa-solid fa-magnifying-glass"></i>
-					Rechercher un niveau
-				</h5>
-			</div>
-			
-		</div> #}
+	
 	<div id='add-matiere_coef'>
 		<h6 class='text-secondary'>
 			Veuillez rechercher un Niveau !!!

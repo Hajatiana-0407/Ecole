@@ -17,7 +17,11 @@
 *::-webkit-scrollbar-thumb {
     background-color: #97a1a4;
 }
-
+#edit-modal a{
+    display: flex ;
+    width: 100%;
+    justify-content: center ;
+}
 body {
     background-color: white;
 }
@@ -247,7 +251,7 @@ body {
 }
 
 /*  */
-/* **************************** */
+/* ****************************************************************************************************** */
 .corps {
     width: 100%;
     padding-top: 67px;
@@ -299,6 +303,7 @@ body {
     max-width: 40%;
     height: 38px;
 }
+
 
 .form-add .title-left {
     max-width: 100%;

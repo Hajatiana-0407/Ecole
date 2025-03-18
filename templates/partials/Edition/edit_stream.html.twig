@@ -1,0 +1,34 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Niveau -
+	{{ titleMenu  }}
+{% endblock %}
+
+{% block body %}
+	<div class="form-add" id='__form__'>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-pen-to-square"></i>
+				Modification
+			</h5>
+		</div>
+		{{ form_start( form )}}
+		{{ form_widget(form) }}
+		<div class="boutton__">
+			{% if annule_path is defined %}
+				<a href='{{path( annule_path ) }}' class='btn btn-secondary'>
+					<i class="fa fa-ban"></i>
+					Annuler
+				</a>
+			{% endif %}
+
+			<button class='btn btn-info ' type='submit'>
+				<i class="fa-solid fa-pen-to-square"></i>
+				Modifier
+			</button>
+		</div>
+		{{ form_end( form )}}
+		<script>
+			$('#__form__ form input:first').focus();
+		</script>
+	</div>
+{% endblock %}

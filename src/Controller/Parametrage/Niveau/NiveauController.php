@@ -7,15 +7,19 @@ use App\Entity\Droit;
 use App\Entity\Frais;
 use App\Entity\Niveau;
 use App\Form\NiveauType;
+use App\Form\NiveauTypeEdit;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
 class NiveauController extends NiveauParent
@@ -68,12 +72,12 @@ class NiveauController extends NiveauParent
                     ->setMontant($_POST['niveau']['droit']);
                 $manager->persist($droit);
             }
- 
+
             // ********************* Classes *********************** //
 
             if (isset($_POST['niveau']['nbr_classe']) && isset($_POST['niveau']['nbr_classe']) > 0) {
-                if ( $_POST['niveau']['nbr_classe'] == ''){
-                    $_POST['niveau']['nbr_classe'] = 0 ; 
+                if ($_POST['niveau']['nbr_classe'] == '') {
+                    $_POST['niveau']['nbr_classe'] = 0;
                 }
                 $alphabets = range('A', 'Z');
                 if ($_POST['niveau']['type'] == 'A') {
@@ -94,7 +98,7 @@ class NiveauController extends NiveauParent
             }
             // ********************************************************************** //
 
-            $manager->flush();   
+            $manager->flush();
 
             $this->addFlash('success', 'Ajout effectué');
             return $this->redirectToRoute('parametre_niveau');
@@ -121,23 +125,47 @@ class NiveauController extends NiveauParent
         ]);
     }
 
-    #[Route('/niveau/edition/{id}', name: 'niveau_edit', methods: ['POST'])]
+    #[Route('/niveau/edition/{id}', name: 'niveau_edit', methods: ['POST', 'GET'])]
     public function edition(
-        EntityManagerInterface $manager,
-        CsrfTokenManagerInterface $csrftoken,
-        Request $request , 
-        Int $id , 
+        Request $request,
+        EntityManagerInterface $manager ,
+        Niveau $niveau 
     ): Response {
-        $niveau =  $this->repository->find($id) ; 
-        $token = $request->request->get('_token');
-        if ($csrftoken->isTokenValid(new CsrfToken('form_niveau_edit', $token))) { 
-                $niveau->setNom($request->request->get('nom')) ; 
-                $manager->persist( $niveau ) ; 
-                $manager->flush() ; 
-                $this->addFlash('success', 'Mofdification éffectué');
-                return $this->redirectToRoute('parametre_niveau');
+        $form = $this->createForm(NiveauTypeEdit::class, $niveau );
+        $form->handleRequest( $request ) ; 
+        if ( $form->isSubmitted() && $form->isValid() ){
+            $data = $form->getData() ; 
+            $manager->persist( $data ) ; 
+            $manager->flush() ; 
+
+            $this->addFlash('success' ,'Modification éffetué') ; 
+
+            return $this->redirectToRoute('parametre_niveau') ; 
         }
-        $this->addFlash('danger', 'Une erreur c\'est produite');
+        return $this->render('partials/edition/edit_stream.html.twig', [
+            ...$this->get_params(),
+            'form' => $form,
+            'annule_path' => 'parametre_niveau'
+        ]);
+    }
+    #[Route('/niveau/edit/{id}', name: 'niveau_valid_edition', methods: ['POST', 'GET'])]
+    public function edit(
+        EntityManagerInterface $manager,
+        Request $request,
+        int $id
+    ): Response {
+        $niveau = new Niveau();
+        $form = $this->createForm(NiveauTypeEdit::class, $niveau);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dd($data->id);
+            $data->setId($id);
+            $manager->persist($data);
+            $manager->flush();
+        }
+
         return $this->redirectToRoute('parametre_niveau');
     }
 
