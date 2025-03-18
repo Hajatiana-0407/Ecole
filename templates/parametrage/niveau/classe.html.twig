@@ -6,38 +6,7 @@
 
 {% block body %}
 
-	{# Modele #}
-	<!-- Button to Open the Modal -->
-
-	<!-- The Modal -->
-		<div class="modal fade modal" id="myModal"> <div class="modal-dialog">
-			<div
-				class="modal-content" class='modal-edit'>
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Modification
-						<i class="fa-solid fa-pen"></i>
-					</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-				<div class="modal-body">
-					<turbo-frame id='update_frame'>
-						<a href="{{ path('parametre_classe_edit' , { id:33 }) }}" id='link_update_frame'>link_update_frame</a>
-					</turbo-frame>
-				</div>
-				<!-- Modal footer -->
-				<div class="modal-footer boutton__">
-					<button class='btn btn-info' type='submit'>
-						<i class="fa-solid fa-pen-to-square"></i>
-						Modifier
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	{# Modele #}
-
-<div class="form-add ">
+<div class="form-add" id='__form__'>
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-circle-plus"></i>

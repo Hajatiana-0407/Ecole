@@ -17,10 +17,10 @@ class DroitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('montant' , NumberType::class , [
+            ->add('Niveau', NiveauAutocompleteField::class)
+            ->add('montant', NumberType::class, [
                 'label' => 'Montant : '
             ])
-            ->add('Niveau', NiveauAutocompleteField::class)
         ;
     }
 

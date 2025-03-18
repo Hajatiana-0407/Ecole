@@ -21,7 +21,6 @@ use Symfony\UX\Turbo\TurboBundle;
 #[Route('/parametre', name: 'parametre_')]
 class MatiereNiveauController extends MatierParent
 {
-    private $form;
     public function __construct()
     {
         parent::__construct();
@@ -31,13 +30,14 @@ class MatiereNiveauController extends MatierParent
     public function index(
         Request $request,
         MatierNiveauRepository $repository,
-        MatierRepository $matiereRepository 
+        MatierRepository $matiereRepository
     ): Response {
         $matierNiveau = new MatierNiveau();
-        $matiere = $matiereRepository->findOneBy([]); 
+        $matiere = $matiereRepository->findOneBy([]);
 
-        $matierNiveau->setMatier( $matiere ) ; 
+        $matierNiveau->setMatier($matiere);
 
+        // formulaire de recherche
         $form =  $this->createForm(MatNiveauType::class, $matierNiveau);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,10 +48,10 @@ class MatiereNiveauController extends MatierParent
 
                 $matierNiveau->setNiveau($niveau);
 
-               
+                //  formulaire d'ajout 
                 $form_add = $this->createForm(MatNiveauTypeAdd::class, $matierNiveau, [
                     'action' => $this->generateUrl('parametre_coeficient_addmatiere'),
-                    'method' => 'POST' , 
+                    'method' => 'POST',
                     'matieres' => $matiers
                 ]);
 
@@ -59,7 +59,7 @@ class MatiereNiveauController extends MatierParent
                     'datas' => $matiers,
                     'niveau_id' => $niveau->getId(),
                     'niveau_nom' => $niveau->getNom(),
-                    'form_add' => $form_add->createView() , 
+                    'form_add' => $form_add->createView(),
                     'add' => false
                 ]);
             }
@@ -81,9 +81,9 @@ class MatiereNiveauController extends MatierParent
         NiveauRepository $niveauRepos,
     ) {
         $matierNiveau = new MatierNiveau();
-        $niveau = $niveauRepos->findOneBy([]) ; 
-        $matierNiveau->setNiveau( $niveau ) ; 
-        $form_add = $this->createForm(MatNiveauTypeAdd::class, $matierNiveau  );
+        $niveau = $niveauRepos->findOneBy([]);
+        $matierNiveau->setNiveau($niveau);
+        $form_add = $this->createForm(MatNiveauTypeAdd::class, $matierNiveau);
         $form_add->handleRequest($request);
         if ($form_add->isValid() && $form_add->isSubmitted()) {
             if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
@@ -108,10 +108,10 @@ class MatiereNiveauController extends MatierParent
                 $matiers = $repository->__get_AllMat_by_niveau($niveau_id);
 
                 $matierNiveau = new MatierNiveau();
-                $matierNiveau->setNiveau( $niveau ) ; 
-                $form_add = $this->createForm(MatNiveauTypeAdd::class, $matierNiveau , [
+                $matierNiveau->setNiveau($niveau);
+                $form_add = $this->createForm(MatNiveauTypeAdd::class, $matierNiveau, [
                     'action' => $this->generateUrl('parametre_coeficient_addmatiere'),
-                    'method' => 'POST' , 
+                    'method' => 'POST',
                     'matieres' => $matiers
                 ]);
 
@@ -119,10 +119,18 @@ class MatiereNiveauController extends MatierParent
                     'datas' => $matiers,
                     'niveau_id' => $niveau_id,
                     'niveau_nom' => $niveau_nom,
-                    'form_add' => $form_add->createView() , 
-                    'add' => true 
+                    'form_add' => $form_add->createView(),
+                    'add' => true
                 ]);
             }
+        }
+
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $form_add ,
+		        'title' => 'Ajouter une nouvelle matière'
+            ]);
         }
 
         $form =  $this->createForm(MatNiveauType::class, $matierNiveau);
@@ -132,6 +140,5 @@ class MatiereNiveauController extends MatierParent
             'js' => 'coeficient',
             'datas' => [],
         ]);
-
     }
 }

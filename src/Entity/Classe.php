@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\ClasseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
+#[UniqueEntity(fields: ['denomination'], message: 'Ce nom existe déjà. Veuillez en choisir un autre.')]
 class Classe
 {
     #[ORM\Id]

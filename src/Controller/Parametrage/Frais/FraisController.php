@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
 class FraisController extends FraisParent
@@ -23,9 +23,9 @@ class FraisController extends FraisParent
     #[Route('/frais', name: 'frais')]
     public function index(
         Request $request,
-        EntityManagerInterface $manager , 
-        FraisRepository $repository ,
-        PaginatorInterface $paginator 
+        EntityManagerInterface $manager,
+        FraisRepository $repository,
+        PaginatorInterface $paginator
     ) {
         $frais = new Frais();
         $form_frais = $this->createForm(FraisType::class, $frais);
@@ -38,14 +38,21 @@ class FraisController extends FraisParent
             return $this->redirectToRoute('parametre_frais');
         }
 
-        $datas = $this->pagination( $paginator , $request , $repository->__get_all() ) ; 
+        $datas = $this->pagination($paginator, $request, $repository->__get_all());
+
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $form_frais,
+                'title' => 'Ajout Frais'
+            ]);
+        }
 
 
         return $this->render('parametrage/frais/frais.html.twig', [
             ...$this->get_params(),
-            'form' => $form_frais->createView() , 
-            'datas' => $datas 
+            'form' => $form_frais->createView(),
+            'datas' => $datas
         ]);
     }
-
 }

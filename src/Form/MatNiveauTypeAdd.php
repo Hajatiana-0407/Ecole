@@ -11,6 +11,7 @@ use App\Repository\NiveauRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,7 +53,7 @@ class MatNiveauTypeAdd extends AbstractType
                     return $qb;
                 }
             ])
-            ->add('coeficient', TextType::class, [
+            ->add('coeficient', NumberType::class, [
                 'label' => 'Coéficient : '
             ])
         ;

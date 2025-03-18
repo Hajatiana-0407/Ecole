@@ -10,7 +10,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
 class ClasseController extends NiveauParent
@@ -41,6 +41,13 @@ class ClasseController extends NiveauParent
             return $this->redirectToRoute('parametre_classe');
         }
 
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $classe_form,
+                'title' => 'Ajout Classe'
+            ]);
+        } 
         $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
 

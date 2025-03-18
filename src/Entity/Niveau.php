@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: NiveauRepository::class)]
-#[UniqueEntity('nom')]
+#[UniqueEntity(fields: ['nom'], message: 'Ce nom existe déjà. Veuillez en choisir un autre.')]
 class Niveau
 {
     #[ORM\Id]

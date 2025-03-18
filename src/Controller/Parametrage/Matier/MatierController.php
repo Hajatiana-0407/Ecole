@@ -13,14 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
-class MatierController extends MatierParent 
+class MatierController extends MatierParent
 {
-    public function __construct( private MatierRepository $repository )
+    public function __construct(private MatierRepository $repository)
     {
         parent::__construct();
-        $this->active_onglet = 'Ajout' ; 
+        $this->active_onglet = 'Ajout';
     }
 
     #[Route('/matier', name: 'matier')]
@@ -46,10 +47,18 @@ class MatierController extends MatierParent
 
         $datas = $this->pagination($paginator, $request, $matierrepos->__get_all());
 
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $form,
+                'title' => 'Ajout Matière'
+            ]);
+        }
+
 
         return $this->render('parametrage/matier/matier.html.twig', [
             ...$this->get_params(),
-            'js' => 'matiere' , 
+            'js' => 'matiere',
             'form_matier' => $form->createView(),
             'datas' => $datas
         ]);

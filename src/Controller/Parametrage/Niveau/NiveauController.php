@@ -103,44 +103,40 @@ class NiveauController extends NiveauParent
             $this->addFlash('success', 'Ajout effectué');
             return $this->redirectToRoute('parametre_niveau');
         }
-
         $datas = $this->pagination($paginator, $request, $this->repository->__get_all());
 
+        // detection des erreur dans la formulaire et retourne dan le vue
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('parametrage/niveau/niveau_form_error.html.twig', [
+                'form_niveau' => $form_niveau ,
+            ]);
+        }
 
         return $this->render('parametrage/niveau/index.html.twig', [
             ...$this->get_params(),
             'form_niveau' => $form_niveau->createView(),
-            'datas' => $datas
+            'datas' => $datas ,
         ]);
     }
 
-    #[Route('/niveau/ajaxdata/{id}', name: 'ajaxdata', methods: ['POST'])]
-    public function ajaxdata(
-        Request $request,
-        Niveau $niveau
-    ): JsonResponse {
-        return new JsonResponse([
-            'id' => $niveau->getId(),
-            'nom' => $niveau->getNom()
-        ]);
-    }
 
     #[Route('/niveau/edition/{id}', name: 'niveau_edit', methods: ['POST', 'GET'])]
     public function edition(
         Request $request,
-        EntityManagerInterface $manager ,
-        Niveau $niveau 
+        EntityManagerInterface $manager,
+        Niveau $niveau
     ): Response {
-        $form = $this->createForm(NiveauTypeEdit::class, $niveau );
-        $form->handleRequest( $request ) ; 
-        if ( $form->isSubmitted() && $form->isValid() ){
-            $data = $form->getData() ; 
-            $manager->persist( $data ) ; 
-            $manager->flush() ; 
+        $form = $this->createForm(NiveauTypeEdit::class, $niveau);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $manager->persist($data);
+            $manager->flush();
 
-            $this->addFlash('success' ,'Modification éffetué') ; 
+            $this->addFlash('success', 'Modification éffetué');
 
-            return $this->redirectToRoute('parametre_niveau') ; 
+            return $this->redirectToRoute('parametre_niveau');
         }
         return $this->render('partials/edition/edit_stream.html.twig', [
             ...$this->get_params(),
