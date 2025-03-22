@@ -18,17 +18,7 @@
 		<link
 		rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
 
-		<!-- Auto-complet -->
-		{# <link rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/dropdown.min.css') }} ">
-		<link rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/form.min.css') }} ">
-		<link
-		rel="stylesheet" href="{{ asset('assets/auto_complete/css/autocomplete/transition.min.css') }} "> #}
-		<!-- Auto-complet -->
-
-
-		<link rel="stylesheet" href="{{ asset('assets/css/alert.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/admin/sidebare.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+		<link rel="stylesheet" href="{{ asset('styles/alert.css') }}">
 
 
 		{% block javascripts %}
@@ -54,13 +44,7 @@
 			<script src="{{ asset('assets/js/bootstrap.bundle.min.js.map') }}"></script>
 			<script src="{{ asset('assets/js/all.min.js') }}"></script>
 			<script src="{{ asset('assets/js/function.js') }}"></script>
-
-			{# <!-- Auto-complet -->
-			// <script src="{{ asset('assets/auto_complete/js/autocomplete/bootstrap.5.2.3.no.dropdown.js') }} "></script>
-			// <script src="{{ asset('assets/auto_complete/js/autocomplete/dropdown.min.js') }} "></script>
-			// <script src="{{ asset('assets/auto_complete/js/autocomplete/form.min.js') }}"></script>
-			// <script src="{{ asset('assets/auto_complete/js/autocomplete/transition.min.js') }} "></script> #}
-			<!-- Auto-complet -->
+			
 
 			{% if js is defined  %}
 				{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}

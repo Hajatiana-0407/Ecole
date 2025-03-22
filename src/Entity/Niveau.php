@@ -21,7 +21,7 @@ class Niveau
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\OneToMany(targetEntity: Classe::class, mappedBy: 'Niveau', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Classe::class, mappedBy: 'Niveau', orphanRemoval: true  , cascade: ['remove'] )]
     private Collection $classes;
 
     #[ORM\Column]
@@ -30,19 +30,19 @@ class Niveau
     /**
      * @var Collection<int, Frais>
      */
-    #[ORM\OneToMany(targetEntity: Frais::class, mappedBy: 'Niveau', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Frais::class, mappedBy: 'Niveau', orphanRemoval: true , cascade: ['remove'] )]
     private Collection $frais;
 
     /**
      * @var Collection<int, Droit>
      */
-    #[ORM\OneToMany(targetEntity: Droit::class, mappedBy: 'Niveau')]
+    #[ORM\OneToMany(targetEntity: Droit::class, mappedBy: 'Niveau' , cascade: ['remove'])]
     private Collection $droits;
 
     /**
      * @var Collection<int, MatiereNiveau>
      */
-    #[ORM\OneToMany(targetEntity: MatiereNiveau::class, mappedBy: 'niveau')]
+    #[ORM\OneToMany(targetEntity: MatiereNiveau::class, mappedBy: 'niveau' , cascade: ['remove'] )]
     private Collection $MatiereNiveaux;
 
 

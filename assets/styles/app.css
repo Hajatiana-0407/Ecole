@@ -17,11 +17,13 @@
 *::-webkit-scrollbar-thumb {
     background-color: #97a1a4;
 }
-#edit-modal a{
-    display: flex ;
+
+#edit-modal a {
+    display: flex;
     width: 100%;
-    justify-content: center ;
+    justify-content: center;
 }
+
 body {
     background-color: white;
 }
@@ -64,6 +66,27 @@ body {
 
 /* ***** bts **** */
 
+.__delete_form {
+    display: inline-block;
+}
+
+.boutton__ {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #97a1a4 transparent;
+}
+
+
+p {
+    margin: 0;
+}
+
+
 /* ***************************** connexion *************************************** */
 .connexion {
     width: 100%;
@@ -71,33 +94,35 @@ body {
     background-image: url('../images/connexion-bg.jpg');
     background-position: center;
     background-size: cover;
-    position: relative ;
+    position: relative;
 }
+
 .blender {
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0 ;
-    background-color: #353535bd ;
+    bottom: 0;
+    background-color: #353535bd;
     z-index: 100;
 }
 
 .form-title {
     border-bottom: 2px solid var(--text-color);
 }
+
 .connexion-container {
-    width: 400px ;
+    width: 400px;
     margin: 0 auto;
-    background-color: var(--white );
+    background-color: var(--white);
     padding: 20px 15px;
     border-radius: 3px;
     box-shadow: 5px 5px 15px rgba(96, 96, 96, 0.78);
-    position: absolute  ;
+    position: absolute;
     z-index: 1000;
-    top: 40% ;
-    left: 50% ;
-    transform: translate( -50%  , -50% );
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .connexion-container .form-group {
@@ -120,8 +145,9 @@ body {
 .menu-principale-icone {
     cursor: pointer;
 }
-.container-menu  a{
-    text-align: left ;
+
+.container-menu a {
+    text-align: left;
 }
 
 .side-title {
@@ -229,6 +255,7 @@ body {
 .onglet {
     width: max-content;
     margin-bottom: -23px;
+    border-bottom: 1px solid white;
 }
 
 .onglet nav ul {
@@ -241,8 +268,6 @@ body {
 }
 
 .onglet nav ul li {
-    border: 1px solid rgb(179, 176, 176);
-    border-bottom: none;
     border-radius: 5px 5px 0 0;
     background-color: rgba(0, 0, 0, 0.18);
 }
@@ -258,6 +283,8 @@ body {
     background-color: var(--primary-color);
     border: none;
     color: var(--white);
+    border: 1px solid rgb(179, 176, 176);
+    border-bottom: none;
 }
 
 .onglet nav ul li.active a {
@@ -350,8 +377,8 @@ body {
 
 .title-left,
 .tab-search-bar {
-    background-color: var(--titre-bg );
-    color: var( --white);
+    background-color: var(--titre-bg);
+    color: var(--white);
     border-radius: 2px;
     position: absolute;
     top: -20px;
@@ -364,15 +391,15 @@ body {
 
 .form-add .title-left {
     max-width: 100%;
-}  
+}
 
-.title-left h5{
+.title-left h5 {
     white-space: nowrap;
     /* Empêche le retour à la ligne */
     overflow: hidden;
     /* Cache le texte qui dépasse */
     text-overflow: ellipsis !important;
-    /* Ajoute "..." lorsque le texte déborde */ 
+    /* Ajoute "..." lorsque le texte déborde */
 }
 
 .tab-search-bar {
