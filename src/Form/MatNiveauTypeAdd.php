@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Matier;
-use App\Entity\MatierNiveau;
+use App\Entity\Matiere;
+use App\Entity\MatiereNiveau;
 use App\Entity\Niveau;
-use App\Repository\MatierNiveauRepository;
-use App\Repository\MatierRepository;
+use App\Repository\MatiereNiveauRepository;
+use App\Repository\MatiereRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,25 +30,25 @@ class MatNiveauTypeAdd extends AbstractType
                 },
                 'disabled' => true,
             ])
-            ->add('Matier', EntityType::class, [
-                'class' => Matier::class,
+            ->add('Matiere', EntityType::class, [
+                'class' => Matiere::class,
                 'choice_label' => 'denomination',
                 'label' => 'Matière : ',
                 'required' => true,
-                'query_builder' => function (MatierRepository $repository) use ($options): QueryBuilder {
-                    // dd( $options['matieres'][0]->getMatier()->getId()) ; 
-                    $matiers_id = [];
-                    for ($i = 0; $i < count($options['matieres']); $i++) {
-                        if ($options['matieres'][$i]->getMatier()  != null) {
-                            $matiers_id[] = $options['matieres'][$i]->getMatier()->getId();
+                'query_builder' => function (MatiereRepository $repository) use ($options): QueryBuilder {
+                    // dd( $options['Matieres'][0]->getMatiere()->getId()) ; 
+                    $Matieres_id = [];
+                    for ($i = 0; $i < count($options['Matieres']); $i++) {
+                        if ($options['Matieres'][$i]->getMatiere()  != null) {
+                            $Matieres_id[] = $options['Matieres'][$i]->getMatiere()->getId();
                         }
                     }
                     $qb = $repository->createQueryBuilder('m')
                         ->orderBy('m.id', 'desc');
 
-                    if (!empty($matiers_id)) {
-                        $qb->where('m.id NOT IN (:matiers)')
-                            ->setParameter('matiers', $matiers_id);
+                    if (!empty($Matieres_id)) {
+                        $qb->where('m.id NOT IN (:Matieres)')
+                            ->setParameter('Matieres', $Matieres_id);
                     }
                     return $qb;
                 }
@@ -62,8 +62,8 @@ class MatNiveauTypeAdd extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MatierNiveau::class,
-            'matieres' => []
+            'data_class' => MatiereNiveau::class,
+            'Matieres' => []
         ]);
     }
 }

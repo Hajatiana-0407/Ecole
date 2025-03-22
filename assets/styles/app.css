@@ -63,8 +63,65 @@ body {
 }
 
 /* ***** bts **** */
+
+/* ***************************** connexion *************************************** */
+.connexion {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/connexion-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative ;
+}
+.blender {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0 ;
+    background-color: #353535bd ;
+    z-index: 100;
+}
+
+.form-title {
+    border-bottom: 2px solid var(--text-color);
+}
+.connexion-container {
+    width: 400px ;
+    margin: 0 auto;
+    background-color: var(--white );
+    padding: 20px 15px;
+    border-radius: 3px;
+    box-shadow: 5px 5px 15px rgba(96, 96, 96, 0.78);
+    position: absolute  ;
+    z-index: 1000;
+    top: 40% ;
+    left: 50% ;
+    transform: translate( -50%  , -50% );
+}
+
+.connexion-container .form-group {
+    position: relative;
+}
+
+.connexion-container .form-group input {
+    text-indent: 25px;
+}
+
+.connexion-container .icon-connexion {
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+/* ***************************** connexion *************************************** */
 .menu-principale-icone {
     cursor: pointer;
+}
+.container-menu  a{
+    text-align: left ;
 }
 
 .side-title {
@@ -266,7 +323,7 @@ body {
 }
 
 .table-container table thead tr th {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
 }
 
@@ -293,8 +350,8 @@ body {
 
 .title-left,
 .tab-search-bar {
-    background-color: var(--secondary-color);
-    color: var(--white);
+    background-color: var(--titre-bg );
+    color: var( --white);
     border-radius: 2px;
     position: absolute;
     top: -20px;

@@ -138,6 +138,16 @@ class NiveauController extends NiveauParent
 
             return $this->redirectToRoute('parametre_niveau');
         }
+
+        if ($form->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $form,
+                'title' => 'Modification Niveau'
+            ]);
+        }
+
+
         return $this->render('partials/edition/edit_stream.html.twig', [
             ...$this->get_params(),
             'form' => $form,

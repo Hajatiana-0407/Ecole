@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Matier;
-use App\Repository\MatierRepository;
+use App\Entity\Matiere;
+use App\Repository\MatiereRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,15 +11,15 @@ use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 #[AsEntityAutocompleteField]
-class MatierAutocompleteField extends AbstractType
+class MatiereAutocompleteField extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'class' => Matier::class,
+            'class' => Matiere::class,
             'placeholder' => 'r',
             'choice_label' => 'denomination',
-            'query_builder' => function (MatierRepository $repository): QueryBuilder {
+            'query_builder' => function (MatiereRepository $repository): QueryBuilder {
                 return $repository->createQueryBuilder('m')
                     ->orderBy('m.id', 'desc');
             }

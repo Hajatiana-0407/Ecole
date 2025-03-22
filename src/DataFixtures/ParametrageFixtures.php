@@ -5,8 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Classe;
 use App\Entity\Droit;
 use App\Entity\Frais;
-use App\Entity\Matier;
-use App\Entity\MatierNiveau;
+use App\Entity\Matiere;
+use App\Entity\MatiereNiveau;
 use App\Entity\Niveau;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\Query\Expr\From;
@@ -64,9 +64,9 @@ class ParametrageFixtures extends Fixture
 
 
         /**
-         * matiere
+         * Matiere
          */
-        $matiers = [
+        $Matieres = [
             'Math' => 'Mathematique',
             'Frs' => 'Français',
             'PC' => 'Phisic chimie',
@@ -77,24 +77,24 @@ class ParametrageFixtures extends Fixture
             'MLG' => 'Malagasy',
             'EPS' => 'Education Phisique et Sportive'
         ];
-        $matiereTab = [] ; 
-        foreach ($matiers as $key => $matiere) {
-            $mat = new Matier() ; 
-            $mat->setDenomination($matiers[$key])
+        $MatiereTab = [] ; 
+        foreach ($Matieres as $key => $Matiere) {
+            $mat = new Matiere() ; 
+            $mat->setDenomination($Matieres[$key])
                 ->setAbreviation($key) ; 
             $manager->persist( $mat ) ;
             
-            $matiereTab [] = $mat ; 
+            $MatiereTab [] = $mat ; 
         }
 
 
         for ($i=0; $i < 50 ; $i++) { 
-            $matiereNiveau = new MatierNiveau() ; 
-            $matiereNiveau->setNiveau($niveau_tab[mt_rand(0, count($niveau_tab) - 1)])
-                        ->setMatier($matiereTab[mt_rand(0, count($matiereTab) - 1)])
+            $MatiereNiveau = new MatiereNiveau() ; 
+            $MatiereNiveau->setNiveau($niveau_tab[mt_rand(0, count($niveau_tab) - 1)])
+                        ->setMatiere($MatiereTab[mt_rand(0, count($MatiereTab) - 1)])
                         ->setCoeficient( mt_rand(1 , 6 )) ;
             
-            $manager->persist( $matiereNiveau ) ; 
+            $manager->persist( $MatiereNiveau ) ; 
         }
         $manager->flush();
     }

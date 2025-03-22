@@ -1,11 +1,12 @@
 /* Bleu */
-/* :root {
-    --primary-color: #124559;
-    --secondary-color: #598392;
+:root {
+    --primary-color: #333d29;
+    --secondary-color: #414833;
+    --titre-bg : #656d4a;
     --text-color: #5b5b5b;
     --white : #ffffff ;
     --black : #222222 ; 
-} */
+}
 
 /* vert */
 /* :root {
@@ -24,13 +25,14 @@
     --black : #222222 ; 
 } */
 /* Maront */
-:root {
+/* :root {
     --primary-color: #2f3e46;
     --secondary-color: #354f52 ; 
+    --titre-bg : #a7bea9;
     --text-color: #5b5b5b;
     --white : #ffffff ;
     --black : #222222 ; 
-}
+} */
 
 
 /* box-shadow: 0px 5px 20px #55555559; */

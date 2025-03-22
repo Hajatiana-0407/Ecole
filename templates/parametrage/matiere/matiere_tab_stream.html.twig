@@ -1,0 +1,98 @@
+{# Tableau #}
+<turbo-stream action="update" target="tab_body_stream">
+	<template>
+		{% for data in datas %}
+			<tr>
+				<td>
+					{{ data.Matiere.denomination }}
+				</td>
+				<td>
+					{{ data.Matiere.abreviation }}
+				</td>
+				<td>
+					{{ data.coeficient }}
+				</td>
+				<td>
+					<a href="{{ path('parametre_coeficient_edit' , {id:data.id }) }}" class="btn btn-sm btn-outline-primary" data-turbo-stream='true'>
+						<i class="fa-solid fa-pen-to-square"></i>
+					</a>
+					<form action="{{ path('parametre_Matiere_delete' , { id:data.id } ) }}" class="__delete_form">
+						<input type="hidden" name='id' value='{{ data.id }}'>
+						<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+							<i class="fa-solid fa-trash"></i>
+						</button>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</template>
+</turbo-stream>
+
+{# Nom #}
+<turbo-stream action="update" target="niveau-name">
+	<template>
+		de :
+		{{ niveau_nom|capitalize  }}
+	</template>
+</turbo-stream>
+
+{% if add is defined and add == true %}
+	<turbo-stream action="update" target="flash_message">
+		<template>
+			{{ alert(  'Ajout effectué', "success" )|raw}}
+		</template>
+	</turbo-stream>
+{% endif %}
+{% if updated is defined and updated == true %}
+	<turbo-stream action="update" target="flash_message">
+		<template>
+			{{ alert( 'Modification éffectué' , 'success' )|raw}}
+		</template>
+	</turbo-stream>
+{% endif %}
+
+<turbo-stream action="update" target="add-Matiere_coef">
+	<template>
+		<div class="form-add " id='__form__'>
+			<div class="title-left">
+				<h5>
+					{% if update is defined and update == true %}
+						<i class="fa-solid fa-pen-to-square"></i>
+						Modification
+					{% else %}
+						<i class="fa-solid fa-circle-plus"></i>
+						Ajouter une nouvelle matière de :
+					{% endif %}
+					{{ niveau_nom|capitalize  }}
+				</h5>
+			</div>
+			{{ form_start( form_add )}}
+			{{ form_row( form_add.Niveau)}}
+			{{ form_row( form_add.Matiere)}}
+			{{ form_row( form_add.coeficient )}}
+			<input type="hidden" name='__niveau_id' value='{{ niveau_id }}'>
+			<input type="hidden" name='__niveau_nom' value='{{ niveau_nom }}'>
+			<div class="boutton__">
+
+				{% if update is defined and update == true %}
+					<button class='btn btn-info ' type='submit'>
+						<i class="fa-solid fa-pen-to-square"></i>
+						Modifier
+					</button>
+				{% else %}
+
+					<button class='btn btn-info ' type='submit'>
+						<i class="fa-solid fa-check"></i>
+						Valider
+					</button>
+				{% endif %}
+			</div>
+			{{ form_end( form_add )}}
+		</div>
+		{% if update is defined and update == true %}
+			<script>
+				$('#coeficient_edit_coeficient').focus();
+			</script>
+		{% endif %}
+	</template>
+</turbo-stream>

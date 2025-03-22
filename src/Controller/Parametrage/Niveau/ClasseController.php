@@ -41,15 +41,15 @@ class ClasseController extends NiveauParent
             return $this->redirectToRoute('parametre_classe');
         }
 
-        if ($request->getPreferredFormat() === TurboBundle::STREAM_FORMAT && $classe_form->isSubmitted() ) {
+        if ($request->getPreferredFormat() === TurboBundle::STREAM_FORMAT && $classe_form->isSubmitted()) {
 
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
                 'form' => $classe_form,
                 'title' => 'Ajout Classe',
-                
+
             ]);
-        } 
+        }
         $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
 
@@ -75,14 +75,22 @@ class ClasseController extends NiveauParent
             $manager->flush();
 
             $this->addFlash('success', 'Modification éffectué');
-            $request->setRequestFormat('html') ; 
+            $request->setRequestFormat('html');
             return $this->redirectToRoute('parametre_classe');
+        }
+
+        if ($classe_form->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            return $this->render('partials/form_error.html.twig', [
+                'form' => $classe_form,
+                'title' => 'Modification Classe'
+            ]);
         }
 
         return $this->render('partials/Edition/edit_stream.html.twig', [
             ...$this->get_params(),
             'form' => $classe_form->createView(),
-            'annule_path' => 'parametre_classe' 
+            'annule_path' => 'parametre_classe'
         ]);
     }
 

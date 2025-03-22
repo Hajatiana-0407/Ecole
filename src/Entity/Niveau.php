@@ -40,10 +40,10 @@ class Niveau
     private Collection $droits;
 
     /**
-     * @var Collection<int, MatierNiveau>
+     * @var Collection<int, MatiereNiveau>
      */
-    #[ORM\OneToMany(targetEntity: MatierNiveau::class, mappedBy: 'niveau')]
-    private Collection $matierNiveaux;
+    #[ORM\OneToMany(targetEntity: MatiereNiveau::class, mappedBy: 'niveau')]
+    private Collection $MatiereNiveaux;
 
 
     public function __construct()
@@ -52,7 +52,7 @@ class Niveau
         $this->createdAt = new DateTimeImmutable();
         $this->frais = new ArrayCollection();
         $this->droits = new ArrayCollection();
-        $this->matierNiveaux = new ArrayCollection();
+        $this->MatiereNiveaux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,29 +180,29 @@ class Niveau
     }
 
     /**
-     * @return Collection<int, MatierNiveau>
+     * @return Collection<int, MatiereNiveau>
      */
-    public function getMatierNiveaux(): Collection
+    public function getMatiereNiveaux(): Collection
     {
-        return $this->matierNiveaux;
+        return $this->MatiereNiveaux;
     }
 
-    public function addMatierNiveau(MatierNiveau $matierNiveau): static
+    public function addMatiereNiveau(MatiereNiveau $MatiereNiveau): static
     {
-        if (!$this->matierNiveaux->contains($matierNiveau)) {
-            $this->matierNiveaux->add($matierNiveau);
-            $matierNiveau->setNiveau($this);
+        if (!$this->MatiereNiveaux->contains($MatiereNiveau)) {
+            $this->MatiereNiveaux->add($MatiereNiveau);
+            $MatiereNiveau->setNiveau($this);
         }
 
         return $this;
     }
 
-    public function removeMatierNiveau(MatierNiveau $matierNiveau): static
+    public function removeMatiereNiveau(MatiereNiveau $MatiereNiveau): static
     {
-        if ($this->matierNiveaux->removeElement($matierNiveau)) {
+        if ($this->MatiereNiveaux->removeElement($MatiereNiveau)) {
             // set the owning side to null (unless already changed)
-            if ($matierNiveau->getNiveau() === $this) {
-                $matierNiveau->setNiveau(null);
+            if ($MatiereNiveau->getNiveau() === $this) {
+                $MatiereNiveau->setNiveau(null);
             }
         }
 

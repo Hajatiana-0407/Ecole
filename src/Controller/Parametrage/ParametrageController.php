@@ -34,8 +34,8 @@ class ParametrageController extends BaseController
                 'role' => '',
                 'icone' => '<i class="fa-solid fa-dollar-sign"></i>'
             ],
-            'Matiére' =>  [
-                'href' => 'parametre_matier',
+            'Matière' =>  [
+                'href' => 'parametre_Matiere',
                 'role' => '',
                 'icone' => '<i class="fas fa-book"></i>'
             ],

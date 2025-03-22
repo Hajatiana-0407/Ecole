@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\MatierNiveau;
+use App\Entity\MatiereNiveau;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +23,7 @@ class MatNiveauType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MatierNiveau::class,
+            'data_class' => MatiereNiveau::class,
         ]);
     }
 }
