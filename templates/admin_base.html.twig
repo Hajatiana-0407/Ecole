@@ -15,8 +15,7 @@
 		{# lien de style css #}
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css.map') }}">
-		<link
-		rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
 
 		<link rel="stylesheet" href="{{ asset('styles/alert.css') }}">
 
@@ -31,9 +30,9 @@
 		{# Side bar  #}
 		{% include "partials/admin/sidebare.html.twig" %}
 		{# Side bar  #}
-
+		<div id='flash_message'></div>
 		<div class='corps'> {% block body %}{% endblock %}
-		</div>
+			</div>
 
 
 			{# Section des alert  #}
@@ -44,7 +43,7 @@
 			<script src="{{ asset('assets/js/bootstrap.bundle.min.js.map') }}"></script>
 			<script src="{{ asset('assets/js/all.min.js') }}"></script>
 			<script src="{{ asset('assets/js/function.js') }}"></script>
-			
+
 
 			{% if js is defined  %}
 				{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}

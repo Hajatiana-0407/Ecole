@@ -1,0 +1,6 @@
+<turbo-stream action="remove" target="tr_table_{{ id }}"></turbo-stream>
+<turbo-stream action="update" target="flash_message">
+	<template>
+		{{ alert( 'Suppréssion éffectué' , 'success' )|raw}}
+	</template>
+</turbo-stream>

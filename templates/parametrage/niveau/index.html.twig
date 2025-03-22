@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-
 	<div class="form-add" id='__form__'>
 		<div class="title-left">
 			<h5>
@@ -89,7 +88,7 @@
 			</thead>
 			<tbody>
 				{% for data in datas %}
-					<tr>
+					<tr id='tr_table_{{ data.id }}'>
 						<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
 						<td>
 							{% if data.droits|length > 0 %}

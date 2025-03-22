@@ -111,8 +111,6 @@ class MatiereController extends MatiereParent
         $manager->flush();
 
         $this->addFlash('success', 'Suppression éffectué');
-        return new  Response(json_encode([
-            'redirect' => $this->generateUrl('parametre_Matiere'),
-        ]));
+        return $this->redirectToRoute('parametre_Matiere');
     }
 }

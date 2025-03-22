@@ -109,19 +109,26 @@ class NiveauController extends NiveauParent
         if ($form_niveau->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('parametrage/niveau/niveau_form_error.html.twig', [
-                'form_niveau' => $form_niveau ,
+                'form_niveau' => $form_niveau,
             ]);
         }
 
         return $this->render('parametrage/niveau/index.html.twig', [
             ...$this->get_params(),
             'form_niveau' => $form_niveau->createView(),
-            'datas' => $datas ,
+            'datas' => $datas,
         ]);
     }
 
-
     #[Route('/niveau/edition/{id}', name: 'niveau_edit', methods: ['POST', 'GET'])]
+    /**
+     * edition
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param Niveau $niveau
+     * @return Response
+     */
     public function edition(
         Request $request,
         EntityManagerInterface $manager,
@@ -176,20 +183,29 @@ class NiveauController extends NiveauParent
     }
 
     #[Route('/niveau/delete/{id}', name: 'niveau_delete', methods: ['POST', 'GET'])]
-    public function delete(Niveau $niveau, EntityManagerInterface $manager)
+    /**
+     * delete
+     *
+     * @param Niveau $niveau
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param integer $id
+     * @return void
+     */
+    public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id)
     {
-        if (!$niveau) {
+        if (!$niveau && !$request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $this->addFlash('danger', 'Erreu lors de la suppréssion');
-            return new  Response(json_encode([
-                'redirect' => $this->generateUrl('parametre_niveau'),
-            ]));
+            return $this->redirectToRoute('parametre_niveau');
         }
-        $manager->remove($niveau);
-        $manager->flush();
 
-        $this->addFlash('success', 'Suppression éffectué');
-        return new  Response(json_encode([
-            'redirect' => $this->generateUrl('parametre_niveau'),
-        ]));
+        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+            $manager->remove($niveau);
+            $manager->flush();
+            return $this->render('partials/delete_stream.html.twig', [
+                'id' => $id
+            ]);
+        }
     }
 }

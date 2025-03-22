@@ -10,10 +10,12 @@
 			<p>Voullez vous vraiment supprimer ?</p>
 		</div>
 		<div class="my-btn-alert">
-			<button id='confirmDelete' class='btn btn-sm btn-danger'>
-				<i class="fa-solid fa-trash"></i>
-				Supprimer
-			</button>
+			<form action="" mathod='post' data-turbo-stream='true'>
+				<button type='submit' id='confirmDelete' class='btn btn-sm btn-danger'>
+					<i class="fa-solid fa-trash"></i>
+					Supprimer
+				</button>
+			</form>
 			<button class='btn btn-sm btn-info' onclick="close_alert( this )">
 				<i class="fa fa-times"></i>
 				Annuler

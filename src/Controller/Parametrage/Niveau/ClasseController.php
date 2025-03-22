@@ -107,8 +107,6 @@ class ClasseController extends NiveauParent
         $manager->flush();
 
         $this->addFlash('success', 'Suppression éffectué');
-        return new  Response(json_encode([
-            'redirect' => $this->generateUrl('parametre_classe'),
-        ]));
+        return $this->redirectToRoute('parametre_classe');
     }
 }
