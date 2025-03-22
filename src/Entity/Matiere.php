@@ -23,7 +23,7 @@ class Matiere
     /**
      * @var Collection<int, MatiereNiveau>
      */
-    #[ORM\OneToMany(targetEntity: MatiereNiveau::class, mappedBy: 'Matiere')]
+    #[ORM\OneToMany(targetEntity: MatiereNiveau::class, mappedBy: 'Matiere' , cascade:['remove'])]
     private Collection $MatiereNiveaux;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -19,19 +19,20 @@ class EntityDeleteService extends AbstractController
      * @param string $path_error
      * @return void
      */
-    public function deleteEntity(object $entity, Request $request , string $path_error ='')
+    public function deleteEntity(object $entity, Request $request , string $path_error ='' , int $id )
     {
         if (!$entity && !$request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
-            $this->addFlash('danger', 'Erreu lors de la suppréssion');
+            $this->addFlash('danger', 'Erreur lors de la suppréssion');
             return $this->redirectToRoute($path_error);
         }
+ 
 
         if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
-            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             $this->manager->remove($entity);
             $this->manager->flush();
+            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/delete_stream.html.twig', [
-                'id' => $entity->getId()
+                'id' => $id 
             ]);
         }
     }

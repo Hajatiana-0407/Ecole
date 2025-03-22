@@ -5,6 +5,7 @@ namespace App\Controller\Parametrage\Niveau;
 use App\Entity\Classe;
 use App\Form\ClasseType;
 use App\Repository\ClasseRepository;
+use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,18 +96,9 @@ class ClasseController extends NiveauParent
     }
 
     #[Route('/niveau/classe/delete/{id}', name: 'classe_delete', methods: ['POST', 'GET'])]
-    public function delete(Classe $classe, EntityManagerInterface $manager)
+    public function delete( Classe $classe,  Request $request,  EntityDeleteService $delete , int $id  )
     {
-        if (!$classe) {
-            $this->addFlash('danger', 'Erreu lors de la suppréssion');
-            return new  Response(json_encode([
-                'redirect' => $this->generateUrl('parametre_classe'),
-            ]));
-        }
-        $manager->remove($classe);
-        $manager->flush();
-
-        $this->addFlash('success', 'Suppression éffectué');
-        return $this->redirectToRoute('parametre_classe');
+        return $delete->deleteEntity( $classe , $request , 'parametre_classe' , $id  ) ; 
     }
+	
 }

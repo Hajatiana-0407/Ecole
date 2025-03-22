@@ -9,8 +9,8 @@ use App\Form\MatNiveauTypeAdd;
 use App\Repository\MatiereNiveauRepository;
 use App\Repository\MatiereRepository;
 use App\Repository\NiveauRepository;
+use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
-use Proxies\__CG__\App\Entity\MatierNiveau;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -228,4 +228,12 @@ class MatiereNiveauController extends MatiereParent
             // return $this->redirect('') ; 
         }
     }
+
+
+    #[Route('/matiere/coeficient/delete/{id}' , name : 'coeficient_delete' , methods:['post' , 'get'])]
+    public function delete(MatiereNiveau $matNiveau , EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
+    {
+        return $delete->deleteEntity( $matNiveau  , $request , 'parametre_niveau' , $id ) ; 
+    }
+	
 }

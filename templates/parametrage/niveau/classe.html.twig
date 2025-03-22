@@ -49,7 +49,7 @@
 			</thead>
 			<tbody>
 				{% for data in datas %}
-					<tr>
+					<tr id='tr_table_{{ data.id }}'>
 						<td>{{ data.denomination  }}</td>
 						<td>{{ data.niveau.nom }}</td>
 						<td>

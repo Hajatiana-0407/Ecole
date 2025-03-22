@@ -5,6 +5,7 @@ namespace App\Controller\Parametrage\Matiere;
 use App\Entity\Matiere;
 use App\Form\MatiereType;
 use App\Repository\MatiereRepository;
+use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,19 +99,10 @@ class MatiereController extends MatiereParent
 
 
 
-    #[Route('/Matiere/delete/{id}', name: 'Matiere_delete', methods: ['POST', 'GET'])]
-    public function delete(Matiere $Matiere, EntityManagerInterface $manager)
+    #[Route('/matiere/delete/{id}', name: 'matiere_delete', methods: ['POST', 'GET'])]
+    public function delete(Matiere $matiere, EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
     {
-        if (!$Matiere) {
-            $this->addFlash('danger', 'Erreu lors de la suppréssion');
-            return new  Response(json_encode([
-                'redirect' => $this->generateUrl('parametre_Matiere'),
-            ]));
-        }
-        $manager->remove($Matiere);
-        $manager->flush();
-
-        $this->addFlash('success', 'Suppression éffectué');
-        return $this->redirectToRoute('parametre_Matiere');
+        return $delete->deleteEntity( $matiere , $request , 'parametre_niveau' , $id  ) ; 
     }
+	
 }

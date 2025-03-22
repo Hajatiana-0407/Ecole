@@ -190,6 +190,6 @@ class NiveauController extends NiveauParent
      */
     public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
     {
-        return $delete->deleteEntity( $niveau , $request , 'parametre_niveau') ; 
+        return $delete->deleteEntity( $niveau , $request , 'parametre_niveau' , $id ) ; 
     }
 }
