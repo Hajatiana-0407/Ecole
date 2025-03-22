@@ -9,16 +9,12 @@ use App\Entity\Niveau;
 use App\Form\NiveauType;
 use App\Form\NiveauTypeEdit;
 use App\Repository\NiveauRepository;
+use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\DomCrawler\Form;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
@@ -192,20 +188,8 @@ class NiveauController extends NiveauParent
      * @param integer $id
      * @return void
      */
-    public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id)
+    public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
     {
-        if (!$niveau && !$request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
-            $this->addFlash('danger', 'Erreu lors de la suppréssion');
-            return $this->redirectToRoute('parametre_niveau');
-        }
-
-        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
-            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
-            $manager->remove($niveau);
-            $manager->flush();
-            return $this->render('partials/delete_stream.html.twig', [
-                'id' => $id
-            ]);
-        }
+        return $delete->deleteEntity( $niveau , $request , 'parametre_niveau') ; 
     }
 }
