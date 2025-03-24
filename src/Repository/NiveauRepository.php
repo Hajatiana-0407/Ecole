@@ -3,11 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Niveau;
+use App\Entity\Search\SearchDate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @extends ServiceEntityRepository<Niveau>
@@ -24,9 +23,10 @@ class NiveauRepository extends ServiceEntityRepository
         parent::__construct($registry, Niveau::class);
     }
 
-    public function __get_all(): Query
+    public function __get_all(SearchDate $search): Query
     {
-        return $this->createQueryBuilder('n')
+
+        $query =  $this->createQueryBuilder('n')
             ->orderBy('n.id', 'desc')
             ->leftJoin('n.frais', 'f', 'WITH', 'f.id = (
                         SELECT MAX(f2.id) FROM App\Entity\Frais f2 
@@ -36,17 +36,31 @@ class NiveauRepository extends ServiceEntityRepository
                         SELECT MAX(d2.id) FROM App\Entity\Droit d2 
                         WHERE d2.Niveau = n.id
                     )')
-            ->leftJoin('n.classes' , 'c') 
-            ->addSelect('f')
-            ->getQuery();
+            ->leftJoin('n.classes', 'c')
+            ->addSelect('f');
+
+        // Recherche avec date
+        if ($search->getRecherche() != '') {
+            $query->andwhere('n.nom LIKE :motcle')
+            ->setParameter('motcle' , '%'.$search->getRecherche().'%') ; 
+        }
+        if ($search->getDateDebut() != '') {
+            $query->andwhere('n.createdAt >= :datedebut')
+            ->setParameter('datedebut' ,$search->getDateDebut()) ; 
+        }
+        if ($search->getDateFin() != '') {
+            $query->andwhere('n.createdAt <= :datefin')
+            ->setParameter('datefin' ,$search->getDateFin()) ; 
+        }
+        return $query->getQuery();
     }
 
-    public function getAllNiveau(){
+    public function getAllNiveau()
+    {
         return $this->createQueryBuilder('n')
-        ->orderBy('n.id' , 'desc')
-        ->getQuery()
-        ->getResult() ; 
-        ; 
+            ->orderBy('n.id', 'desc')
+            ->getQuery()
+            ->getResult();;
     }
 
 

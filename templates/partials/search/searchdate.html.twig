@@ -1,0 +1,10 @@
+{{ form_start( form ) }}
+<div class="input-group">
+	{{ form_widget( form.recherche ) }}
+	{{ form_widget( form.dateDebut ) }}
+	{{ form_widget( form.dateFin ) }}
+	<button class="btn btn-info" type="submit">
+		<i class="fa-solid fa-magnifying-glass"></i>
+	</button>
+</div>
+{{ form_end( form ) }}

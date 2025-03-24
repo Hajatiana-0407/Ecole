@@ -6,8 +6,11 @@ use App\Entity\Classe;
 use App\Entity\Droit;
 use App\Entity\Frais;
 use App\Entity\Niveau;
+use App\Entity\Search\SearchDate;
+use App\Entity\SearchDateType;
 use App\Form\NiveauType;
 use App\Form\NiveauTypeEdit;
+use App\Form\SearchDateType as FormSearchDateType;
 use App\Repository\NiveauRepository;
 use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +18,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route as AttributeRoute;
 use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
@@ -99,7 +103,6 @@ class NiveauController extends NiveauParent
             $this->addFlash('success', 'Ajout effectué');
             return $this->redirectToRoute('parametre_niveau');
         }
-        $datas = $this->pagination($paginator, $request, $this->repository->__get_all());
 
         // detection des erreur dans la formulaire et retourne dan le vue
         if ($form_niveau->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
@@ -109,9 +112,16 @@ class NiveauController extends NiveauParent
             ]);
         }
 
+
+        $saerch = new SearchDate();
+        $form_search = $this->createForm(FormSearchDateType::class, $saerch);
+        $form_search->handleRequest( $request ) ; 
+
+        $datas = $this->pagination($paginator, $request, $this->repository->__get_all( $saerch ));
         return $this->render('parametrage/niveau/index.html.twig', [
             ...$this->get_params(),
             'form_niveau' => $form_niveau->createView(),
+            'form_search' => $form_search->createView(),
             'datas' => $datas,
         ]);
     }
@@ -188,8 +198,12 @@ class NiveauController extends NiveauParent
      * @param integer $id
      * @return void
      */
-    public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
+    public function delete(Niveau $niveau, EntityManagerInterface $manager, Request $request, int $id, EntityDeleteService $delete)
     {
-        return $delete->deleteEntity( $niveau , $request , 'parametre_niveau' , $id ) ; 
+        return $delete->deleteEntity($niveau, $request, 'parametre_niveau', $id);
     }
+
+
+    #[Route('niveau/search', name: 'niveau_search', methods: ['POST', 'GET'])]
+    public function search() {}
 }
