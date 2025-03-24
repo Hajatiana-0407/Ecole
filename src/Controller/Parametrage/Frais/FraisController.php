@@ -35,12 +35,14 @@ class FraisController extends FraisParent
             $manager->persist($data);
             $manager->flush();
             $this->addFlash('success', 'Ajout effectué');
+
+
             return $this->redirectToRoute('parametre_frais');
         }
 
         $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
-        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+        if ( $form_frais->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
                 'form' => $form_frais,

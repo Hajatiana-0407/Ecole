@@ -41,7 +41,7 @@ class DroitController extends FraisParent
 
         $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
-        if ($request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
+        if ($form_droit->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
                 'form' => $form_droit,
