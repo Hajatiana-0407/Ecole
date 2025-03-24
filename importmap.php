@@ -42,4 +42,21 @@ return [
         'version' => '2.4.3',
         'type' => 'css',
     ],
+    'bootstrap' => [
+        'version' => '5.3.3',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '5.3.3',
+        'type' => 'css',
+    ],
+    '@fortawesome/fontawesome-free/css/all.css' => [
+        'version' => '6.7.2',
+        'type' => 'css',
+    ],
+    'jquery' => [
+        'version' => '3.6.0',
+    ],
 ];

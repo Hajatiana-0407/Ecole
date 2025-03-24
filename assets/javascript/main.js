@@ -29,7 +29,6 @@ function show_sidebar() {
     })
 }
 
-
 $(window).resize(function () {
     if ($(window).width() < 996) {
         const elem_hidde = $('.attribut-to-hidde');
