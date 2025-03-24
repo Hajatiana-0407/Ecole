@@ -3,7 +3,9 @@
 namespace App\Controller\Parametrage\Frais;
 
 use App\Entity\Droit;
+use App\Entity\Search\Search;
 use App\Form\DroitType;
+use App\Form\SearchType;
 use App\Repository\DroitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -38,13 +40,17 @@ class DroitController extends FraisParent
             return $this->redirectToRoute('parametre_droit');
         }
 
+        $search = new Search();
+        $form_search = $this->createForm(SearchType::class, $search);
+        $form_search->handleRequest($request);
 
-        $datas = $this->pagination($paginator, $request, $repository->__get_all());
+
+        $datas = $this->pagination($paginator, $request, $repository->__get_all( $search ));
 
         if ($form_droit->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
-                'form' => $form_droit,
+                'form' => $form_droit, 
                 'title' => 'Droit d\'inscription'
             ]);
         }
@@ -53,6 +59,7 @@ class DroitController extends FraisParent
         return $this->render('parametrage/frais/droit.html.twig', [
             ...$this->get_params(),
             'form' => $form_droit->createView(),
+            'form_search' => $form_search ,
             'datas' => $datas
         ]);
     }

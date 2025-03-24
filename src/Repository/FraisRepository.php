@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Frais;
+use App\Entity\Search\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,13 +18,19 @@ class FraisRepository extends ServiceEntityRepository
         parent::__construct($registry, Frais::class);
     }
 
-    public function __get_all( ) :Query
+    public function __get_all(Search $search): Query
     {
-        return $this->createQueryBuilder('f')
-            ->innerJoin('f.Niveau' , 'n')
+        $query =  $this->createQueryBuilder('f')
+            ->innerJoin('f.Niveau', 'n')
             ->addSelect('n')
-            ->orderBy('f.id' , 'desc')
-            ->getQuery() ; 
+            ->orderBy('f.id', 'desc');
+
+        if ($search->getRecherche() != '') {
+            $query->andWhere('n.nom LIKE :mot')
+                ->setParameter('mot', '%' . $search->getRecherche() . '%');
+        }
+
+        return     $query->getQuery();
     }
 
     //    /**

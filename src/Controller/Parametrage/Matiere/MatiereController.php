@@ -3,7 +3,9 @@
 namespace App\Controller\Parametrage\Matiere;
 
 use App\Entity\Matiere;
+use App\Entity\Search\Search;
 use App\Form\MatiereType;
+use App\Form\SearchType;
 use App\Repository\MatiereRepository;
 use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +24,7 @@ class MatiereController extends MatiereParent
         $this->active_onglet = 'Ajout';
     }
 
-    #[Route('/Matiere', name: 'Matiere', methods: ['POST', 'GET'])]
+    #[Route('/matiere', name: 'Matiere', methods: ['POST', 'GET'])]
     public function index(
         Request $request,
         EntityManagerInterface $manger,
@@ -43,7 +45,7 @@ class MatiereController extends MatiereParent
             return $this->redirectToRoute('parametre_Matiere');
         }
 
-        $datas = $this->pagination($paginator, $request, $Matiererepos->__get_all());
+
 
         if ($form->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
@@ -53,16 +55,21 @@ class MatiereController extends MatiereParent
             ]);
         }
 
+        $search = new Search();
+        $form_search = $this->createForm(SearchType::class, $search);
+        $form_search->handleRequest($request);
 
+        $datas = $this->pagination($paginator, $request, $Matiererepos->__get_all( $search ));
         return $this->render('parametrage/Matiere/Matiere.html.twig', [
             ...$this->get_params(),
             'js' => 'Matiere',
             'form_Matiere' => $form->createView(),
+            'form_search' => $form_search , 
             'datas' => $datas
         ]);
     }
 
-    #[Route('/Matiere/edition/{id}', name: 'Matiere_edit', methods: ['GET', 'POST'])]
+    #[Route('/matiere/edition/{id}', name: 'Matiere_edit', methods: ['GET', 'POST'])]
     public function edition(
         Request $request,
         EntityManagerInterface $manager,
@@ -81,7 +88,7 @@ class MatiereController extends MatiereParent
             $this->addFlash('success', 'Modification éffectué');
             return $this->redirectToRoute('parametre_Matiere');
         }
-       
+
         if ($form->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
@@ -100,9 +107,8 @@ class MatiereController extends MatiereParent
 
 
     #[Route('/matiere/delete/{id}', name: 'matiere_delete', methods: ['POST', 'GET'])]
-    public function delete(Matiere $matiere, EntityManagerInterface $manager, Request $request, int $id , EntityDeleteService $delete )
+    public function delete(Matiere $matiere, EntityManagerInterface $manager, Request $request, int $id, EntityDeleteService $delete)
     {
-        return $delete->deleteEntity( $matiere , $request , 'parametre_niveau' , $id  ) ; 
+        return $delete->deleteEntity($matiere, $request, 'parametre_niveau', $id);
     }
-	
 }

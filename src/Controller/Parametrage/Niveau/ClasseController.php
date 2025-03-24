@@ -3,7 +3,9 @@
 namespace App\Controller\Parametrage\Niveau;
 
 use App\Entity\Classe;
+use App\Entity\Search\Search;
 use App\Form\ClasseType;
+use App\Form\SearchType;
 use App\Repository\ClasseRepository;
 use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,12 +53,16 @@ class ClasseController extends NiveauParent
 
             ]);
         }
-        $datas = $this->pagination($paginator, $request, $repository->__get_all());
 
+        $search = New Search() ; 
+        $form_search = $this->createForm( SearchType::class , $search ) ; 
+        $form_search->handleRequest( $request ) ; 
 
+        $datas = $this->pagination($paginator, $request, $repository->__get_all( $search ));
         return $this->render('parametrage/niveau/classe.html.twig', [
             ...$this->get_params(),
             'classe_form' => $classe_form->createView(),
+            'form_search' => $form_search->createView() , 
             'datas' => $datas
         ]);
     }

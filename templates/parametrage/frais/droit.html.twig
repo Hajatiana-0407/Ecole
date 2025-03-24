@@ -4,27 +4,32 @@
 {% endblock %}
 {% block body %}
 
-<div class="form-add " id='__form__'>
+	<div class="form-add " id='__form__'>
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-circle-plus"></i>
 				Droit d'inscription
 			</h5>
 		</div>
-	{{ form_start( form )}}
-	{{ form_row( form.Niveau) }}
-	{{ form_row( form.montant) }}
-	<div class="boutton__">
-		<button class="btn btn-info" type='submit'>
-			<i class="fa-solid fa-check"></i>
-			Valider
-		</button>
-	</div>
-	{{ form_end( form )}}
+		{{ form_start( form )}}
+		{{ form_row( form.Niveau) }}
+		{{ form_row( form.montant) }}
+		<div class="boutton__">
+			<button class="btn btn-info" type='submit'>
+				<i class="fa-solid fa-check"></i>
+				Valider
+			</button>
+		</div>
+		{{ form_end( form )}}
 	</div>
 
 	<div class="table-container mt-3">
-	<div class="title-left">
+		<div class='tab-search-bar'>
+			{% include "partials/search/search.html.twig" with {
+				'form' : form_search
+			} %}
+		</div>
+		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-bars-staggered"></i>
 				Droit d'inscription

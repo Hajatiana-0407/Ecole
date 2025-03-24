@@ -3,7 +3,9 @@
 namespace App\Controller\Parametrage\Frais;
 
 use App\Entity\Frais;
+use App\Entity\Search\Search;
 use App\Form\FraisType;
+use App\Form\SearchType;
 use App\Repository\FraisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -40,8 +42,7 @@ class FraisController extends FraisParent
             return $this->redirectToRoute('parametre_frais');
         }
 
-        $datas = $this->pagination($paginator, $request, $repository->__get_all());
-
+        
         if ( $form_frais->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
             return $this->render('partials/form_error.html.twig', [
@@ -50,10 +51,16 @@ class FraisController extends FraisParent
             ]);
         }
 
-
+        $search = new Search();
+        $form_search = $this->createForm(SearchType::class, $search);
+        $form_search->handleRequest($request);
+        
+        
+        $datas = $this->pagination($paginator, $request, $repository->__get_all( $search ));
         return $this->render('parametrage/frais/frais.html.twig', [
             ...$this->get_params(),
             'form' => $form_frais->createView(),
+            'form_search' => $form_search , 
             'datas' => $datas
         ]);
     }

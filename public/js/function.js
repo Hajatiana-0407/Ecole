@@ -6,8 +6,8 @@ function __delete(self, id) {
     const form = $(self).parent();
     const action = $(form).attr('action')
 
-    $('.myalert form').attr('action' , action ) ; 
-    
+    $('.myalert form').attr('action', action);
+
     $('.my-back-dorp-delete').removeClass('d-none');
     $.when($('#confirmDelete').on('click', function () {
         if (id == $(form).find('input[name="id"]').val()) {
@@ -24,4 +24,13 @@ function __delete(self, id) {
         }
     }))
 }
+
+$('#__add_classe').on('click', function () {
+    const elem = $(this);
+    if ($('#__classe_add_container').hasClass('d-none')) {
+        $(elem).remove();
+        $('#__classe_add_container').removeClass('d-none');
+        $('#niveau_nrb_classe').focus();
+    }
+})
 

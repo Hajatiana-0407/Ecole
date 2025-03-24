@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Droit;
+use App\Entity\Search\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,13 +18,19 @@ class DroitRepository extends ServiceEntityRepository
         parent::__construct($registry, Droit::class);
     }
 
-    public function __get_all( ) :Query
+    public function __get_all(Search $search): Query
     {
-        return $this->createQueryBuilder('d')
-            ->innerJoin('d.Niveau' , 'n')
+        $query = $this->createQueryBuilder('d')
+            ->innerJoin('d.Niveau', 'n')
             ->addSelect('n')
-            ->orderBy('d.id' , 'desc')
-            ->getQuery() ; 
+            ->orderBy('d.id', 'desc');
+
+
+        if ($search->getRecherche() != '') {
+            $query->andWhere('n.nom LIKE :mot')
+                ->setParameter('mot', '%' . $search->getRecherche() . '%');
+        }
+        return   $query->getQuery();
     }
 
     //    /**

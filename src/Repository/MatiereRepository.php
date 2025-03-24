@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Matiere;
+use App\Entity\Search\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,10 +18,17 @@ class MatiereRepository extends ServiceEntityRepository
         parent::__construct($registry, Matiere::class);
     }
 
-    public function __get_all ( ) : Query {
-        return $this->createQueryBuilder('m')
-                ->orderBy('m.id' , 'desc')
-                ->getQuery() ; 
+    public function __get_all(Search $search): Query
+    {
+        $query =  $this->createQueryBuilder('m')
+            ->orderBy('m.id', 'desc');
+
+            if ( $search->getRecherche() !=''){
+                $query->andWhere('m.denomination LIKE :mot')
+                    ->orWhere('m.abreviation LIKE :mot')
+                    ->setParameter('mot' , '%'. $search->getRecherche() .'%') ; 
+            }
+        return $query->getQuery();
     }
 
     //    /**

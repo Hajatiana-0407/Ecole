@@ -25,6 +25,11 @@
 	</div>
 
 	<div class="table-container mt-3">
+		<div class='tab-search-bar'>
+			{% include "partials/search/search.html.twig" with {
+				'form' : form_search
+			} %}
+		</div>
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-bars-staggered"></i>

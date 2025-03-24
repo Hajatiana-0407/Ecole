@@ -6,43 +6,48 @@
 
 {% block body %}
 
-<div class="form-add" id='__form__'>
+	<div class="form-add" id='__form__'>
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-circle-plus"></i>
-				Ajout Classe 
+				Ajout Classe
 			</h5>
 		</div>
-	{{ form_start( classe_form )}}
-	{{ form_row( classe_form.niveau ) }}
-	{{ form_row( classe_form.denomination ) }}
-	<div class="boutton__">
-		<button class='btn btn-info ' type='submit'>
-			{% if id is defined %}
-				<i class="fa-solid fa-pen-to-square"></i>
-				Modifier
-			{% else %}
-				<i class="fa-solid fa-check"></i>
-				Valider
-			{% endif %}
-		</button>
-	</div>
-	{{ form_end( classe_form )}}
+		{{ form_start( classe_form )}}
+		{{ form_row( classe_form.niveau ) }}
+		{{ form_row( classe_form.denomination ) }}
+		<div class="boutton__">
+			<button class='btn btn-info ' type='submit'>
+				{% if id is defined %}
+					<i class="fa-solid fa-pen-to-square"></i>
+					Modifier
+				{% else %}
+					<i class="fa-solid fa-check"></i>
+					Valider
+				{% endif %}
+			</button>
+		</div>
+		{{ form_end( classe_form )}}
 	</div>
 
 	<div class="table-container mt-3">
-	<div class="title-left">
+		<div class='tab-search-bar'>
+			{% include "partials/search/search.html.twig" with {
+				'form' : form_search
+			} %}
+		</div>
+		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-bars-staggered"></i>
-				Liste des classes 
+				Liste des classes
 			</h5>
 		</div>
 		<table class="table table-md  table-hover">
 			<thead class=''>
 				<tr>
 					<th>
-					<i class="fas fa-tag text-primary"></i>
-					Denomination</th>
+						<i class="fas fa-tag text-primary"></i>
+						Denomination</th>
 					<th>Niveau</th>
 					<th>Action</th>
 				</tr>
@@ -54,8 +59,8 @@
 						<td>{{ data.niveau.nom }}</td>
 						<td>
 							{# <a href="{{ path('parametre_classe_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary">
-																						<i class="fa-solid fa-pen-to-square"></i>
-																					</a> #}
+																													<i class="fa-solid fa-pen-to-square"></i>
+																												</a> #}
 							<a href="{{ path('parametre_classe_edit' , { id:data.id }) }}" class="btn btn-sm btn-outline-primary">
 								<i class="fa-solid fa-pen-to-square"></i>
 							</a>
