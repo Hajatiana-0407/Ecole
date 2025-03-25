@@ -1,0 +1,61 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Niveau -
+	{{ titleMenu  }}
+{% endblock %}
+
+{% block body %}
+	<a href="{{ path('parametre_niveau') }}">Retourner dans Niveau</a>
+	<div class="table-container mt-3">
+		<div class='tab-search-bar'>
+			{% include "partials/search/search.html.twig" with {
+				'form' : form_search
+			} %}
+		</div>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des classes de : {{ niveau_nom  }}
+			</h5>
+		</div>
+		<div class="table_overflow">
+			<table class="table table-md  table-hover">
+				<thead class=''>
+					<tr>
+						<th>
+							Denomination
+							<i class="fas fa-tag text-primary"></i>
+						</th>
+						<th>
+							Niveau
+							<i class="fas fa-signal text-primary"></i>
+						</th>
+						<th>
+						Action
+							<i class="fas fa-bolt text-primary"></i>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for data in datas %}
+						<tr id='tr_table_{{ data.id }}'>
+							<td>{{ data.denomination  }}</td>
+							<td>{{ data.niveau.nom }}</td>
+							<td>
+								<form action="{{ path('parametre_classe_delete' , { id:data.id } ) }}" class="__delete_form">
+									<input type="hidden" name='id' value='{{ data.id }}'>
+									<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+										<i class="fa-solid fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="navigation ">
+			{{ knp_pagination_render(datas) }}
+		</div>
+	</div>
+{% endblock %}

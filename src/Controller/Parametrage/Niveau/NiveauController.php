@@ -6,11 +6,13 @@ use App\Entity\Classe;
 use App\Entity\Droit;
 use App\Entity\Frais;
 use App\Entity\Niveau;
+use App\Entity\Search\Search;
 use App\Entity\Search\SearchDate;
-use App\Entity\SearchDateType;
 use App\Form\NiveauType;
 use App\Form\NiveauTypeEdit;
 use App\Form\SearchDateType as FormSearchDateType;
+use App\Form\SearchType;
+use App\Repository\ClasseRepository;
 use App\Repository\NiveauRepository;
 use App\Service\EntityDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +20,6 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Attribute\Route as AttributeRoute;
 use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/parametre', name: 'parametre_')]
@@ -115,9 +116,9 @@ class NiveauController extends NiveauParent
 
         $saerch = new SearchDate();
         $form_search = $this->createForm(FormSearchDateType::class, $saerch);
-        $form_search->handleRequest( $request ) ; 
+        $form_search->handleRequest($request);
 
-        $datas = $this->pagination($paginator, $request, $this->repository->__get_all( $saerch ));
+        $datas = $this->pagination($paginator, $request, $this->repository->__get_all($saerch));
         return $this->render('parametrage/niveau/index.html.twig', [
             ...$this->get_params(),
             'form_niveau' => $form_niveau->createView(),
@@ -204,6 +205,20 @@ class NiveauController extends NiveauParent
     }
 
 
-    #[Route('niveau/search', name: 'niveau_search', methods: ['POST', 'GET'])]
-    public function search() {}
+    #[Route('niveau/classes-liste/{id}', name: 'niveau_classes-liste', methods: ['POST', 'GET'])]
+    public function classeListe(ClasseRepository $repository, int $id, Request $request, PaginatorInterface $paginator , Niveau $niveau )
+    {
+        $search = new Search();
+        $form_search = $this->createForm(SearchType::class, $search);
+        $form_search->handleRequest($request);
+
+        $datas = $this->pagination($paginator, $request, $repository->__get_classeListe($search, $id));
+
+        return $this->render('parametrage/niveau/classe_liste.html.twig', [
+            ...$this->get_params(),
+            'form_search' => $form_search->createView(),
+            'datas' => $datas,
+            'niveau_nom' => $niveau->getNom() 
+        ]);
+    }
 }

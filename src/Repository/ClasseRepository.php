@@ -38,6 +38,25 @@ class ClasseRepository extends ServiceEntityRepository
         return $query->getQuery();
     }
 
+
+    public function __get_classeListe(Search $search , int $id )
+    {
+        $query = $this->createQueryBuilder('c')
+            ->innerJoin('c.Niveau', 'n')
+            ->addSelect('n')
+            ->orderBy('c.id', 'desc')
+            ->andWhere('n.id = :niveau_id')
+            ->setParameter('niveau_id' , $id )
+            ;
+
+        if ($search->getRecherche() != '') {
+            $query->andWhere('c.denomination LIKE :mot OR n.nom LIKE :mot')
+                ->setParameter('mot', '%' . $search->getRecherche() . '%');
+        }
+        // ->orderBy('n.nom' , 'desc')
+        return $query->getQuery();
+    }
+
     //    /**
     //     * @return Classe[] Returns an array of Classe objects
     //     */

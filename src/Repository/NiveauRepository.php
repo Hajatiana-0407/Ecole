@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Niveau;
+use App\Entity\Search\Search;
 use App\Entity\Search\SearchDate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -42,26 +43,27 @@ class NiveauRepository extends ServiceEntityRepository
         // Recherche avec date
         if ($search->getRecherche() != '') {
             $query->andwhere('n.nom LIKE :motcle')
-            ->setParameter('motcle' , '%'.$search->getRecherche().'%') ; 
+                ->setParameter('motcle', '%' . $search->getRecherche() . '%');
         }
         if ($search->getDateDebut() != '') {
             $query->andwhere('n.createdAt >= :datedebut')
-            ->setParameter('datedebut' ,$search->getDateDebut()) ; 
+                ->setParameter('datedebut', $search->getDateDebut());
         }
         if ($search->getDateFin() != '') {
             $query->andwhere('n.createdAt <= :datefin')
-            ->setParameter('datefin' ,$search->getDateFin()) ; 
+                ->setParameter('datefin', $search->getDateFin());
         }
         return $query->getQuery();
     }
 
-    public function getAllNiveau()
-    {
-        return $this->createQueryBuilder('n')
-            ->orderBy('n.id', 'desc')
-            ->getQuery()
-            ->getResult();;
-    }
+    
+    // public function getAllNiveau()
+    // {
+    //     return $this->createQueryBuilder('n')
+    //         ->orderBy('n.id', 'desc')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
 
     //    /**

@@ -51,7 +51,7 @@ body {
 } */
 
 .btn.btn-danger {
-    background-color: var( --danger-color );
+    background-color: var(--danger-color);
 }
 
 .text-primary {
@@ -319,9 +319,9 @@ p {
 }
 
 .user-info-container P {
-    display: inline-block ;
-    width: 70% ;
-    overflow: hidden ;
+    display: inline-block;
+    width: 70%;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -350,10 +350,11 @@ p {
     padding: 5px;
     color: var(--white);
 }
+
 .info-liste ul li a span {
-    display: inline-block ;
-    width: 25px ;
-    margin: 0 ;
+    display: inline-block;
+    width: 25px;
+    margin: 0;
 }
 
 /*  */
@@ -400,10 +401,41 @@ p {
 
 
 .table_overflow {
-    overflow: auto ;
+    overflow: auto;
 }
-th , td {
+
+th,
+td {
     white-space: nowrap;
+}
+
+
+td {
+    position: relative;
+}
+
+td .details-links {
+    position: absolute;
+    right: 20px;
+    color: var(--text-color);
+}
+
+td .details-links .datails-links-text {
+    position: absolute;
+    top: -20px;
+    right: -82px;
+    z-index: 1;
+    background-color: var(--primary-color);
+    color: var(--white);
+    display: inline-block;
+    padding: 4px;
+    padding-inline: 10px;
+    border-radius: 8px 8px 8px 0;
+    display: none ;
+}
+
+td .details-links:hover .datails-links-text {
+    display: inline-block ;
 }
 
 .form-add {

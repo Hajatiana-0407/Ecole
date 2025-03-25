@@ -51,9 +51,6 @@
 	</div>
 
 
-
-
-
 	<div class="table-container mt-3">
 		<div class='tab-search-bar'>
 			{% include "partials/search/searchdate.html.twig" with {
@@ -68,81 +65,102 @@
 		</div>
 		<div class="table_overflow">
 			<table class="table table-md  table-hover  table-hover">
-			<thead>
-				<tr>
-					<th>
-						Nom
-						<i class="fas fa-tag text-primary"></i>
-					</th>
-					<th>
-						Droit d'inscription
-						<i class="fas fa-file-signature text-primary"></i>
-					</th>
-					<th>
-						Frais de scolarité
-						<i class="fas fa-money-bill-wave text-primary"></i>
-					</th>
-					<th>
-						Nbr Classe
-						<i class="fas fa-chalkboard-teacher text-primary"></i>
-					</th>
-					<th>
-						Date d'ajout
-						<i class="fas fa-calendar-plus text-primary"></i>
-					</th>
-					<th>Action
-						<i class="fas fa-cogs text-primary"></i>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for data in datas %}
-					<tr id='tr_table_{{ data.id }}'>
-						<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
-						<td>
-							{% if data.droits|length > 0 %}
-								{{ data.droits[0].montant|number_format(0 , '.' , ' ') }}
-								Ar
-								<i class="fas fa-dollar text-secondary"></i>
-							{% else %}
-								<p class="text-secondary text-small">
-									En attente ...
-								</p>
-							{% endif %}
-						</td>
-						<td>
-							{% if data.frais|length > 0 %}
-								{{ data.frais[0].montant|number_format(0 , '.' , ' ') }}
-								Ar
-								<i class="fas fa-coins text-secondary"></i>
-							{% else %}
-								<p class="text-secondary text-small">
-									En attente ...
-								</p>
-							{% endif %}
-						</td>
-						<td>
-							{{ data.classes|length }}
-						</td>
-						<td>
-							{{ data.createdAt|date('d-m-Y') }}
-							<i class="fas fa-calendar-check text-secondary"></i>
-						</td>
-						<td>
-							<a href='{{ path('parametre_niveau_edit' , {id:data.id}) }}' type='submit' class="btn btn-sm btn-outline-primary">
-								<i class="fa-solid fa-pen-to-square"></i>
-							</a>
-							<form action="{{ path('parametre_niveau_delete' , { id:data.id } ) }}" class="__delete_form">
-								<input type="hidden" name='id' value='{{ data.id }}'>
-								<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
-									<i class="fa-solid fa-trash"></i>
-								</button>
-							</form>
-						</td>
+				<thead>
+					<tr>
+						<th>
+							Nom
+							<i class="fas fa-tag text-primary"></i>
+						</th>
+						<th>
+							Droit d'inscription
+							<i class="fas fa-file-signature text-primary"></i>
+						</th>
+						<th>
+							Frais de scolarité
+							<i class="fas fa-money-bill-wave text-primary"></i>
+						</th>
+						<th>
+							Nbr Classe
+							<i class="fas fa-chalkboard-teacher text-primary"></i>
+						</th>
+						<th>
+							Date d'ajout
+							<i class="fas fa-calendar-plus text-primary"></i>
+						</th>
+						<th>Action
+							<i class="fas fa-cogs text-primary"></i>
+						</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for data in datas %}
+						<tr id='tr_table_{{ data.id }}'>
+							<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
+							<td>
+								{% if data.droits|length > 0 %}
+									{{ data.droits[0].montant|number_format(0 , '.' , ' ') }}
+									Ar
+									<i class="fas fa-dollar text-secondary"></i>
+								{% else %}
+									<p class="text-secondary text-small">
+										En attente ...
+									</p>
+								{% endif %}
+							</td>
+							<td>
+								{% if data.frais|length > 0 %}
+									{{ data.frais[0].montant|number_format(0 , '.' , ' ') }}
+									Ar
+									<i class="fas fa-coins text-secondary"></i>
+								{% else %}
+									<p class="text-secondary text-small">
+										En attente ...
+									</p>
+								{% endif %}
+							</td>
+							<td>
+								{{ data.classes|length }}
+								{% if data.classes|length > 0 %}
+									<a href="{{ path('parametre_niveau_classes-liste' , {id:data.id}) }}" class='details-links'>
+										<span>
+											<i class='fa fa-eye'></i>
+											<p class='datails-links-text'>
+												Voir tous
+											</p>
+										</span>
+									</a>
+								{% else %}
+									<a href="#" class='details-links'>
+										<span>
+											<i class='fa fa-eye'></i>
+											<p class='datails-links-text'>
+												Voir tous
+											</p>
+										</span>
+									</a>
+								{% endif %}
+
+
+							</td>
+							<td>
+								{{ data.createdAt|date('d-m-Y') }}
+								<i class="fas fa-calendar-check text-secondary"></i>
+							</td>
+							<td>
+								<a href='{{ path('parametre_niveau_edit' , {id:data.id}) }}' type='submit' class="btn btn-sm btn-outline-primary">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+								<form action="{{ path('parametre_niveau_delete' , { id:data.id } ) }}" class="__delete_form">
+									<input type="hidden" name='id' value='{{ data.id }}'>
+									<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+										<i class="fa-solid fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 		<div class="navigation ">
 			{{ knp_pagination_render(datas) }}
