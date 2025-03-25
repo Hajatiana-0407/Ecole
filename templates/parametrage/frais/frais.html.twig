@@ -36,7 +36,8 @@
 				Frais d'inscription
 			</h5>
 		</div>
-		<table class="table table-md  table-hover">
+		<div class="table_overflow">
+			<table class="table table-md  table-hover">
 			<thead class=''>
 				<tr>
 					<th>
@@ -69,6 +70,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		</div>
 		<div class="navigation ">
 			{{ knp_pagination_render(datas) }}
 		</div>

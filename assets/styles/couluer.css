@@ -1,22 +1,26 @@
 /* Bleu */
-:root {
+/* :root {
     --primary-color: #333d29;
     --secondary-color: #414833;
     --titre-bg : #656d4a;
     --text-color: #5b5b5b;
     --white : #ffffff ;
     --black : #222222 ; 
-}
+} */
 
 /* Maront */
 
 /* box-shadow: 0px 5px 20px #55555559; */
 /* teste */
-/* :root {
-    --primary-color: #0a0908;
-    --secondary-color: #22333b ; 
-    --titre-bg : #495057;
+:root {
+    --primary-color: #252422;
+    --secondary-color: #403d39 ; 
+    --danger-color : #ca054d ;
+
+
+
+    --titre-bg : #6b705c;
     --text-color: #5b5b5b;
     --white : #ffffff ;
     --black : #222222 ; 
-} */
+}

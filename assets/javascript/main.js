@@ -97,4 +97,39 @@ $(document).ready(function () {
     // });
 
 
+    $(document).on('click', '.container_image', function () {
+        const id = $(this).data('id');
+        $('div#' + id + ' input[type="file"]').click();
+
+
+        $(document).on('change', 'div#' + id + ' input[type="file"]', function (event) {
+            var file = event.target.files[0];  // Récupérer le premier fichier sélectionné
+
+            if (file) {
+                var reader = new FileReader();  // Créer un lecteur de fichiers
+
+
+                var fileType = file.type;
+                var validImageTypes = ["image/jpeg", "image/png"];
+
+                if (!validImageTypes.includes(fileType)) {
+                    return; // Sortir de la fonction si le fichier n'est pas une image
+                }
+
+                // Lorsque le fichier est chargé, mettre à jour l'image
+                reader.onload = function (e) {
+                    $('.container_image img').css({
+                        'border': '1px solid rgb(135, 135, 135)',
+                        'padding': '10px',
+                    })
+                    $('.container_image img').attr('src', e.target.result);  // Mettre à jour l'attribut src de l'image
+                };
+
+                // Lire le fichier comme une URL de données
+                reader.readAsDataURL(file);
+            }
+        });
+    })
+
+
 })

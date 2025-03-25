@@ -8,14 +8,20 @@ use App\Entity\Frais;
 use App\Entity\Matiere;
 use App\Entity\MatiereNiveau;
 use App\Entity\Niveau;
+use App\Entity\Professeur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\Query\Expr\From;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ParametrageFixtures extends Fixture
 {
-    public function load(ObjectManager $manager): void
+    public function __construct( private  UserPasswordHasherInterface $hasher)
+    {
+        
+    }
+    public function load(ObjectManager $manager  ): void
     {
         $facker = Factory::create('fr_FR');
         /**
@@ -95,6 +101,23 @@ class ParametrageFixtures extends Fixture
                         ->setCoeficient( mt_rand(1 , 6 )) ;
             
             $manager->persist( $MatiereNiveau ) ; 
+        }
+
+
+        // proffesseur 
+        for ($i=0; $i < 5 ; $i++) { 
+            $professeur = new Professeur() ; 
+            $professeur->setNom($facker->firstName )
+            ->setPrenom( $facker->lastName )
+            ->setTelephone( $facker->phoneNumber )
+            ->setAdresse( $facker->address ) 
+            ->setEmail( $facker->email )
+            ->setPassword( $this->hasher->hashPassword( $professeur , '123456'))
+            ->setRoles(["ROLE_ADMIN"])
+            ->setPhoto( $facker->word )
+            ; 
+
+            $manager->persist( $professeur ) ; 
         }
         $manager->flush();
     }

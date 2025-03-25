@@ -1,7 +1,8 @@
-<div class='head'>
+<div
+	class='head'>
 	{# <div class="head-left">
-		<h3>{{ titleMenu }}</h3>
-	</div> #}
+				<h3>{{ titleMenu }}</h3>
+			</div> #}
 	{% include "partials/admin/onglet.html.twig"  %}
 	<div class="head-right">
 		<div class='user-info-container'>
@@ -23,13 +24,19 @@
 	<ul>
 		<li class='mb-1 user-info-liste-li d-none'>
 			<a href="#">
-				<span class='user-icone me-1'>
+				<span class='user-icone'>
 					<i class="fa-solid fa-gear"></i>
 				</span>Sécurité</a>
 		</li>
 		<li class='user-info-liste-li d-none'>
+			<a href="{{ path('app_menu') }}">
+				<span class='user-icone'>
+					<i class="fas fa-bars"></i>
+				</span>Menu principale</a>
+		</li>
+		<li class='user-info-liste-li d-none'>
 			<a href="{{ path('app_logout') }}">
-				<span class='user-icone me-2'>
+				<span class='user-icone'>
 					<i class="fa-solid fa-sign-out-alt"></i>
 				</span>Deconnexion</a>
 		</li>

@@ -40,7 +40,7 @@ class ParametrageController extends BaseController
                 'icone' => '<i class="fas fa-book"></i>'
             ],
             'Utilisateur' =>  [
-                'href' => '',
+                'href' => 'parametre_utilisateur',
                 'role' => '',
                 'icone' => '<i class="fas fa-user"></i>'
             ],

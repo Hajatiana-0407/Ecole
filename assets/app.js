@@ -7,6 +7,9 @@ import $ from 'jquery';
     import('./bootstrap.js');
     import('@hotwired/turbo');
     import('./javascript/main.js');
+
+    import('./javascript/niveau.js')
+
 })();
 
 

@@ -7,10 +7,13 @@
 			{% endblock %}
 			| Nathiyh</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-
 		{% block javascripts %}
 			{% block importmap %}
-				{{ importmap(['app' ]) }}
+				{# {% if js is defined and js not in importmap() == false  %}
+													{{ importmap(['app' , js ]) }}
+												{% else  %}
+												{% endif  %} #}
+				{{ importmap(['app']) }}
 			{% endblock %}
 		{% endblock %}
 	</head>
@@ -30,10 +33,6 @@
 
 			<script src="{{ asset('js/function.js') }}"></script>
 
-			{# {% if js is defined  %}
-										{% set  scriptpath = asset('assets/js/admin/'~ js ~'.js')  %}
-										<script src="{{ scriptpath }}"></script>
-									{% endif %} #}
 
 		</body>
 	</html>

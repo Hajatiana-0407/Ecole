@@ -9,6 +9,11 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_prof_provider:
+            entity:
+                class: App\Entity\Professeur
+                property: email
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

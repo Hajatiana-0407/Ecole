@@ -1,0 +1,132 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Utilisateur -
+	{{ titleMenu  }}
+{% endblock %}
+
+{% block body %}
+
+	{# ******************************************************************************************************** #}
+
+	{# ******************************************************************************************************** #}
+
+	<div class="form-add" id='__form__'>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-circle-plus"></i>
+				Ajout Utilisateur
+			</h5>
+		</div>
+		{{ form_start( form )}}
+		<div class="form_user">
+			<div class="form_user_input_container">
+				{{ form_row( form.nom )}}
+				{{ form_row( form.prenom )}}
+				{{ form_row( form.telephone )}}
+				{{ form_row( form.adresse )}}
+			</div>
+			<div class="form_user_profil_container">
+				<div class='container_image' data-id='profile-image'>
+					<img src="{{ asset('images/photo-camera.png') }}" alt="">
+				</div>
+				{# {{ form_widget( form.photo )}} #}
+			</div>
+		</div>
+		<div class="d-none" id='profile-image'>
+			{{ form_widget( form.photo )}}
+		</div>
+
+		{{ form_widget( form )}}
+
+		<div class="boutton__">
+
+			<button class='btn btn-info ' type='submit'>
+				<i class="fa-solid fa-check"></i>
+				Valider
+			</button>
+		</div>
+		{{ form_end( form )}}
+	</div>
+
+
+	<div class="table-container mt-3">
+		<div class='tab-search-bar'>
+			{% include "partials/search/search.html.twig" with { 'form' : form_search } %}
+		</div>
+		<div class="title-left">
+			<h5>
+				<i class="fa-solid fa-bars-staggered"></i>
+				Liste des Utilisateurs
+			</h5>
+		</div>
+		<div class="table_overflow">
+			<table class="table table-md  table-hover  table-hover">
+				<thead>
+					<tr>
+						<th>
+							Nom
+							<i class="fas fa-tag text-primary"></i>
+						</th>
+						<th>
+							Prenom
+							<i class="fas fa-user text-primary"></i>
+						</th>
+						<th>
+							Télephone
+							<i class="fas fa-phone-alt text-primary"></i>
+						</th>
+						<th>
+							Email
+							<i class="fas fa-envelope text-primary"></i>
+						</th>
+						<th>
+							Adresse
+							<i class="fas fa-map-marker-alt text-primary"></i>
+						</th>
+						<th>
+							Photo
+							<i class="fas fa-camera text-primary"></i>
+						</th>
+						<th>Action
+							<i class="fas fa-cogs text-primary"></i>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for data in datas %}
+						<tr id='tr_table_{{ data.id }}'>
+							<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.prenom|capitalize  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.telephone  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.adresse  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.email  }}</td>
+							<td id='table_tr_{{ data.id }}'>
+								{% if data.photo == ''%}
+									<img width='40' src="{{ asset('images/mode-paysage.png') }}" alt="">
+								{% else %}
+									<img width='40' src="{{ asset( data.photo ) }}" alt="">
+								{% endif %}
+							</td>
+
+							<td>
+								<a href='{{ path('parametre_user_edit' , {id:data.id}) }}' type='submit' class="btn btn-sm btn-outline-primary">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+								<form action="{{ path('parametre_user_delete' , { id:data.id } ) }}" class="__delete_form">
+									<input type="hidden" name='id' value='{{ data.id }}'>
+									<button type="button" onclick='__delete( this , {{ data.id }} )' class="btn btn-sm btn-outline-danger">
+										<i class="fa-solid fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="navigation ">
+			{{ knp_pagination_render(datas) }}
+		</div>
+	</div>
+{% endblock %}

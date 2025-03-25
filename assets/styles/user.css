@@ -1,0 +1,29 @@
+.form_user {
+    display: flex ;
+    gap: 10px ;
+}
+
+.form_user .form_user_input_container {
+    flex: 3 ;
+}
+
+.form_user .form_user_profil_container{
+    flex: 2 ;
+}
+
+
+.form_user .form_user_profil_container .container_image {
+    height: 278px ;
+    margin-bottom: 10px ;
+    background-color: rgb(203, 203, 203) ;
+    margin-top: 32px ;
+    border-radius: 5px ;
+    padding-inline: 30px ;
+    display: flex ;
+    justify-content: center ;
+    cursor: pointer;
+}
+
+.form_user .form_user_profil_container img {
+    height: inherit ;
+}
