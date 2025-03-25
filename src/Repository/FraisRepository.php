@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Frais;
 use App\Entity\Search\Search;
+use App\Entity\Search\SearchDate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +19,7 @@ class FraisRepository extends ServiceEntityRepository
         parent::__construct($registry, Frais::class);
     }
 
-    public function __get_all(Search $search): Query
+    public function __get_all(SearchDate $search): Query
     {
         $query =  $this->createQueryBuilder('f')
             ->innerJoin('f.Niveau', 'n')
@@ -28,6 +29,14 @@ class FraisRepository extends ServiceEntityRepository
         if ($search->getRecherche() != '') {
             $query->andWhere('n.nom LIKE :mot')
                 ->setParameter('mot', '%' . $search->getRecherche() . '%');
+        }
+        if ($search->getDateDebut() != '') {
+            $query->andwhere('f.createdAt >= :datedebut')
+            ->setParameter('datedebut' ,$search->getDateDebut()) ; 
+        }
+        if ($search->getDateFin() != '') {
+            $query->andwhere('f.createdAt <= :datefin')
+            ->setParameter('datefin' ,$search->getDateFin()) ; 
         }
 
         return     $query->getQuery();

@@ -4,7 +4,9 @@ namespace App\Controller\Parametrage\Frais;
 
 use App\Entity\Droit;
 use App\Entity\Search\Search;
+use App\Entity\Search\SearchDate;
 use App\Form\DroitType;
+use App\Form\SearchDateType;
 use App\Form\SearchType;
 use App\Repository\DroitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,8 +42,8 @@ class DroitController extends FraisParent
             return $this->redirectToRoute('parametre_droit');
         }
 
-        $search = new Search();
-        $form_search = $this->createForm(SearchType::class, $search);
+        $search = new SearchDate();
+        $form_search = $this->createForm(SearchDateType::class, $search);
         $form_search->handleRequest($request);
 
 

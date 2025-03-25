@@ -3,9 +3,9 @@
 namespace App\Controller\Parametrage\Frais;
 
 use App\Entity\Frais;
-use App\Entity\Search\Search;
+use App\Entity\Search\SearchDate;
 use App\Form\FraisType;
-use App\Form\SearchType;
+use App\Form\SearchDateType;
 use App\Repository\FraisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -51,8 +51,8 @@ class FraisController extends FraisParent
             ]);
         }
 
-        $search = new Search();
-        $form_search = $this->createForm(SearchType::class, $search);
+        $search = new SearchDate();
+        $form_search = $this->createForm(SearchDateType::class, $search);
         $form_search->handleRequest($request);
         
         

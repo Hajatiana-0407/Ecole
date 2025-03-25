@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Droit;
 use App\Entity\Search\Search;
+use App\Entity\Search\SearchDate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +19,7 @@ class DroitRepository extends ServiceEntityRepository
         parent::__construct($registry, Droit::class);
     }
 
-    public function __get_all(Search $search): Query
+    public function __get_all(SearchDate $search): Query
     {
         $query = $this->createQueryBuilder('d')
             ->innerJoin('d.Niveau', 'n')
@@ -29,6 +30,14 @@ class DroitRepository extends ServiceEntityRepository
         if ($search->getRecherche() != '') {
             $query->andWhere('n.nom LIKE :mot')
                 ->setParameter('mot', '%' . $search->getRecherche() . '%');
+        }
+        if ($search->getDateDebut() != '') {
+            $query->andwhere('d.createdAt >= :datedebut')
+            ->setParameter('datedebut' ,$search->getDateDebut()) ; 
+        }
+        if ($search->getDateFin() != '') {
+            $query->andwhere('d.createdAt <= :datefin')
+            ->setParameter('datefin' ,$search->getDateFin()) ; 
         }
         return   $query->getQuery();
     }
