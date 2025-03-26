@@ -14,6 +14,7 @@
 /* teste */
 :root {
     --primary-color: #252422;
+    --primary-hover: #302f2e;
     --secondary-color: #403d39 ; 
     --danger-color : #ca054d ;
 

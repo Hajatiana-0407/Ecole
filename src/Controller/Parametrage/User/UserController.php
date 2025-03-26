@@ -152,9 +152,8 @@ class UserController extends ParametrageController
 
         if ($form->isSubmitted() && $request->getPreferredFormat() == TurboBundle::STREAM_FORMAT) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
-            return $this->render('partials/form_error.html.twig', [
+            return $this->render('parametrage/utilisateur/utilisateur_error.html.twig', [
                 'form' => $form,
-                'title' => 'Modification Classe'
             ]);
         }
 

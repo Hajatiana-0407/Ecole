@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('parametre_niveau') }}">Retourner dans Niveau</a>
+	<a href="{{ path('parametre_niveau') }}">Tous les Niveaux</a>
 	<div class="table-container mt-3">
 		<div class='tab-search-bar'>
 			{% include "partials/search/search.html.twig" with {
@@ -15,7 +15,8 @@
 		<div class="title-left">
 			<h5>
 				<i class="fa-solid fa-bars-staggered"></i>
-				Liste des classes de : {{ niveau_nom  }}
+				Liste des classes de :
+				{{ niveau_nom  }}
 			</h5>
 		</div>
 		<div class="table_overflow">
@@ -30,9 +31,8 @@
 							Niveau
 							<i class="fas fa-signal text-primary"></i>
 						</th>
-						<th>
-						Action
-							<i class="fas fa-bolt text-primary"></i>
+						<th>Action
+							<i class="fas fa-cogs text-primary"></i>
 						</th>
 					</tr>
 				</thead>

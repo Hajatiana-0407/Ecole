@@ -2,10 +2,17 @@
 @import url('./user.css');
 @import url('./alert.css');
 
+@font-face {
+    font-family: "Lexend_Light";
+    src: url("../font/static/Quicksand-Regular.ttf");
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Lexend_Light';
 }
 
 *::-webkit-scrollbar {
@@ -38,11 +45,19 @@ body {
     border-color: rgb(188, 188, 188);
 }
 
-/* .btn.btn-info {
+.btn-my-primary {
     background-color: var(--primary-color);
     color: var(--white);
     border-color: var(--secondary-color);
 }
+
+.btn-my-primary:hover {
+    background-color: var(--primary-hover);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+/* 
 
 .btn.btn-secondary {
     background-color: var(--secondary-color);
@@ -431,11 +446,11 @@ td .details-links .datails-links-text {
     padding: 4px;
     padding-inline: 10px;
     border-radius: 8px 8px 8px 0;
-    display: none ;
+    display: none;
 }
 
 td .details-links:hover .datails-links-text {
-    display: inline-block ;
+    display: inline-block;
 }
 
 .form-add {
