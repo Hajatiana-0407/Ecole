@@ -68,10 +68,6 @@
 							<i class="fas fa-tag text-primary"></i>
 						</th>
 						<th>
-							Prenom
-							<i class="fas fa-user text-primary"></i>
-						</th>
-						<th>
 							Télephone
 							<i class="fas fa-phone-alt text-primary"></i>
 						</th>
@@ -95,11 +91,10 @@
 				<tbody>
 					{% for data in datas %}
 						<tr id='tr_table_{{ data.id }}'>
-							<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }}</td>
-							<td id='table_tr_{{ data.id }}'>{{ data.prenom|capitalize  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.nom|capitalize  }} {{ data.prenom|capitalize  }}</td>
 							<td id='table_tr_{{ data.id }}'>{{ data.telephone  }}</td>
-							<td id='table_tr_{{ data.id }}'>{{ data.adresse  }}</td>
 							<td id='table_tr_{{ data.id }}'>{{ data.email  }}</td>
+							<td id='table_tr_{{ data.id }}'>{{ data.adresse  }}</td>
 							<td id='table_tr_{{ data.id }}'>
 								{% if data.photo == ''%}
 									<img width='40' src="{{ asset('images/mode-paysage.png') }}" alt="">
